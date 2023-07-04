@@ -5,23 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
- import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
- import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
-import org.springframework.util.LinkedMultiValueMap;
-
-import com.respositories.ToolTypeRepository;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import com.services.ToolTypeService;
-
 import net.minidev.json.JSONObject;
-
 import org.springframework.beans.factory.annotation.Value;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -37,8 +29,6 @@ public class ToolTypeControllerTest {
     @Value(value="${local.server.port}")
     private int port;
 
-    @Autowired
-    private TestRestTemplate restTemplate;
 
     @BeforeEach
     public void clear() {

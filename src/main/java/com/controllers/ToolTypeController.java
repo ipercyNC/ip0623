@@ -8,28 +8,19 @@
  */
 package com.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.RepaintManager;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.models.ToolType;
-import com.respositories.ToolTypeRepository;
 import com.services.ToolTypeService;
 
 @RestController
@@ -78,12 +69,18 @@ public class ToolTypeController {
 
     /*
      * Returns a matching ToolType from the service layer if it exists
-     * @param int to search for in the database
+     * @param str to search for in the database (id or name)
      * @return ToolType object
      */
-    @GetMapping("/toolType/{id}")
-    public ResponseEntity<ToolType> getToolTypeById(@PathVariable("id") int id) {
-        ToolType toolType = toolTypeService.findToolTypeById(id);
+    @GetMapping("/toolType/{str}")
+    public ResponseEntity<ToolType> getToolTypeByIdOrName(@PathVariable("str") String str) {
+        ToolType toolType;
+        try {
+            int id = Integer.parseInt(str.toString());
+            toolType = toolTypeService.findToolTypeById(id);
+        } catch (NumberFormatException e) {
+            toolType = toolTypeService.findToolTypeByName(str);
+        }
 
         if (toolType != null) {
             return new ResponseEntity<>(toolType, HttpStatus.OK);
@@ -92,21 +89,21 @@ public class ToolTypeController {
         }
     }
 
-    /*
-     * Returns a matching ToolType from the database if it exists
-     * @param String to search for in the database
-     * @return ToolType object
-     */
-    @GetMapping("/toolType/{name}")
-    public ResponseEntity<ToolType> getToolTypeByName(@PathVariable("name") String name) {
-        ToolType toolType = toolTypeService.findToolTypeByName(name);
+    // /*
+    //  * Returns a matching ToolType from the database if it exists
+    //  * @param String to search for in the database
+    //  * @return ToolType object
+    //  */
+    // @GetMapping("/toolType/{name}")
+    // public ResponseEntity<ToolType> getToolTypeByIdOrName(@PathVariable("name") String name) {
+    //     ToolType toolType = toolTypeService.findToolTypeByName(name);
 
-        if (toolType != null) {
-            return new ResponseEntity<>(toolType, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+    //     if (toolType != null) {
+    //         return new ResponseEntity<>(toolType, HttpStatus.OK);
+    //     } else {
+    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    //     }
+    // }
 
     /*
      * Initiate call to delete all ToolTypes from the database
