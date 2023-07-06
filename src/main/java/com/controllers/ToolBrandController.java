@@ -9,7 +9,6 @@
 package com.controllers;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.models.ToolBrand;
 import com.services.ToolBrandService;
@@ -59,8 +57,6 @@ public class ToolBrandController {
     public ResponseEntity<String> createToolBrand(@RequestBody ObjectNode objectNode) {
         try {
             boolean result = toolBrandService.createToolBrand(objectNode.get("name").asText());
-            System.out.println(result);
-            Thread.sleep(10000);
             if (result) {
                 return new ResponseEntity<String>("ToolBrand created successfully.", HttpStatus.CREATED);
             } else {
@@ -73,7 +69,7 @@ public class ToolBrandController {
 
     /*
      * Returns a matching ToolBrand from the service layer if it exists
-     * @param str to searhc for in the database (id or name)
+     * @param str to search for in the database (id or name)
      * @return ToolBrand object
      */
     @GetMapping("/{str}")
@@ -83,7 +79,10 @@ public class ToolBrandController {
             int id = Integer.parseInt(str.toString());
             toolBrand = toolBrandService.findToolBrandById(id);
         } catch (NumberFormatException e) {
+            // this needs a wrap on another exception from the backend
             toolBrand = toolBrandService.findToolBrandByName(str);
+        } catch(Exception e) {
+            toolBrand = null;
         }
 
         if (toolBrand != null) {

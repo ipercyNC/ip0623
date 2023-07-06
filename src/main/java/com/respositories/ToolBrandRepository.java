@@ -22,7 +22,7 @@ public interface  ToolBrandRepository {
     /*
      * Saves ToolBrand to the database
      * @param String of the new ToolBrand name
-     * @return int id of the saved ToolBrand
+     * @return int number of rows saved
      */
     int save(String toolBrandName);
 

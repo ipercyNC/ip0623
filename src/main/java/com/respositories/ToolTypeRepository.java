@@ -9,7 +9,6 @@
 package com.respositories;
 
 import java.util.List;
-
 import com.models.ToolType;
 
 public interface ToolTypeRepository {
@@ -22,7 +21,7 @@ public interface ToolTypeRepository {
     /*
      * Saves ToolType to the database
      * @param String of the new ToolType name
-     * @return int id of the saved ToolType
+     * @return int number of rows saved
      */
     int save(String toolTypeName);
 

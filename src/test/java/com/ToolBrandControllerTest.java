@@ -57,7 +57,7 @@ public class ToolBrandControllerTest {
     public void gatherAllToolBrandsEmpty() throws Exception {
         MvcResult result = mvc.perform(get("/api/toolBrand")).andReturn();
         String resultAsString = result.getResponse().getContentAsString();
-        assertThat(resultAsString.isEmpty());
+        assertThat(resultAsString.isBlank());
     }
 
 }

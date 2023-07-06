@@ -60,6 +60,6 @@ public class ToolTypeControllerTest {
     public void gatherAllToolTypesEmpty() throws Exception {
         MvcResult result = mvc.perform(get("/api/toolType")).andReturn();
         String resultAsString = result.getResponse().getContentAsString();
-        assertThat(resultAsString.isEmpty());
+        assertThat(resultAsString.isBlank());
     }
 }

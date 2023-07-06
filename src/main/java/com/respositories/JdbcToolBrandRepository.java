@@ -36,7 +36,7 @@ public class JdbcToolBrandRepository implements ToolBrandRepository {
     /*
      * Saves ToolBrand to the database
      * @param String of the new ToolBrand name
-     * @return int id of the saved ToolBrand
+     * @return int number of rows saved
      */
     @Override
     public int save(String toolBrandName) {

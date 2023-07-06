@@ -9,14 +9,12 @@
 package com.respositories;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import com.models.ToolType;
 
 @Repository
@@ -37,7 +35,7 @@ public class JdbcToolTypeRepository implements ToolTypeRepository{
     /*
      * Saves ToolType to database
      * @param String of the new ToolType name
-     * @return int id of the saved ToolType
+     * @return int number of rows saved
      */
     @Override
     public int save(String toolTypeName) {
