@@ -13,11 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.models.ToolCharges;
 import com.respositories.ToolChargesRepository;
+import com.respositories.ToolTypeRepository;
 
 @Service
 public class ToolChargesService {
     @Autowired
     ToolChargesRepository toolChargesRepository;
+
+    @Autowired
+    ToolTypeRepository toolTypeRepository;
 
     /*
      * Returns all ToolCharges objects from the database
@@ -28,6 +32,9 @@ public class ToolChargesService {
         try {
             List<ToolCharges> toolCharges = new ArrayList<ToolCharges>();
             toolChargesRepository.findAll().forEach(toolCharges::add);
+            toolCharges.forEach(tt -> {
+                tt.setToolType(toolTypeRepository.findById(tt.getToolType().getId()));
+            });
             return toolCharges;
         } catch (Exception e) {
             return new ArrayList<>();
@@ -59,6 +66,7 @@ public class ToolChargesService {
      */
     public ToolCharges findToolChargesById(int id) {
         ToolCharges toolCharges = toolChargesRepository.findById(id);
+        toolCharges.setToolType(toolTypeRepository.findById(toolCharges.getToolType().getId()));
         return toolCharges;
     }
 

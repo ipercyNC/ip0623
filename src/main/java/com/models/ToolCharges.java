@@ -18,7 +18,7 @@
 
  public class ToolCharges {
     private int id;
-    private int typeId;
+    private ToolType toolType;
     private double dailyCharge;
     private int weekdayCharge;
     private int weekendCharge;
@@ -26,15 +26,24 @@
 
 
     public ToolCharges() {
-
     }
+
+    public ToolCharges(int id, ToolType toolType, double dailyCharge,
+        int weekdayCharge, int weekendCharge, int holidayCharge) {
+            this.id = id;
+            this.toolType = toolType;
+            this.dailyCharge = dailyCharge;
+            this.weekdayCharge = weekdayCharge;
+            this.weekendCharge = weekendCharge;
+            this.holidayCharge = holidayCharge;
+        }
 
     @Override
     public String toString() {
         return String.format(
-            "ToolCharges[id=%d, typeId=%d, dailyCharge=%d, weekdayCharge=%d, " +
+            "ToolCharges[id=%d, toolType='%s', dailyCharge=%d, weekdayCharge=%d, " +
             "weekendCharge=%d, holidayCharge=%d]",
-            id, typeId, dailyCharge, weekdayCharge, weekendCharge, holidayCharge
+            id, toolType.toString(), dailyCharge, weekdayCharge, weekendCharge, holidayCharge
         );
     }
 
@@ -42,12 +51,12 @@
         return id;
     }
 
-    public void setTypeId (int typeId) {
-        this.typeId = typeId;
+    public void setToolType (ToolType toolType) {
+        this.toolType = toolType;
     }
 
-    public int getTypeId() {
-        return typeId;
+    public ToolType getToolType() {
+        return toolType;
     }
 
     public void setDailyCharge(double dailyCharge) {

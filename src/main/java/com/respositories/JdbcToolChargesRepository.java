@@ -12,12 +12,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.models.ToolBrand;
 import com.models.ToolCharges;
+import com.models.ToolChargesMapper;
 
 @Repository
 public class JdbcToolChargesRepository implements ToolChargesRepository {
@@ -31,7 +30,7 @@ public class JdbcToolChargesRepository implements ToolChargesRepository {
     @Override
     public List<ToolCharges> findAll() {
         return jdbcTemplate.query("SELECT * FROM tool_charges",
-            BeanPropertyRowMapper.newInstance(ToolCharges.class));
+            new ToolChargesMapper());
     }
 
     /*
@@ -74,7 +73,7 @@ public class JdbcToolChargesRepository implements ToolChargesRepository {
     public ToolCharges findById(int id) {
         try {
             ToolCharges toolCharges = jdbcTemplate.queryForObject("SELECT * FROM tool_charges WHERE id = ?",
-                BeanPropertyRowMapper.newInstance(ToolCharges.class), id);
+                new ToolChargesMapper(), id);
             return toolCharges;
         } catch (IncorrectResultSizeDataAccessException e) {
             return null;
@@ -90,7 +89,7 @@ public class JdbcToolChargesRepository implements ToolChargesRepository {
     public ToolCharges findByTypeId(int typeId) {
         try {
             ToolCharges toolCharges = jdbcTemplate.queryForObject("SELECT * FROM tool_charges WHERE type_id = ?",
-                BeanPropertyRowMapper.newInstance(ToolCharges.class), typeId);
+                new ToolChargesMapper(), typeId);
             return toolCharges;
         } catch (IncorrectResultSizeDataAccessException e) {
             return null;

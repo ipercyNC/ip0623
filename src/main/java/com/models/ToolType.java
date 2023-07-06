@@ -19,7 +19,8 @@ public class ToolType {
     public ToolType() {
     }
 
-    public ToolType(String name) {
+    public ToolType(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 
