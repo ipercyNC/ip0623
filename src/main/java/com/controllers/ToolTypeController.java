@@ -24,7 +24,7 @@ import com.models.ToolType;
 import com.services.ToolTypeService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/toolType")
 public class ToolTypeController {
     @Autowired 
     ToolTypeService toolTypeService;
@@ -34,7 +34,7 @@ public class ToolTypeController {
      * Gathers the ToolType results from the service layer
      * @return List of ToolType objects
      */
-    @GetMapping("/toolType")
+    @GetMapping("")
     public ResponseEntity<List<ToolType>> getAllToolTypes() {
         try {
             List<ToolType> toolTypes = toolTypeService.findAllToolTypes();
@@ -52,7 +52,7 @@ public class ToolTypeController {
      * @param String of the ToolType name to add into the database
      * @return status of the insert success
      */
-    @PostMapping("/toolType")
+    @PostMapping("")
     public ResponseEntity<String> createToolType(@RequestBody ObjectNode objectNode) {
         try {
             boolean result = toolTypeService.createToolType(objectNode.get("name").asText());
@@ -72,7 +72,7 @@ public class ToolTypeController {
      * @param str to search for in the database (id or name)
      * @return ToolType object
      */
-    @GetMapping("/toolType/{str}")
+    @GetMapping("/{str}")
     public ResponseEntity<ToolType> getToolTypeByIdOrName(@PathVariable("str") String str) {
         ToolType toolType;
         try {
@@ -109,7 +109,7 @@ public class ToolTypeController {
      * Initiate call to delete all ToolTypes from the database
      * @return status of the delete success
      */
-    @DeleteMapping("/toolType")
+    @DeleteMapping("")
     public ResponseEntity<String> deleteAllToolTypes() {
         try {
             int numRowsDeleted = toolTypeService.deleteAllToolTypes();

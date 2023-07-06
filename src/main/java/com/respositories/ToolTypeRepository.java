@@ -20,7 +20,7 @@ public interface ToolTypeRepository {
     List<ToolType> findAll();
 
     /*
-     * Saves ToolType to database
+     * Saves ToolType to the database
      * @param String of the new ToolType name
      * @return int id of the saved ToolType
      */
@@ -28,7 +28,7 @@ public interface ToolTypeRepository {
 
     /*
      * Delete all ToolType objects from the database
-     * @return null
+     * @return number of affected rows
      */
     int deleteAll();
 

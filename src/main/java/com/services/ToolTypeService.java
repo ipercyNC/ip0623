@@ -19,7 +19,7 @@ import com.respositories.ToolTypeRepository;
 
 @Service
 public class ToolTypeService {
-        @Autowired 
+    @Autowired 
     ToolTypeRepository toolTypeRepository;
 
     /*
@@ -44,12 +44,13 @@ public class ToolTypeService {
      * @return status of the insert success
      */
     public boolean createToolType(String toolTypeName) {
-        System.out.println("Create tool " + toolTypeName);
         try {
             int result = toolTypeRepository.save(toolTypeName);
-            System.out.println("here " + result);
-            return true;
-            
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             return false;
         }
@@ -58,7 +59,7 @@ public class ToolTypeService {
     /*
      * Returns a matching ToolType from the database if it exists
      * @param int to search for in the database
-     * @return ToolType objects
+     * @return ToolType object
      */
     public ToolType findToolTypeById(int id) {
         ToolType toolType = toolTypeRepository.findById(id);

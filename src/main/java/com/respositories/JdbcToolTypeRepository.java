@@ -30,7 +30,8 @@ public class JdbcToolTypeRepository implements ToolTypeRepository{
      */
     @Override
     public List<ToolType> findAll() {
-        return jdbcTemplate.query("SELECT * FROM tool_type", BeanPropertyRowMapper.newInstance(ToolType.class));
+        return jdbcTemplate.query("SELECT * FROM tool_type", 
+            BeanPropertyRowMapper.newInstance(ToolType.class));
     }
 
     /*
@@ -46,7 +47,6 @@ public class JdbcToolTypeRepository implements ToolTypeRepository{
             return jdbcTemplate.update("INSERT INTO tool_type (name) VALUES(?)",
                 toolTypeName);
         } catch (IncorrectResultSizeDataAccessException e) {
-            System.out.println(e);
             return -1;
         }
     }
@@ -72,7 +72,7 @@ public class JdbcToolTypeRepository implements ToolTypeRepository{
     @Override
     public ToolType findById(int id) {
         try {
-            ToolType toolType = jdbcTemplate.queryForObject("SELECT * FROM tool_type where id = ?",
+            ToolType toolType = jdbcTemplate.queryForObject("SELECT * FROM tool_type WHERE id = ?",
                 BeanPropertyRowMapper.newInstance(ToolType.class), id);
             return toolType;
         } catch (IncorrectResultSizeDataAccessException e) {

@@ -1,10 +1,10 @@
 /*
- * ToolTypeControllerTest.java
- * 7/4/2023
+ * ToolBrandControllerTest.java
+ * 7/5/2023
  * Ian Percy
  * 
- * Test for the ToolTypeController. Test the endpoints exposed for the 
- * ToolType api.
+ * Test for the ToolBrandController. Test the endpoints exposed for the 
+ * ToolBrand api.
  */
 package com;
 
@@ -16,20 +16,19 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import com.services.ToolTypeService;
-import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.services.ToolBrandService;
+import net.minidev.json.JSONObject;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@AutoConfigureMockMvc 
-public class ToolTypeControllerTest {
+@AutoConfigureMockMvc
+public class ToolBrandControllerTest {
     @Autowired
-    ToolTypeService toolTypeService;
+    ToolBrandService toolBrandService;
 
     @Autowired
     private MockMvc mvc;
@@ -37,29 +36,28 @@ public class ToolTypeControllerTest {
     @Value(value="${local.server.port}")
     private int port;
 
-
     @BeforeEach
     public void clear() {
-        toolTypeService.deleteAllToolTypes();
+        toolBrandService.deleteAllToolBrands();
     }
 
-    // Test creating one ToolType through controller
+    // Test creating one ToolBrand through controller
     @Test
-    public void createOneToolType() throws Exception {
-        String newToolTypeName = "testToolType";
+    public void createOneToolBrand() throws Exception {
+        String newToolBrandName = "testToolBrand";
         JSONObject json = new JSONObject();
-        json.put("name", newToolTypeName);
-        mvc.perform(post("/api/toolType").contentType(MediaType.APPLICATION_JSON).content(json.toString())).andExpect(status().isCreated());
-        MvcResult result = mvc.perform(get("/api/toolType")).andReturn();
+        json.put("name", newToolBrandName);
+        mvc.perform(post("/api/toolBrand").contentType(MediaType.APPLICATION_JSON).content(json.toString())).andExpect(status().isCreated());
+        MvcResult result = mvc.perform(get("/api/toolBrand")).andReturn();
         String resultAsString = result.getResponse().getContentAsString();
-        assertThat(resultAsString.contains(newToolTypeName));
+        assertThat(resultAsString.contains(newToolBrandName));
     }
-
-    //Test gathering all ToolTypes when it's empty
+    //Test gathering all ToolBrands when it's empty
     @Test
-    public void gatherAllToolTypesEmpty() throws Exception {
-        MvcResult result = mvc.perform(get("/api/toolType")).andReturn();
+    public void gatherAllToolBrandsEmpty() throws Exception {
+        MvcResult result = mvc.perform(get("/api/toolBrand")).andReturn();
         String resultAsString = result.getResponse().getContentAsString();
         assertThat(resultAsString.isEmpty());
     }
+
 }
