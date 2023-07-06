@@ -67,7 +67,7 @@ public class ToolChargesController {
     }
 
     /*
-     * Returns a matching ToolCharges from the service layre if it exists
+     * Returns a matching ToolCharges from the service layer if it exists
      * @param int to search for in the database
      * @return ToolCharges object
      */

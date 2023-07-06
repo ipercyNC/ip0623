@@ -1,3 +1,10 @@
+/*
+ * ToolChargesMapper.java
+ * 7/6/2023
+ * Ian Percy
+ * 
+ * Maps a resultset to a ToolCharges object
+ */
 package com.models;
 
 import java.sql.ResultSet;

@@ -6,7 +6,7 @@
  * Jdbc implmentation of the ToolBrandRepository.
  * Allows specific queries on top of the ToolBrandRepository.
  */
-package com.respositories;
+package com.repositories;
 
 import java.util.List;
 

@@ -6,7 +6,7 @@
  * Interface of the ToolChargesRepository.
  * Defines the general methods to be used with the ToolCharges table
  */
-package com.respositories;
+package com.repositories;
 
 import java.util.List;
 import com.models.ToolCharges;
@@ -23,7 +23,7 @@ public interface ToolChargesRepository {
      * @param int of the new ToolCharge typeId
      * @return int number of rows saved
      */
-    int save(int toolChargesName);
+    int save(int toolChargesInt);
 
     /*
      * Delete all ToolCharges objects from the database

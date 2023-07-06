@@ -6,7 +6,7 @@
  * Jdbc implmentation of the ToolChargesRepository.
  * Allows specific queries on top of the ToolChargesRepository.
  */
-package com.respositories;
+package com.repositories;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

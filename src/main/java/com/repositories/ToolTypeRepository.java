@@ -6,7 +6,7 @@
  * Interface of the ToolTypeRepository.
  * Defines the general methods to be used with the ToolType table
  */
-package com.respositories;
+package com.repositories;
 
 import java.util.List;
 import com.models.ToolType;

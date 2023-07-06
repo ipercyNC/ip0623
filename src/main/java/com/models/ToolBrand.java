@@ -19,7 +19,8 @@ public class ToolBrand {
 
     }
 
-    public ToolBrand(String name) {
+    public ToolBrand(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 

@@ -41,7 +41,7 @@
     @Override
     public String toString() {
         return String.format(
-            "ToolCharges[id=%d, toolType='%s', dailyCharge=%d, weekdayCharge=%d, " +
+            "ToolCharges[id=%d, toolType='%s', dailyCharge=%10.2f, weekdayCharge=%d, " +
             "weekendCharge=%d, holidayCharge=%d]",
             id, toolType.toString(), dailyCharge, weekdayCharge, weekendCharge, holidayCharge
         );

@@ -12,8 +12,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.models.ToolCharges;
-import com.respositories.ToolChargesRepository;
-import com.respositories.ToolTypeRepository;
+import com.repositories.ToolChargesRepository;
+import com.repositories.ToolTypeRepository;
 
 @Service
 public class ToolChargesService {
@@ -26,7 +26,7 @@ public class ToolChargesService {
     /*
      * Returns all ToolCharges objects from the database
      * Initiates a query to the database and maps the results
-     * @return List of ToolChoices objects
+     * @return List of ToolCharges objects
      */
     public List<ToolCharges> findAllToolCharges() {
         try {
@@ -66,6 +66,17 @@ public class ToolChargesService {
      */
     public ToolCharges findToolChargesById(int id) {
         ToolCharges toolCharges = toolChargesRepository.findById(id);
+        toolCharges.setToolType(toolTypeRepository.findById(toolCharges.getToolType().getId()));
+        return toolCharges;
+    }
+
+    /*
+     * Returns a matching ToolCharge from the database if it exists
+     * @param int type id to search for in the database
+     * @return ToolCharges
+     */
+    public ToolCharges findToolChargesByTypeId(int id) {
+        ToolCharges toolCharges = toolChargesRepository.findByTypeId(id);
         toolCharges.setToolType(toolTypeRepository.findById(toolCharges.getToolType().getId()));
         return toolCharges;
     }

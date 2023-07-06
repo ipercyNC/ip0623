@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.models.ToolType;
-import com.respositories.ToolTypeRepository;
+import com.repositories.ToolTypeRepository;
 
 @Service
 public class ToolTypeService {

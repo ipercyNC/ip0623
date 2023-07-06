@@ -6,7 +6,7 @@
  * Interface of the ToolBrand.
  * Defines the general methods to be used with the ToolBrand table
  */
-package com.respositories;
+package com.repositories;
 
 import java.util.List;
 
