@@ -74,6 +74,19 @@ public class ToolChoicesService {
         toolChoices.setToolBrand(toolBrandRepository.findById(toolChoices.getToolBrand().getId()));
         return toolChoices;
     }
+
+    /*
+     * Returns a matching ToolChoice from the database if it exists
+     * @param String code to search for in the database
+     * @return ToolChoice
+     */
+    public ToolChoices findToolChoicesByCode(String code){
+        ToolChoices toolChoices = toolChoicesRepository.findByCode(code);
+        toolChoices.setToolType(toolTypeRepository.findById(toolChoices.getToolType().getId()));
+        toolChoices.setToolBrand(toolBrandRepository.findById(toolChoices.getToolBrand().getId()));
+        return toolChoices;
+    }
+
     /*
      * Deletes all ToolChoices
      * @return int indiciating success or failure of deletion

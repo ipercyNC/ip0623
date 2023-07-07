@@ -76,5 +76,21 @@ public class JdbcToolChoicesRepository implements ToolChoicesRepository {
             return null;
         }
     }
+
+    /*
+     * Returns a matching ToolChoices from the database if it exists
+     * @param id to search for in the database
+     * @return ToolChoices object
+     */
+    @Override
+    public ToolChoices findByCode(String code) {
+        try {
+            ToolChoices toolChoices = jdbcTemplate.queryForObject("SELECT * FROM tool_choices where code = ? ", 
+            new ToolChoicesMapper(), code);
+            return toolChoices;
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return null;
+        }
+    }
     
 }

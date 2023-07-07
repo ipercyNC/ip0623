@@ -38,6 +38,13 @@ public interface ToolChoicesRepository {
      */
     ToolChoices findById(int id);
 
+    /*
+     * Returns a matching ToolChoices from the database if it exists
+     * @param id to search for in the database
+     * @return ToolChoices object
+     */
+    ToolChoices findByCode(String code);
+
      //TODO: Possibly add looking by ToolBrand id or ToolType id, however you could do findALL() and filter
      // selectiviy might be the same there - minimal performance gain initially
 }

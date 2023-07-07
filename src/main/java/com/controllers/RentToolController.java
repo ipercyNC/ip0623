@@ -39,14 +39,14 @@ public class RentToolController {
     RentToolService rentToolService;
     
     @PostMapping("")
-    public ResponseEntity<String> rentTool(@RequestBody ObjectNode objectNode) {
+    public ResponseEntity<List<String>> rentTool(@RequestBody ObjectNode objectNode) {
         try {
-            double charges = rentToolService.rentTool(objectNode.get("typeId").asText(),
+            List<String> charges = rentToolService.rentTool(objectNode.get("code").asText(),
                 objectNode.get("startDate").asText(), 
                 objectNode.get("days").asText(),
                 objectNode.get("discount").asText());
 
-            return new ResponseEntity<String>("worked " + charges , HttpStatus.OK);
+            return new ResponseEntity<List<String>>(charges, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

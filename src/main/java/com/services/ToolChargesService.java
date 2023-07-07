@@ -26,7 +26,7 @@ public class ToolChargesService {
     /*
      * Returns all ToolCharges objects from the database
      * Initiates a query to the database and maps the results
-     * @return List of ToolCharges objects
+     * @return List of ToolChoices objects
      */
     public List<ToolCharges> findAllToolCharges() {
         try {

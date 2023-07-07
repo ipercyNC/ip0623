@@ -74,10 +74,25 @@ public class ToolChoicesController {
      * @param int to search for in the database
      * @return ToolChoices object
      */
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<ToolChoices> getToolChoicesById(@PathVariable("id") int id) {
         try {
             ToolChoices toolChoices = toolChoicesService.findToolChoicesById(id);
+            return new ResponseEntity<ToolChoices>(toolChoices, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /*
+     * Returns a matching ToolChoices from the service layer if it exists
+     * @param String to search for in the database
+     * @return ToolChoices object
+     */
+    @GetMapping("/code/{code}")
+    public ResponseEntity<ToolChoices> getToolChoicesByCode(@PathVariable("code") String code) {
+        try {
+            ToolChoices toolChoices = toolChoicesService.findToolChoicesByCode(code);
             return new ResponseEntity<ToolChoices>(toolChoices, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
