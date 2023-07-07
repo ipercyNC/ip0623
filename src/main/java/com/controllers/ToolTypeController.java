@@ -26,19 +26,22 @@ import com.services.ToolTypeService;
 @RestController
 @RequestMapping("/api/toolType")
 public class ToolTypeController {
-    @Autowired 
+    @Autowired
     ToolTypeService toolTypeService;
 
     /*
-     * Returns all ToolType objects from the database. 
+     * Returns all ToolType objects from the database.
      * Gathers the ToolType results from the service layer
+     * 
      * @return List of ToolType objects
      */
     @GetMapping("")
     public ResponseEntity<List<ToolType>> getAllToolTypes() {
         try {
+            // Call ToolTypeService to get all ToolTypes from the database
             List<ToolType> toolTypes = toolTypeService.findAllToolTypes();
-            if (toolTypes.isEmpty()){
+            // If empty, return NO_CONTENT
+            if (toolTypes.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
             return new ResponseEntity<List<ToolType>>(toolTypes, HttpStatus.OK);
@@ -49,19 +52,22 @@ public class ToolTypeController {
 
     /*
      * Creates a new ToolType through the service layer
-     * @param String of the ToolType name to add into the database
+     * 
+     * @param objectNode object containing the ToolType name to add
+     * 
      * @return status of the insert success
      */
     @PostMapping("")
     public ResponseEntity<String> createToolType(@RequestBody ObjectNode objectNode) {
         try {
+            // Call ToolTypeService to create tool and return the result
             boolean result = toolTypeService.createToolType(objectNode.get("name").asText());
             if (result) {
                 return new ResponseEntity<String>("ToolType created successfully.", HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<String>("ToolType not created.", HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            
+
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -69,49 +75,49 @@ public class ToolTypeController {
 
     /*
      * Returns a matching ToolType from the service layer if it exists
-     * @param str to search for in the database (id or name)
+     * 
+     * @param id to search for in the database
+     * 
      * @return ToolType object
      */
-    @GetMapping("/{str}")
-    public ResponseEntity<ToolType> getToolTypeByIdOrName(@PathVariable("str") String str) {
-        ToolType toolType;
+    @GetMapping("/id/{id}")
+    public ResponseEntity<ToolType> getToolTypeById(@PathVariable("id") int id) {
         try {
-            int id = Integer.parseInt(str.toString());
-            toolType = toolTypeService.findToolTypeById(id);
-        } catch (NumberFormatException e) {
-            toolType = toolTypeService.findToolTypeByName(str);
-        }
-
-        if (toolType != null) {
-            return new ResponseEntity<>(toolType, HttpStatus.OK);
-        } else {
+            // Call ToolTypeService to find ToolType by id
+            ToolType toolType = toolTypeService.findToolTypeById(id);
+            return new ResponseEntity<ToolType>(toolType, HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    // /*
-    //  * Returns a matching ToolType from the database if it exists
-    //  * @param String to search for in the database
-    //  * @return ToolType object
-    //  */
-    // @GetMapping("/toolType/{name}")
-    // public ResponseEntity<ToolType> getToolTypeByIdOrName(@PathVariable("name") String name) {
-    //     ToolType toolType = toolTypeService.findToolTypeByName(name);
-
-    //     if (toolType != null) {
-    //         return new ResponseEntity<>(toolType, HttpStatus.OK);
-    //     } else {
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
-    // }
+    /*
+     * Returns a matching ToolType from the service layer if it exists
+     * 
+     * @param name to search for in the database
+     * 
+     * @return ToolType object
+     */
+    @GetMapping("/name/{name}")
+    public ResponseEntity<ToolType> getToolTypeByName(@PathVariable("name") String name) {
+        try {
+            // Call ToolTypeService to find ToolType by id
+            ToolType toolType = toolTypeService.findToolTypeByName(name);
+            return new ResponseEntity<ToolType>(toolType, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     /*
      * Initiate call to delete all ToolTypes from the database
+     * 
      * @return status of the delete success
      */
     @DeleteMapping("")
     public ResponseEntity<String> deleteAllToolTypes() {
         try {
+            // Call ToolTypeService to delete ToolTypes and return number of rows deleted
             int numRowsDeleted = toolTypeService.deleteAllToolTypes();
             return new ResponseEntity<>("Deleted " + numRowsDeleted + " ToolType(s) deleted", HttpStatus.OK);
         } catch (Exception e) {

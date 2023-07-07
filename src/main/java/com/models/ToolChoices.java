@@ -33,9 +33,8 @@ public class ToolChoices {
     @Override
     public String toString() {
         return String.format(
-            "ToolChoices[id=%d, code='%s', toolBrand='%s', toolType = '%s']",
-            id, code, toolBrand.toString(), toolType.toString()
-        );
+                "ToolChoices[id=%d, code='%s', toolBrand='%s', toolType = '%s']",
+                id, code, toolBrand.toString(), toolType.toString());
     }
 
     public int getId() {

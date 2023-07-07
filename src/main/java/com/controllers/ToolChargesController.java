@@ -30,14 +30,17 @@ public class ToolChargesController {
     ToolChargesService toolChargesService;
 
     /*
-     * Returns all ToolChoices objects from the database
+     * Returns all ToolCharges objects from the database
      * Gathers all the ToolCharges objects from the service layer
+     * 
      * @return List of ToolCharges objects
      */
     @GetMapping("")
     public ResponseEntity<List<ToolCharges>> getAllToolCharges() {
         try {
+            // Call ToolChargesService to gather all ToolCharges
             List<ToolCharges> toolCharges = toolChargesService.findAllToolCharges();
+            // If empty, return NO_CONTENT
             if (toolCharges.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -49,12 +52,15 @@ public class ToolChargesController {
 
     /*
      * Creates a new ToolCharges through the service layer
-     * @param String of the ToolBrand name to add into the database
+     * 
+     * @param objectNode contains the id of the ToolType to add into the database
+     * 
      * @return status of the insert success
      */
     @PostMapping("")
     public ResponseEntity<String> createToolCharges(@RequestBody ObjectNode objectNode) {
         try {
+            // Call ToolChargesService to create a new ToolCharge
             boolean result = toolChargesService.createToolCharge(objectNode.get("typeId").asInt());
             if (result) {
                 return new ResponseEntity<String>("ToolCharges created successully.", HttpStatus.CREATED);
@@ -68,15 +74,17 @@ public class ToolChargesController {
 
     /*
      * Returns a matching ToolCharges from the service layer if it exists
-     * @param int to search for in the database
+     * 
+     * @param id int to search for in the database
+     * 
      * @return ToolCharges object
      */
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<ToolCharges> getToolChargesById(@PathVariable("id") int id) {
-        try{
+        try {
+            // Call ToolChargesService to find ToolCharges by id
             ToolCharges toolCharges = toolChargesService.findToolChargesById(id);
             return new ResponseEntity<ToolCharges>(toolCharges, HttpStatus.OK);
-
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -84,11 +92,14 @@ public class ToolChargesController {
 
     /*
      * Indicate call to delete all ToolCharges from the database
+     * 
      * @return status of the delete success
      */
     @DeleteMapping("")
     public ResponseEntity<String> deleteAllToolCharges() {
         try {
+            // Call to ToolBrandService to delete rows from table and return number of rows
+            // Returns number of rows deleted
             int numRowsDeleted = toolChargesService.deleteAllToolCharges();
             return new ResponseEntity<>("Deleted " + numRowsDeleted + " ToolCharges deleted", HttpStatus.OK);
         } catch (Exception e) {

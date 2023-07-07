@@ -33,8 +33,10 @@ public class ToolChoicesService {
      */
     public List<ToolChoices> findAllToolChoices() {
         try {
+            // Get all ToolChoices from database and map to List
             List<ToolChoices> toolChoices = new ArrayList<ToolChoices>();
             toolChoicesRepository.findAll().forEach(toolChoices::add);
+            // Set the ToolType and ToolBrand to the actual objects
             toolChoices.forEach(tc -> {
                 tc.setToolType(toolTypeRepository.findById(tc.getToolType().getId()));
                 tc.setToolBrand(toolBrandRepository.findById(tc.getToolBrand().getId()));
@@ -46,12 +48,20 @@ public class ToolChoicesService {
     }
 
     /*
-     * Adds a ToolChoice to the database
-     * @param String of the type code to add
-     * @return status of the insert success
+     * Saves ToolChoices to database
+     * 
+     * @param toolChoicesCode String of the new ToolChoices code
+     * 
+     * @param brandId int of the ToolBrand
+     * 
+     * @param typeId int of the ToolType
+     * 
+     * @return boolean success of creation
      */
     public boolean createToolChoice(String toolChoiceCode, int brandId, int typeId) {
         try {
+            // Save new ToolChoices to database and return the result (number of rows
+            // affected)
             int result = toolChoicesRepository.save(toolChoiceCode, brandId, typeId);
             if (result > 0) {
                 return true;
@@ -65,23 +75,27 @@ public class ToolChoicesService {
 
     /* 
      * Returns a matching ToolChoice from the database if it exists
-     * @param int id to search for in the database
-     * @return ToolChoice
+     * @param id int of id to search for in the database
+     * @return ToolChoices
      */
     public ToolChoices findToolChoicesById(int id) {
+        // Query ToolChoices table to find by specific id and return result
         ToolChoices toolChoices = toolChoicesRepository.findById(id);
+        // Set the ToolType and ToolBrand to the actual objects
         toolChoices.setToolType(toolTypeRepository.findById(toolChoices.getToolType().getId()));
         toolChoices.setToolBrand(toolBrandRepository.findById(toolChoices.getToolBrand().getId()));
         return toolChoices;
     }
 
     /*
-     * Returns a matching ToolChoice from the database if it exists
-     * @param String code to search for in the database
-     * @return ToolChoice
+     * Returns a matching ToolChoices from the database if it exists
+     * @param code String of code to search for in the database
+     * @return ToolChoices
      */
     public ToolChoices findToolChoicesByCode(String code){
+        // Query ToolChoices table to find by specific code and return result
         ToolChoices toolChoices = toolChoicesRepository.findByCode(code);
+        // Set the ToolType and ToolBrand to the actual objects
         toolChoices.setToolType(toolTypeRepository.findById(toolChoices.getToolType().getId()));
         toolChoices.setToolBrand(toolBrandRepository.findById(toolChoices.getToolBrand().getId()));
         return toolChoices;

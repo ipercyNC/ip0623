@@ -1,3 +1,10 @@
+/*
+ * RentToolService.java
+ * 7/7/2023
+ * Ian Percy
+ * 
+ * Service layer to handle tool renting logic
+ */
 package com.services;
 
 import java.text.ParseException;
@@ -11,7 +18,6 @@ import java.util.Date;
 import java.util.List;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.temporal.TemporalAdjusters;
@@ -25,6 +31,9 @@ public class RentToolService {
     @Autowired
     ToolChoicesService toolChoicesService;
 
+    /*
+     * TODO: finalize comment after all changes
+     */
     public List<String> rentTool(String code, String s, String rentalDays, String discountRaw) {
         try {
             ToolChoices toolChoices = toolChoicesService.findToolChoicesByCode(code);
@@ -93,14 +102,18 @@ public class RentToolService {
             // Charge days -> calculated in loop
             int outputChargeDays = daysToCharge;
             // Pre-discounted charge -> calculated after loop
-            double outputPrediscountCharge = new BigDecimal(daysToCharge * toolCharges.getDailyCharge()).setScale(2, RoundingMode.HALF_UP).doubleValue();
+            double outputPrediscountCharge = new BigDecimal(daysToCharge * toolCharges.getDailyCharge())
+                    .setScale(2, RoundingMode.HALF_UP).doubleValue();
             // Discount percent -> from input
-            int outputDiscountCalculated = new BigDecimal(discountCalculated * 100).setScale(0, RoundingMode.HALF_UP).intValue();
+            int outputDiscountCalculated = new BigDecimal(discountCalculated * 100).setScale(0, RoundingMode.HALF_UP)
+                    .intValue();
             // Discount Amount -> amount saved from discount - calculated after loop
-            double outputDiscountAmount = new BigDecimal(outputPrediscountCharge * outputDiscountCalculated).setScale(2, RoundingMode.HALF_UP).doubleValue();
+            double outputDiscountAmount = new BigDecimal(outputPrediscountCharge * outputDiscountCalculated)
+                    .setScale(2, RoundingMode.HALF_UP).doubleValue();
             // final charge -> pre-discounted charge minus discount amount - caluclated
             // after loop
-            double outputFinalCharge = new BigDecimal(outputPrediscountCharge - outputDiscountAmount).setScale(2, RoundingMode.HALF_UP).doubleValue();
+            double outputFinalCharge = new BigDecimal(outputPrediscountCharge - outputDiscountAmount)
+                    .setScale(2, RoundingMode.HALF_UP).doubleValue();
 
             System.out.println("Charge Dates " + chargeDates.toString());
             System.out.println("No Charge Dates " + noChargeDates.toString());
@@ -121,7 +134,16 @@ public class RentToolService {
         }
     }
 
+    /*
+     * Calculate if day is a holiday
+     * Currently checking for July 4th and Labor Day
+     * 
+     * @param date LocalDate to check
+     * 
+     * @return boolean of if day is holiday or not
+     */
     public boolean holidayDate(LocalDate date) {
+        // Check if Labor Day
         if (date.getMonthValue() == 9) {
             LocalDate firstMonday = date.with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
             if (date.equals(firstMonday)) {
@@ -129,6 +151,9 @@ public class RentToolService {
                 return true;
             }
         }
+        // Check if July 4th or observed July 4th
+        // If July 4th is only Saturday, observed day is Friday
+        // If July 4th is only Sunday, observed day is Monday
         if (date.getMonthValue() == 7) {
             if (date.getDayOfMonth() == 3 && date.getDayOfWeek().getValue() == 5) {
                 System.out.println("Observed July 4th on Friday " + date);
@@ -144,6 +169,10 @@ public class RentToolService {
         return false;
     }
 
+    /*
+     * Generate rental agreement for the tool rental
+     * TODO: change this to use rental agreement object
+     */
     public List<String> generateAgreement(String outputToolCode,
             String outputToolType,
             String outputToolBrand,

@@ -13,9 +13,11 @@ import org.springframework.jdbc.core.RowMapper;
 
 public class ToolChargesMapper implements RowMapper<ToolCharges> {
 
-
     @Override
-    public ToolCharges mapRow(ResultSet rs, int rowNum) throws SQLException {        
+    public ToolCharges mapRow(ResultSet rs, int rowNum) throws SQLException {
+        // TODO: Fix ToolType to autowire in this class to find actual ToolType object
+        // currently it is being set with actual values after the the object is
+        // instantiated
         return new ToolCharges(
                 rs.getInt("id"),
                 new ToolType(rs.getInt("type_id"), null),

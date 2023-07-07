@@ -14,33 +14,45 @@ import com.models.ToolChoices;
 public interface ToolChoicesRepository {
     /*
      * Returns all ToolChoices objects from the database
+     * 
      * @return List of ToolChoices objects
      */
     List<ToolChoices> findAll();
 
     /*
      * Saves ToolChoices to database
-     * @param String of the new ToolChoice code
+     * 
+     * @param toolChoicesCode String of the new ToolChoices code
+     * 
+     * @param brandId int of the ToolBrand
+     * 
+     * @param typeId int of the ToolType
+     * 
      * @return int number of rows saved
      */
     int save(String toolChoicesCode, int brandId, int typeId);
 
     /*
-     * Delete all ToolChoices objects from the database if it exists
-     * @return number of affected rows 
+     * Delete all ToolChoices objects from the database
+     * 
+     * @return number of affected rows
      */
     int deleteAll();
 
     /*
      * Returns a matching ToolChoices from the database if it exists
-     * @param id to search for in the database
+     * 
+     * @param id int for the id to search for in the database
+     * 
      * @return ToolChoices object
      */
     ToolChoices findById(int id);
 
     /*
      * Returns a matching ToolChoices from the database if it exists
-     * @param id to search for in the database
+     * 
+     * @param code String for tool code to search for in the database
+     * 
      * @return ToolChoices object
      */
     ToolChoices findByCode(String code);

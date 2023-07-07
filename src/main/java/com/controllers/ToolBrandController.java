@@ -28,16 +28,19 @@ import com.services.ToolBrandService;
 public class ToolBrandController {
     @Autowired
     ToolBrandService toolBrandService;
-    
+
     /*
      * Returns all ToolBrand objects from the database
      * Gathers the ToolBrand objects from the service layer
+     * 
      * @return List of ToolBrand objects
      */
     @GetMapping("")
     public ResponseEntity<List<ToolBrand>> getAllToolBrands() {
         try {
+            // Get all ToolBrands
             List<ToolBrand> toolBrands = toolBrandService.findAllToolBrands();
+            // If empty, return NO_CONTENT
             if (toolBrands.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -49,12 +52,15 @@ public class ToolBrandController {
 
     /*
      * Creates a new ToolBrand through the service layer
-     * @param String of the ToolBrand name to add into the database
+     * 
+     * @param objectNode String of the ToolBrand name to add into the database
+     * 
      * @return status of the insert success
      */
     @PostMapping("")
     public ResponseEntity<String> createToolBrand(@RequestBody ObjectNode objectNode) {
         try {
+            // Pass the name to the ToolBrandService to create ToolBrand
             boolean result = toolBrandService.createToolBrand(objectNode.get("name").asText());
             if (result) {
                 return new ResponseEntity<String>("ToolBrand created successfully.", HttpStatus.CREATED);
@@ -68,36 +74,50 @@ public class ToolBrandController {
 
     /*
      * Returns a matching ToolBrand from the service layer if it exists
-     * @param str to search for in the database (id or name)
+     * 
+     * @param id to search for in the database
+     * 
      * @return ToolBrand object
      */
-    @GetMapping("/{str}")
-    public ResponseEntity<ToolBrand> getToolBrandByIdOrName(@PathVariable("str") String str) {
-        ToolBrand toolBrand;
+    @GetMapping("/id/{id}")
+    public ResponseEntity<ToolBrand> getToolBrandById(@PathVariable("id") int id) {
         try {
-            int id = Integer.parseInt(str.toString());
-            toolBrand = toolBrandService.findToolBrandById(id);
-        } catch (NumberFormatException e) {
-            // this needs a wrap on another exception from the backend
-            toolBrand = toolBrandService.findToolBrandByName(str);
-        } catch(Exception e) {
-            toolBrand = null;
-        }
-
-        if (toolBrand != null) {
+            // Call ToolBrandService to find ToolBrand by id
+            ToolBrand toolBrand = toolBrandService.findToolBrandById(id);
             return new ResponseEntity<ToolBrand>(toolBrand, HttpStatus.OK);
-        } else {
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /*
+     * Returns a matching ToolBrand from the service layer if it exists
+     * 
+     * @param name to search for in the database
+     * 
+     * @return ToolBrand object
+     */
+    @GetMapping("/name/{name}")
+    public ResponseEntity<ToolBrand> getToolBrandByName(@PathVariable("name") String name) {
+        try {
+            // Call ToolBrandService to find ToolBrand by name
+            ToolBrand toolBrand = toolBrandService.findToolBrandByName(name);
+            return new ResponseEntity<ToolBrand>(toolBrand, HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     /*
      * Indicate call to delete all ToolBrands from the database
+     * 
      * @return status of the delete success
      */
     @DeleteMapping("")
     public ResponseEntity<String> deleteAllToolBrands() {
         try {
+            // Call to ToolBrandService to delete rows from table and return number of rows
+            // Returns number of rows deleted
             int numRowsDeleted = toolBrandService.deleteAllToolBrands();
             return new ResponseEntity<>("Deleted " + numRowsDeleted + " ToolBrand(s) deleted", HttpStatus.OK);
         } catch (Exception e) {

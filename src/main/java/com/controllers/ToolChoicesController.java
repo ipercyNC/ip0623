@@ -12,7 +12,6 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,12 +32,15 @@ public class ToolChoicesController {
     /*
      * Returns all ToolChoices objects from the database
      * Gathers all ToolChoices from the service layer
-     * @return List of ToolCharges objects
+     * 
+     * @return List of ToolChoices objects
      */
     @GetMapping("")
     public ResponseEntity<List<ToolChoices>> getAllToolChoices() {
         try {
+            // Call ToolChoicesServie to get all ToolChoices
             List<ToolChoices> toolChoices = toolChoicesService.findAllToolChoices();
+            // If empty, return NO_CONTENT
             if (toolChoices.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -50,16 +52,19 @@ public class ToolChoicesController {
 
     /*
      * Creates a new ToolChoice through the service layer
-     * @param String of the tool code to add into the database
+     * 
+     * @param objectNode object of the ToolChoice to add into the database
+     * 
      * @return status of the insert success
      */
     @PostMapping("")
     public ResponseEntity<String> createToolChoices(@RequestBody ObjectNode objectNode) {
         try {
+            // Call ToolChoicesService to create ToolChoice in database
             boolean result = toolChoicesService.createToolChoice(
-                        objectNode.get("code").asText(),
-                        objectNode.get("brandId").asInt(),
-                        objectNode.get("typeId").asInt());
+                    objectNode.get("code").asText(),
+                    objectNode.get("brandId").asInt(),
+                    objectNode.get("typeId").asInt());
             if (result) {
                 return new ResponseEntity<String>("ToolChoices created successfully.", HttpStatus.CREATED);
             } else {
@@ -69,14 +74,18 @@ public class ToolChoicesController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     /*
      * Returns a matching ToolChoices from the service layer if it exists
-     * @param int to search for in the database
+     * 
+     * @param id int to search for in the database
+     * 
      * @return ToolChoices object
      */
     @GetMapping("/id/{id}")
     public ResponseEntity<ToolChoices> getToolChoicesById(@PathVariable("id") int id) {
         try {
+            // Call ToolChoicesService to find by ID
             ToolChoices toolChoices = toolChoicesService.findToolChoicesById(id);
             return new ResponseEntity<ToolChoices>(toolChoices, HttpStatus.OK);
         } catch (Exception e) {
@@ -86,12 +95,15 @@ public class ToolChoicesController {
 
     /*
      * Returns a matching ToolChoices from the service layer if it exists
-     * @param String to search for in the database
+     * 
+     * @param code String to search for in the database (toolcode)
+     * 
      * @return ToolChoices object
      */
     @GetMapping("/code/{code}")
     public ResponseEntity<ToolChoices> getToolChoicesByCode(@PathVariable("code") String code) {
         try {
+            // Call ToolChoicesService to search by ToolCode
             ToolChoices toolChoices = toolChoicesService.findToolChoicesByCode(code);
             return new ResponseEntity<ToolChoices>(toolChoices, HttpStatus.OK);
         } catch (Exception e) {
@@ -101,11 +113,14 @@ public class ToolChoicesController {
 
     /*
      * Indicate call to delete all ToolChoices from the database
+     * 
      * @return status of the delete success
      */
     @DeleteMapping("")
     public ResponseEntity<String> deleteAllToolChoices() {
         try {
+            // Call ToolChoicesService to delete from the database and return number of rows
+            // deleted
             int numRowsDeleted = toolChoicesService.deleteAllToolChoices();
             return new ResponseEntity<String>("Deleted " + numRowsDeleted + " ToolChoices deleted", HttpStatus.OK);
         } catch (Exception e) {

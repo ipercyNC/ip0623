@@ -15,7 +15,7 @@ public class ToolType {
 
     private int id;
     private String name;
-    
+
     public ToolType() {
     }
 
@@ -27,9 +27,8 @@ public class ToolType {
     @Override
     public String toString() {
         return String.format(
-            "ToolType[id=%d, name='%s']",
-            id, name
-        );
+                "ToolType[id=%d, name='%s']",
+                id, name);
     }
 
     public void setName(String name) {
@@ -47,6 +46,5 @@ public class ToolType {
     public void setId(int id) {
         this.id = id;
     }
-
 
 }

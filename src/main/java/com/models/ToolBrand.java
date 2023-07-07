@@ -27,15 +27,14 @@ public class ToolBrand {
     @Override
     public String toString() {
         return String.format(
-            "ToolBrand[id=%d, name='%s']",
-            id, name
-        );
+                "ToolBrand[id=%d, name='%s']",
+                id, name);
     }
 
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public String getName() {
         return name;
     }

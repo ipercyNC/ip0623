@@ -18,32 +18,35 @@ import org.springframework.stereotype.Repository;
 import com.models.ToolType;
 
 @Repository
-public class JdbcToolTypeRepository implements ToolTypeRepository{
+public class JdbcToolTypeRepository implements ToolTypeRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    
+
     /*
      * Returns all ToolType objects from the database
+     * 
      * @return List of ToolType objects
      */
     @Override
     public List<ToolType> findAll() {
-        return jdbcTemplate.query("SELECT * FROM tool_type", 
-            BeanPropertyRowMapper.newInstance(ToolType.class));
+        // Map result of the SELECT to the default RowMapper for ToolType
+        return jdbcTemplate.query("SELECT * FROM tool_type",
+                BeanPropertyRowMapper.newInstance(ToolType.class));
     }
 
     /*
      * Saves ToolType to database
-     * @param String of the new ToolType name
+     * 
+     * @param toolTypeName String of the new ToolType name
+     * 
      * @return int number of rows saved
      */
     @Override
     public int save(String toolTypeName) {
         try {
-            // ToolType toolType = jdbcTemplate.queryForObject("SELECT * FROM tool_type where name = ?",
-            //     BeanPropertyRowMapper.newInstance(ToolType.class), toolTypeName);
+            // Insert into ToolType table and return the number of rows affected
             return jdbcTemplate.update("INSERT INTO tool_type (name) VALUES(?)",
-                toolTypeName);
+                    toolTypeName);
         } catch (IncorrectResultSizeDataAccessException e) {
             return -1;
         }
@@ -51,11 +54,13 @@ public class JdbcToolTypeRepository implements ToolTypeRepository{
 
     /*
      * Delete all ToolType objects from the database
-     * @return null
+     * 
+     * @return number of affected rows
      */
     @Override
     public int deleteAll() {
         try {
+            // Delete from ToolType table and return number of rows affected
             return jdbcTemplate.update("DELETE FROM tool_type");
         } catch (DataAccessException e) {
             return -1;
@@ -64,34 +69,42 @@ public class JdbcToolTypeRepository implements ToolTypeRepository{
 
     /*
      * Returns a matching ToolType from the database if it exists
-     * @param id to search for in the database
+     * 
+     * @param id int for the id to search for in the database
+     * 
      * @return ToolType object
      */
     @Override
     public ToolType findById(int id) {
         try {
+            // Map result of the SELECT with id filter to the default RowMapper for
+            // ToolType
             ToolType toolType = jdbcTemplate.queryForObject("SELECT * FROM tool_type WHERE id = ?",
-                BeanPropertyRowMapper.newInstance(ToolType.class), id);
+                    BeanPropertyRowMapper.newInstance(ToolType.class), id);
             return toolType;
         } catch (IncorrectResultSizeDataAccessException e) {
             return null;
         }
     }
-    
+
     /*
      * Returns a matching ToolType from the database if it exists
-     * @param String to search for in the database
+     * 
+     * @param toolTypeName String to search for in the database
+     * 
      * @return ToolType object
      */
     @Override
     public ToolType findByName(String toolTypeName) {
         try {
+            // Map result of the SELECT with name filter to the default RowMapper for
+            // ToolType
             ToolType toolType = jdbcTemplate.queryForObject("SELECT * FROM tool_type where name = ?",
-                BeanPropertyRowMapper.newInstance(ToolType.class), toolTypeName);
+                    BeanPropertyRowMapper.newInstance(ToolType.class), toolTypeName);
             return toolType;
         } catch (IncorrectResultSizeDataAccessException e) {
             return null;
         }
     }
-    
+
 }
