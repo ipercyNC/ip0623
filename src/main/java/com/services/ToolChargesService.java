@@ -9,6 +9,9 @@ package com.services;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.models.ToolCharges;
@@ -17,6 +20,7 @@ import com.repositories.ToolTypeRepository;
 
 @Service
 public class ToolChargesService {
+    private static final Logger logger = LoggerFactory.getLogger(ToolChargesService.class);
     @Autowired
     ToolChargesRepository toolChargesRepository;
 
@@ -40,6 +44,7 @@ public class ToolChargesService {
             });
             return toolCharges;
         } catch (Exception e) {
+            logger.error("Error getting ToolCharges " + e);
             return new ArrayList<>();
         }
     }
@@ -62,6 +67,7 @@ public class ToolChargesService {
                 return false;
             }
         } catch (Exception e) {
+            logger.error("Error creating ToolCharge " + e);
             return false;
         }
     }

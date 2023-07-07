@@ -9,6 +9,9 @@
 package com.repositories;
 
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
@@ -19,6 +22,7 @@ import com.models.ToolBrand;
 
 @Repository
 public class JdbcToolBrandRepository implements ToolBrandRepository {
+    private static final Logger logger = LoggerFactory.getLogger(JdbcToolBrandRepository.class);
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -47,6 +51,7 @@ public class JdbcToolBrandRepository implements ToolBrandRepository {
             // Insert into ToolBrand table and return the number of rows affected
             return jdbcTemplate.update("INSERT INTO tool_brand(name) VALUES(?)", toolBrandName);
         } catch (IncorrectResultSizeDataAccessException e) {
+            logger.error("Error with INSERT query into tool_brand " + e);
             return -1;
         }
     }
@@ -62,6 +67,7 @@ public class JdbcToolBrandRepository implements ToolBrandRepository {
             // Delete from ToolBrand table and return number of rows affected
             return jdbcTemplate.update("DELETE FROM tool_brand");
         } catch (DataAccessException e) {
+            logger.error("Error with DELETE query with tool_brand " + e);
             return -1;
         }
     }
@@ -82,6 +88,7 @@ public class JdbcToolBrandRepository implements ToolBrandRepository {
                     BeanPropertyRowMapper.newInstance(ToolBrand.class), id);
             return toolBrand;
         } catch (IncorrectResultSizeDataAccessException e) {
+            logger.error("Error with SELECT by id tool_brand " + e);
             return null;
         }
     }
@@ -102,6 +109,7 @@ public class JdbcToolBrandRepository implements ToolBrandRepository {
                     BeanPropertyRowMapper.newInstance(ToolBrand.class), toolBrandName);
             return toolBrand;
         } catch (IncorrectResultSizeDataAccessException e) {
+            logger.error("Error with SELECT by name tool_brand " + e);
             return null;
         }
     }

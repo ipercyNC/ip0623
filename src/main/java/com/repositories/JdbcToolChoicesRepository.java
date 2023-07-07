@@ -9,6 +9,9 @@
 package com.repositories;
 
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
@@ -19,6 +22,7 @@ import com.models.ToolChoicesMapper;
 
 @Repository
 public class JdbcToolChoicesRepository implements ToolChoicesRepository {
+    private static final Logger logger = LoggerFactory.getLogger(JdbcToolChoicesRepository.class);
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -50,9 +54,8 @@ public class JdbcToolChoicesRepository implements ToolChoicesRepository {
             // Insert into ToolChoices table and return the number of rows affected
             return jdbcTemplate.update("INSERT into tool_choices(code, brand_id, type_id) " +
                     " VALUES(?,?,?)", toolChoicesCode, brandId, typeId);
-        } catch (DataAccessException e) {
-            return -1;
         } catch (Exception e) {
+            logger.error("Error inserting into tool_choices " + e);
             return -1;
         }
     }
@@ -68,6 +71,7 @@ public class JdbcToolChoicesRepository implements ToolChoicesRepository {
             // Delete from ToolChoices table and return number of rows affected
             return jdbcTemplate.update("DELETE FROM tool_choices");
         } catch (DataAccessException e) {
+            logger.error("Error deleting from tool_choices " +e);
             return -1;
         }
     }
@@ -88,6 +92,7 @@ public class JdbcToolChoicesRepository implements ToolChoicesRepository {
                     new ToolChoicesMapper(), id);
             return toolChoices;
         } catch (IncorrectResultSizeDataAccessException e) {
+            logger.error("Error selecting by id from tool_choices " + e);
             return null;
         }
     }
@@ -108,6 +113,7 @@ public class JdbcToolChoicesRepository implements ToolChoicesRepository {
                     new ToolChoicesMapper(), code);
             return toolChoices;
         } catch (IncorrectResultSizeDataAccessException e) {
+            logger.error("Error selecting by code from tool_choices " + e);
             return null;
         }
     }

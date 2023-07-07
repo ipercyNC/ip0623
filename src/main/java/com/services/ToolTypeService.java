@@ -9,6 +9,9 @@ package com.services;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.models.ToolType;
@@ -16,6 +19,7 @@ import com.repositories.ToolTypeRepository;
 
 @Service
 public class ToolTypeService {
+    private static final Logger logger = LoggerFactory.getLogger(ToolTypeService.class);
     @Autowired
     ToolTypeRepository toolTypeRepository;
 
@@ -33,6 +37,7 @@ public class ToolTypeService {
             toolTypeRepository.findAll().forEach(toolTypes::add);
             return toolTypes;
         } catch (Exception e) {
+            logger.error("Error getting ToolTypes from database " + e);
             return new ArrayList<>();
         }
     }
@@ -55,6 +60,7 @@ public class ToolTypeService {
                 return false;
             }
         } catch (Exception e) {
+            logger.error("Error creating ToolType " + e);
             return false;
         }
     }

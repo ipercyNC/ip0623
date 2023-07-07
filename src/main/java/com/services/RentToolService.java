@@ -18,6 +18,9 @@ import java.util.Date;
 import java.util.List;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.temporal.TemporalAdjusters;
@@ -26,6 +29,7 @@ import com.models.ToolChoices;
 
 @Service
 public class RentToolService {
+    private static final Logger logger = LoggerFactory.getLogger(RentToolService.class);
     @Autowired
     ToolChargesService toolChargesService;
     @Autowired
@@ -130,6 +134,7 @@ public class RentToolService {
                     outputDiscountAmount,
                     outputFinalCharge);
         } catch (ParseException ex) {
+            logger.error("Parsing error in renttool " + ex);
             return new ArrayList<>();
         }
     }

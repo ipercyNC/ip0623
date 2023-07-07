@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,8 @@ import com.services.ToolTypeService;
 @RestController
 @RequestMapping("/api/toolType")
 public class ToolTypeController {
+    private static final Logger logger = LoggerFactory.getLogger(ToolTypeController.class);
+
     @Autowired
     ToolTypeService toolTypeService;
 
@@ -46,6 +50,7 @@ public class ToolTypeController {
             }
             return new ResponseEntity<List<ToolType>>(toolTypes, HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("Error getting all ToolTypes " + e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -69,6 +74,7 @@ public class ToolTypeController {
             }
 
         } catch (Exception e) {
+            logger.error("Error creating ToolType " + e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -87,6 +93,7 @@ public class ToolTypeController {
             ToolType toolType = toolTypeService.findToolTypeById(id);
             return new ResponseEntity<ToolType>(toolType, HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("Error getting ToolType by id" + e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -105,6 +112,7 @@ public class ToolTypeController {
             ToolType toolType = toolTypeService.findToolTypeByName(name);
             return new ResponseEntity<ToolType>(toolType, HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("Error getting ToolType by name");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -121,6 +129,7 @@ public class ToolTypeController {
             int numRowsDeleted = toolTypeService.deleteAllToolTypes();
             return new ResponseEntity<>("Deleted " + numRowsDeleted + " ToolType(s) deleted", HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("Error deleting ToolTypes " + e);
             return new ResponseEntity<>("Cannot delete ToolTypes.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

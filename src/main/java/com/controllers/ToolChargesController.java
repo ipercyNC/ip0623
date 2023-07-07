@@ -10,6 +10,8 @@ package com.controllers;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,7 @@ import com.services.ToolChargesService;
 @RestController
 @RequestMapping("/api/toolCharges")
 public class ToolChargesController {
+    private static final Logger logger = LoggerFactory.getLogger(ToolChargesController.class);
     @Autowired
     ToolChargesService toolChargesService;
 
@@ -46,6 +49,7 @@ public class ToolChargesController {
             }
             return new ResponseEntity<List<ToolCharges>>(toolCharges, HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("Error when getting all ToolCharges " + e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -68,6 +72,7 @@ public class ToolChargesController {
                 return new ResponseEntity<String>("ToolCharges not created.", HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } catch (Exception e) {
+            logger.error("Error when creating ToolCharges " + e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -86,6 +91,7 @@ public class ToolChargesController {
             ToolCharges toolCharges = toolChargesService.findToolChargesById(id);
             return new ResponseEntity<ToolCharges>(toolCharges, HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("Error when getting ToolCharges by id " + e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -103,6 +109,7 @@ public class ToolChargesController {
             int numRowsDeleted = toolChargesService.deleteAllToolCharges();
             return new ResponseEntity<>("Deleted " + numRowsDeleted + " ToolCharges deleted", HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("Error when deleting ToolCharges " + e);
             return new ResponseEntity<>("Cannot delete ToolCharges.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

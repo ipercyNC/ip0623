@@ -9,6 +9,8 @@
 package com.repositories;
 
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
@@ -19,6 +21,7 @@ import com.models.ToolChargesMapper;
 
 @Repository
 public class JdbcToolChargesRepository implements ToolChargesRepository {
+    private static final Logger logger = LoggerFactory.getLogger(JdbcToolChargesRepository.class);
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -49,10 +52,8 @@ public class JdbcToolChargesRepository implements ToolChargesRepository {
                     "INSERT into tool_charges(type_id,daily_charge,weekday_charge,weekend_charge,holiday_charge) " +
                             " VALUES(?,0.0,0,0,0)",
                     typeId);
-        } catch (DataAccessException e) {
-            return -1;
-
         } catch (Exception e) {
+            logger.error("Error inserting into tool_charges table " + e);
             return -1;
         }
     }
@@ -68,6 +69,7 @@ public class JdbcToolChargesRepository implements ToolChargesRepository {
             // Delete from ToolCharges table and return number of rows affected
             return jdbcTemplate.update("DELETE FROM tool_charges");
         } catch (DataAccessException e) {
+            logger.error("Error deleting from tool_charges table " + e);
             return -1;
         }
     }
@@ -88,6 +90,7 @@ public class JdbcToolChargesRepository implements ToolChargesRepository {
                     new ToolChargesMapper(), id);
             return toolCharges;
         } catch (IncorrectResultSizeDataAccessException e) {
+            logger.error("Error with selecting by id from tool_charges " + e);
             return null;
         }
     }
@@ -108,6 +111,7 @@ public class JdbcToolChargesRepository implements ToolChargesRepository {
                     new ToolChargesMapper(), typeId);
             return toolCharges;
         } catch (IncorrectResultSizeDataAccessException e) {
+            logger.error("Error with selecting by name from tool_charges " + e);
             return null;
         }
     }

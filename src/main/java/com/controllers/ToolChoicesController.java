@@ -10,6 +10,8 @@ package com.controllers;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,7 @@ import com.services.ToolChoicesService;
 @RestController
 @RequestMapping("/api/toolChoices")
 public class ToolChoicesController {
+    private static final Logger logger = LoggerFactory.getLogger(ToolChoicesController.class);
     @Autowired
     ToolChoicesService toolChoicesService;
 
@@ -46,6 +49,7 @@ public class ToolChoicesController {
             }
             return new ResponseEntity<List<ToolChoices>>(toolChoices, HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("Error when getting ToolChoices " + e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -71,6 +75,7 @@ public class ToolChoicesController {
                 return new ResponseEntity<String>("ToolChoices not created", HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } catch (Exception e) {
+            logger.error("Error when creating ToolChoices " + e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -89,6 +94,7 @@ public class ToolChoicesController {
             ToolChoices toolChoices = toolChoicesService.findToolChoicesById(id);
             return new ResponseEntity<ToolChoices>(toolChoices, HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("Error when getting ToolChoices by id " + e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -107,6 +113,7 @@ public class ToolChoicesController {
             ToolChoices toolChoices = toolChoicesService.findToolChoicesByCode(code);
             return new ResponseEntity<ToolChoices>(toolChoices, HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("Error when getting by ToolChoices by code " + e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -124,6 +131,7 @@ public class ToolChoicesController {
             int numRowsDeleted = toolChoicesService.deleteAllToolChoices();
             return new ResponseEntity<String>("Deleted " + numRowsDeleted + " ToolChoices deleted", HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("Error when deleting ToolChoices " + e);
             return new ResponseEntity<>("Cannot delete ToolChoices.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

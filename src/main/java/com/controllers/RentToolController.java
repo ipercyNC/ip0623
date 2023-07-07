@@ -9,6 +9,8 @@
  */
 package com.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ import com.services.RentToolService;
 @RestController
 @RequestMapping("/api/rentTool")
 public class RentToolController {
+    private static final Logger logger = LoggerFactory.getLogger(RentToolController.class);
+
     @Autowired
     RentToolService rentToolService;
 
@@ -46,6 +50,7 @@ public class RentToolController {
 
             return new ResponseEntity<List<String>>(charges, HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("Error in rentTool() " + e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

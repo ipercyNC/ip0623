@@ -9,6 +9,9 @@
 package com.controllers;
 
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +29,8 @@ import com.services.ToolBrandService;
 @RestController
 @RequestMapping("/api/toolBrand")
 public class ToolBrandController {
+    private static final Logger logger = LoggerFactory.getLogger(ToolBrandController.class);
+
     @Autowired
     ToolBrandService toolBrandService;
 
@@ -46,6 +51,7 @@ public class ToolBrandController {
             }
             return new ResponseEntity<List<ToolBrand>>(toolBrands, HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("Error when getting all ToolBrands " + e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -68,6 +74,7 @@ public class ToolBrandController {
                 return new ResponseEntity<String>("ToolBrand not created.", HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } catch (Exception e) {
+            logger.error("Error when creating ToolBrand " + e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -86,6 +93,7 @@ public class ToolBrandController {
             ToolBrand toolBrand = toolBrandService.findToolBrandById(id);
             return new ResponseEntity<ToolBrand>(toolBrand, HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("Error when getting ToolBrand by id " + e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -104,6 +112,7 @@ public class ToolBrandController {
             ToolBrand toolBrand = toolBrandService.findToolBrandByName(name);
             return new ResponseEntity<ToolBrand>(toolBrand, HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("Error when getting ToolBrand by name " + e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -121,6 +130,7 @@ public class ToolBrandController {
             int numRowsDeleted = toolBrandService.deleteAllToolBrands();
             return new ResponseEntity<>("Deleted " + numRowsDeleted + " ToolBrand(s) deleted", HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("Error when deleting ToolBrands " + e);
             return new ResponseEntity<>("Cannot delete ToolBrands.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

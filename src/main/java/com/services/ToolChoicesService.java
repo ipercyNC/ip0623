@@ -8,6 +8,9 @@
 package com.services;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.models.ToolChoices;
@@ -17,6 +20,7 @@ import com.repositories.ToolTypeRepository;
 
 @Service
 public class ToolChoicesService {
+    private static final Logger logger = LoggerFactory.getLogger(ToolChoicesService.class);
     @Autowired
     ToolChoicesRepository toolChoicesRepository;
 
@@ -43,6 +47,7 @@ public class ToolChoicesService {
             });
             return toolChoices;
         } catch (Exception e) {
+            logger.error("Error getting ToolChoices " + e);
             return new ArrayList<>();
         }
     }
@@ -69,6 +74,7 @@ public class ToolChoicesService {
                 return false;
             }
         } catch (Exception e) {
+            logger.error("Error saving ToolChoice " + e);
             return false;
         }
     }
@@ -82,8 +88,11 @@ public class ToolChoicesService {
         // Query ToolChoices table to find by specific id and return result
         ToolChoices toolChoices = toolChoicesRepository.findById(id);
         // Set the ToolType and ToolBrand to the actual objects
-        toolChoices.setToolType(toolTypeRepository.findById(toolChoices.getToolType().getId()));
-        toolChoices.setToolBrand(toolBrandRepository.findById(toolChoices.getToolBrand().getId()));
+        if (toolChoices != null) {
+            toolChoices.setToolType(toolTypeRepository.findById(toolChoices.getToolType().getId()));
+            toolChoices.setToolBrand(toolBrandRepository.findById(toolChoices.getToolBrand().getId()));
+        }
+
         return toolChoices;
     }
 
@@ -96,8 +105,10 @@ public class ToolChoicesService {
         // Query ToolChoices table to find by specific code and return result
         ToolChoices toolChoices = toolChoicesRepository.findByCode(code);
         // Set the ToolType and ToolBrand to the actual objects
-        toolChoices.setToolType(toolTypeRepository.findById(toolChoices.getToolType().getId()));
-        toolChoices.setToolBrand(toolBrandRepository.findById(toolChoices.getToolBrand().getId()));
+        if (toolChoices != null) {
+            toolChoices.setToolType(toolTypeRepository.findById(toolChoices.getToolType().getId()));
+            toolChoices.setToolBrand(toolBrandRepository.findById(toolChoices.getToolBrand().getId()));
+        }
         return toolChoices;
     }
 

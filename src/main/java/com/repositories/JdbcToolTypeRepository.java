@@ -9,6 +9,8 @@
 package com.repositories;
 
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
@@ -19,6 +21,7 @@ import com.models.ToolType;
 
 @Repository
 public class JdbcToolTypeRepository implements ToolTypeRepository {
+    private static final Logger logger = LoggerFactory.getLogger(JdbcToolTypeRepository.class);
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -48,6 +51,7 @@ public class JdbcToolTypeRepository implements ToolTypeRepository {
             return jdbcTemplate.update("INSERT INTO tool_type (name) VALUES(?)",
                     toolTypeName);
         } catch (IncorrectResultSizeDataAccessException e) {
+            logger.error("Error inserting into tool_type " + e);
             return -1;
         }
     }
@@ -63,6 +67,7 @@ public class JdbcToolTypeRepository implements ToolTypeRepository {
             // Delete from ToolType table and return number of rows affected
             return jdbcTemplate.update("DELETE FROM tool_type");
         } catch (DataAccessException e) {
+            logger.error("Error deleting from tool_type " + e);
             return -1;
         }
     }
@@ -83,6 +88,7 @@ public class JdbcToolTypeRepository implements ToolTypeRepository {
                     BeanPropertyRowMapper.newInstance(ToolType.class), id);
             return toolType;
         } catch (IncorrectResultSizeDataAccessException e) {
+            logger.error("Error selecting by id from tool_type " + e);
             return null;
         }
     }
@@ -103,6 +109,7 @@ public class JdbcToolTypeRepository implements ToolTypeRepository {
                     BeanPropertyRowMapper.newInstance(ToolType.class), toolTypeName);
             return toolType;
         } catch (IncorrectResultSizeDataAccessException e) {
+            logger.error("Error selecting by name from tool_type " + e);
             return null;
         }
     }
