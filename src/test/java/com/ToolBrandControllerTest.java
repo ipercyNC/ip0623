@@ -5,6 +5,13 @@
  * 
  * Test for the ToolBrandController. Test the endpoints exposed for the 
  * ToolBrand api.
+ * 
+ * Tests:
+ * 1) Get All ToolBrands
+ * 2) Create ToolBrand
+ * 3) Get ToolBrand by ID
+ * 4) Get ToolBrand by name
+ * 5) Delete ToolBrands
  */
 package com;
 

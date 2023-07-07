@@ -152,7 +152,7 @@ public class RentToolService {
         if (date.getMonthValue() == 9) {
             LocalDate firstMonday = date.with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
             if (date.equals(firstMonday)) {
-                System.out.println("Labor Day " + date);
+                logger.info("Labor Day " + date);
                 return true;
             }
         }
@@ -161,13 +161,13 @@ public class RentToolService {
         // If July 4th is only Sunday, observed day is Monday
         if (date.getMonthValue() == 7) {
             if (date.getDayOfMonth() == 3 && date.getDayOfWeek().getValue() == 5) {
-                System.out.println("Observed July 4th on Friday " + date);
+                logger.info("Observed July 4th on Friday " + date);
                 return true;
-            } else if (date.getDayOfMonth() == 3 && date.getDayOfWeek().getValue() == 1) {
-                System.out.println("Observed July 4th on Monday " + date);
+            } else if (date.getDayOfMonth() == 5 && date.getDayOfWeek().getValue() == 1) {
+                logger.info("Observed July 4th on Monday " + date);
                 return true;
             } else if (date.getDayOfMonth() == 4 && date.getDayOfWeek().getValue() < 6) {
-                System.out.println("Acutal July 4th " + date);
+                logger.info("Acutal July 4th " + date);
                 return true;
             }
         }

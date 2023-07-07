@@ -5,6 +5,12 @@
  * 
  * Test for the ToolChargesController. Test the endpoints exposed for the 
  * ToolCharges api.
+ * 
+ * Tests:
+ * 1) Get All ToolCharges
+ * 2) Create ToolCharges
+ * 3) Get ToolCharges by ID
+ * 5) Delete ToolCharges
  */
 package com;
 
@@ -20,11 +26,8 @@ import org.springframework.beans.factory.annotation.Value;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import com.jayway.jsonpath.JsonPath;
 import com.services.ToolChargesService;
 import com.services.ToolTypeService;
-
 import org.json.JSONObject;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)

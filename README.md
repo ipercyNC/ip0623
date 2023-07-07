@@ -18,7 +18,7 @@ Rent a specific tool (by tool code), checkout date, amount of days, and discount
 
 
 #### Next Steps:
-1) Setup checkout path fully
+1) Finalize checkout path
 2) Make holiday handling more robust
 3) Create more unit tests
 4) Add formatting to rental agreement
@@ -26,7 +26,7 @@ Rent a specific tool (by tool code), checkout date, amount of days, and discount
 6) Add frontend
 7) Convert from MySQL (current DB to PostgreSQL)
 8) Create simple DB diagram
-9) Add in logging
+9) ~~Add in logging~~
 10) Create JAR + deploy to Render (with hosted Postgres)
 11) Improve frontend and redeploy
 
