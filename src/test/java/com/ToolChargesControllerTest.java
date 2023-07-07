@@ -7,10 +7,10 @@
  * ToolCharges api.
  * 
  * Tests:
- * 1) Get All ToolCharges
- * 2) Create ToolCharges
- * 3) Get ToolCharges by ID
- * 5) Delete ToolCharges
+ * 1) Get All ToolCharges - done
+ * 2) Create ToolCharges - done
+ * 3) Get ToolCharges by ID - done
+ * 5) Delete ToolCharges - done
  */
 package com;
 
@@ -28,6 +28,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import com.services.ToolChargesService;
 import com.services.ToolTypeService;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -47,9 +49,9 @@ public class ToolChargesControllerTest {
     private int port;
 
     @BeforeEach
-    public void clear() {
-        toolTypeService.deleteAllToolTypes();
+    public void clearBefore() {
         toolChargesService.deleteAllToolCharges();
+        toolTypeService.deleteAllToolTypes();
     }
 
     // Test creating one ToolCharges through controller
@@ -64,7 +66,7 @@ public class ToolChargesControllerTest {
         MvcResult toolTypeResult = mvc.perform(get("/api/toolType")).andReturn();
         String toolTypeResultAsString = toolTypeResult.getResponse().getContentAsString();
         assertThat(toolTypeResultAsString.contains(newToolTypeName));
-        MvcResult toolTypeIdResult = mvc.perform(get("/api/toolType/" + newToolTypeName)).andExpect(status().isOk()).andReturn();
+        MvcResult toolTypeIdResult = mvc.perform(get("/api/toolType/name/" + newToolTypeName)).andExpect(status().isOk()).andReturn();
         String toolTypeIdResultString = toolTypeIdResult.getResponse().getContentAsString();
         JSONObject jsonObject = new JSONObject(toolTypeIdResultString);
         int newToolChargesId = Integer.parseInt(jsonObject.get("id").toString());
@@ -77,6 +79,46 @@ public class ToolChargesControllerTest {
         assertThat(resultAsString.contains(String.valueOf(newToolChargesId)));
     }
 
+    
+    // Test creating one ToolCharges through controller
+    @Test 
+    public void getToolChargesById() throws Exception {
+
+        // Create ToolType first
+        String newToolTypeName = "testToolType";
+        JSONObject toolTypeJson = new JSONObject();
+        toolTypeJson.put("name", newToolTypeName);
+        
+        mvc.perform(post("/api/toolType").contentType(MediaType.APPLICATION_JSON).content(toolTypeJson.toString())).andExpect(status().isCreated());
+        MvcResult toolTypeResult = mvc.perform(get("/api/toolType")).andReturn();
+        String toolTypeResultAsString = toolTypeResult.getResponse().getContentAsString();
+        assertThat(toolTypeResultAsString.contains(newToolTypeName));
+        MvcResult toolTypeIdResult = mvc.perform(get("/api/toolType/name/" + newToolTypeName)).andExpect(status().isOk()).andReturn();
+        String toolTypeIdResultString = toolTypeIdResult.getResponse().getContentAsString();
+        JSONObject jsonObject = new JSONObject(toolTypeIdResultString);
+        int newToolChargesId = Integer.parseInt(jsonObject.get("id").toString());
+
+        // Query 
+        JSONObject json = new JSONObject();
+        json.put("typeId", newToolChargesId);
+        mvc.perform(post("/api/toolCharges").contentType(MediaType.APPLICATION_JSON).content(json.toString())).andExpect(status().isCreated());
+        MvcResult result = mvc.perform(get("/api/toolCharges")).andReturn();
+        String resultAsString = result.getResponse().getContentAsString();
+        assertThat(resultAsString.contains(String.valueOf(newToolChargesId)));
+
+        // Get the object from the get all query
+        JSONArray toolChargesResultArray = new JSONArray(resultAsString);
+        String firstToolCharges = toolChargesResultArray.get(0).toString();
+        JSONObject firstToolChargesObject = new JSONObject(firstToolCharges);
+        int retrievedToolChargesId = Integer.parseInt(firstToolChargesObject.get("id").toString());
+
+        //Query for id
+        MvcResult toolChargesFindById = mvc.perform(get("/api/toolCharges/id/" + retrievedToolChargesId)).andExpect(status().isOk()).andReturn();
+        String toolChargesByIdString = toolChargesFindById.getResponse().getContentAsString();
+        assertThat(toolChargesByIdString.contains(Integer.toString(newToolChargesId)));
+    }
+
+
     //Test gathering all ToolCharges when it's empty
     @Test
     public void gatherAllToolChargesEmpty() throws Exception {
@@ -84,4 +126,11 @@ public class ToolChargesControllerTest {
         String resultAsString = result.getResponse().getContentAsString();
         assertThat(resultAsString.isBlank());
     }
+
+    @AfterAll
+    public void clearAfter() {
+        toolChargesService.deleteAllToolCharges();
+        toolTypeService.deleteAllToolTypes();
+    }
+
 }

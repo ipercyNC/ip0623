@@ -19,16 +19,15 @@ Rent a specific tool (by tool code), checkout date, amount of days, and discount
 
 #### Next Steps:
 1) Finalize checkout path
-2) Make holiday handling more robust
-3) Create more unit tests
-4) Add formatting to rental agreement
-5) Create RentalAgreement object
-6) Add frontend
-7) Convert from MySQL (current DB to PostgreSQL)
-8) Create simple DB diagram
-9) ~~Add in logging~~
-10) Create JAR + deploy to Render (with hosted Postgres)
-11) Improve frontend and redeploy
+2) ~~Create more unit tests~~
+3) Add formatting to rental agreement
+4) Create RentalAgreement object
+5) Add frontend
+6) Convert from MySQL (current DB to PostgreSQL)
+7) Create simple DB diagram
+8) ~~Add in logging~~
+9) Create JAR + deploy to Render (with hosted Postgres)
+10) Improve frontend and redeploy
 
 #### Stretch Goals:
 1) Add Users
@@ -36,4 +35,5 @@ Rent a specific tool (by tool code), checkout date, amount of days, and discount
 3) Show agreement history for users
 4) Fix mapping of nested objects
 5) Add testing coverage sheet
+6) Improve Holiday handling to make it dymamic
 

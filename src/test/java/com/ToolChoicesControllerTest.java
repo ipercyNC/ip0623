@@ -8,9 +8,9 @@
  * 
  * 1) Get All ToolChoices - done
  * 2) Create ToolChoices - done
- * 3) Get ToolChoices by ID
- * 4) Get ToolChoices by code
- * 5) Delete ToolChoices
+ * 3) Get ToolChoices by ID - done
+ * 4) Get ToolChoices by code - done
+ * 5) Delete ToolChoices - done
  */
 package com;
 

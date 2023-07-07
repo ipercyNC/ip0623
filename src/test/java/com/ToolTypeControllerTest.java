@@ -10,7 +10,7 @@
  * 2) Create ToolType - done
  * 3) Get ToolType by ID - done
  * 4) Get ToolType by name - done
- * 5) Delete ToolTypes
+ * 5) Delete ToolTypes - done
  */
 package com;
 
