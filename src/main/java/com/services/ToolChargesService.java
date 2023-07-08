@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.models.ToolCharges;
+import com.models.ToolType;
 import com.repositories.ToolChargesRepository;
 import com.repositories.ToolTypeRepository;
 
@@ -46,6 +47,40 @@ public class ToolChargesService {
         } catch (Exception e) {
             logger.error("Error getting ToolCharges " + e);
             return new ArrayList<>();
+        }
+    }
+
+    /*
+     * Adds a ToolCharge to the database
+     * 
+     * @param toolType ToolType for the ToolCharges object
+     * 
+     * @param dailyCharge double for the daily charge for the rental
+     * 
+     * @param weekdayCharge int for if there are charges on the weekday for the
+     * ToolType
+     * 
+     * @param weekendCharge int for if there are charges on the weekend for the
+     * ToolType
+     * 
+     * @param holidayCharge int for if there are charges on the holiday for the
+     * ToolType
+     *      
+     * @return status of the insert success
+     */
+    public boolean createToolCharge(ToolType toolType, double dailyCharge, int weekdayCharge, int weekendCharge, int holidayCharge) {
+        try {
+            // Save new ToolCharges to database and return the result (number of rows
+            // affected)
+            int result = toolChargesRepository.save(toolType, dailyCharge, weekdayCharge, weekendCharge, holidayCharge);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error("Error creating ToolCharge " + e);
+            return false;
         }
     }
 

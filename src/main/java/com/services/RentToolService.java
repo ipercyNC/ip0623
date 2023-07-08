@@ -7,24 +7,19 @@
  */
 package com.services;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.temporal.TemporalAdjusters;
-
 import com.models.RentalAgreement;
 import com.models.ToolCharges;
 import com.models.ToolChoices;
@@ -132,8 +127,10 @@ public class RentToolService {
             double finalCharge = new BigDecimal(prediscountCharge - discountAmount)
                     .setScale(2, RoundingMode.HALF_UP).doubleValue();
 
-            System.out.println("Charge Dates " + chargeDates.toString());
-            System.out.println("No Charge Dates " + noChargeDates.toString());
+            logger.info("Charge Dates " + chargeDates.toString());
+            logger.info("No Charge Dates " + noChargeDates.toString());
+
+            // Generate RentalAgreement object
             RentalAgreement rentalAgreement = new RentalAgreement(toolChoices,
                     Integer.parseInt(rentalDays),
                     startDate,
@@ -196,6 +193,8 @@ public class RentToolService {
      * @return string with the formatted rental agreement String
      */
     public String generateAgreement(RentalAgreement rentalAgreement) {
+        // Created extra function call here so if we want to modify the output format or 
+        // add some logic with the output of the agreement
         return rentalAgreement.formatRentalAgreement();
     }
 }

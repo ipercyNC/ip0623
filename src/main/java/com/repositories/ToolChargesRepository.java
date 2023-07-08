@@ -10,9 +10,10 @@ package com.repositories;
 
 import java.util.List;
 import com.models.ToolCharges;
+import com.models.ToolType;
 
 public interface ToolChargesRepository {
-    
+
     /*
      * Returns all ToolCharges objects from the database
      * 
@@ -27,7 +28,27 @@ public interface ToolChargesRepository {
      * 
      * @return int number of rows saved
      */
-    int save(int toolChargesInt);
+    int save(int typeId);
+
+    /*
+     * Saves ToolCharges to database
+     * 
+     * @param toolType ToolType for the ToolCharges object
+     * 
+     * @param dailyCharge double for the daily charge for the rental
+     * 
+     * @param weekdayCharge int for if there are charges on the weekday for the
+     * ToolType
+     * 
+     * @param weekendCharge int for if there are charges on the weekend for the
+     * ToolType
+     * 
+     * @param holidayCharge int for if there are charges on the holiday for the
+     * ToolType
+     * 
+     * @return int number of rows saved
+     */
+    int save(ToolType toolType, double dailyCharge, int weekdayCharge, int weekendCharge, int holidayCharge);
 
     /*
      * Delete all ToolCharges objects from the database

@@ -46,7 +46,7 @@ public class ToolTypeControllerTest {
     private int port;
 
     @BeforeEach
-    public void clear() {
+    public void clearBefore() {
         toolTypeService.deleteAllToolTypes();
     }
 
@@ -156,5 +156,11 @@ public class ToolTypeControllerTest {
         MvcResult toolTypeResult = mvc.perform(get("/api/toolType")).andReturn();
         String toolTypeResultAsString = toolTypeResult.getResponse().getContentAsString();
         assertThat(toolTypeResultAsString.isBlank());
+    
     }
+    @AfterAll
+    public void clearAfter() {
+        toolTypeService.deleteAllToolTypes();
+    }
+
 }

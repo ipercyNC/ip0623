@@ -18,6 +18,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.models.ToolCharges;
 import com.models.ToolChargesMapper;
+import com.models.ToolType;
 
 @Repository
 public class JdbcToolChargesRepository implements ToolChargesRepository {
@@ -113,6 +114,38 @@ public class JdbcToolChargesRepository implements ToolChargesRepository {
         } catch (IncorrectResultSizeDataAccessException e) {
             logger.error("Error with selecting by name from tool_charges " + e);
             return null;
+        }
+    }
+
+    /*
+     * Saves ToolCharges to database
+     * 
+     * @param toolType ToolType for the ToolCharges object
+     * 
+     * @param dailyCharge double for the daily charge for the rental
+     * 
+     * @param weekdayCharge int for if there are charges on the weekday for the
+     * ToolType
+     * 
+     * @param weekendCharge int for if there are charges on the weekend for the
+     * ToolType
+     * 
+     * @param holidayCharge int for if there are charges on the holiday for the
+     * ToolType
+     * 
+     * @return int number of rows saved
+     */
+    @Override
+    public int save(ToolType toolType, double dailyCharge, int weekdayCharge, int weekendCharge, int holidayCharge) {
+        try {
+            // Insert into ToolCharges table and return the number of rows affected
+            return jdbcTemplate.update(
+                    "INSERT into tool_charges(type_id,daily_charge,weekday_charge,weekend_charge,holiday_charge) " +
+                            " VALUES(?,?,?,?,?)",
+                    toolType.getId(), dailyCharge, weekdayCharge, weekendCharge, holidayCharge);
+        } catch (Exception e) {
+            logger.error("Error inserting into tool_charges table " + e);
+            return -1;
         }
     }
 
