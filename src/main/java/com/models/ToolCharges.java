@@ -7,7 +7,7 @@
  * 
  * Attributes: 
  * - id - int
- * - type_id - int (maps to ToolType id))
+ * - type_id - int (maps to ToolType id)
  * - daily_charge - decimal
  * - weekday_charge - int (true or false)
  * - weekend_charge - int (true or false)
