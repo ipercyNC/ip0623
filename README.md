@@ -18,16 +18,17 @@ Rent a specific tool (by tool code), checkout date, amount of days, and discount
 
 
 #### Next Steps:
-1) Finalize checkout path
+1) Finalize checkout path + add the test cases
 2) ~~Create more unit tests~~
-3) Add formatting to rental agreement
-4) Create RentalAgreement object
+3) ~~Add formatting to rental agreement~~
+4) ~~Create RentalAgreement object~~
 5) Add frontend
 6) Convert from MySQL (current DB to PostgreSQL)
-7) Create simple DB diagram
-8) ~~Add in logging~~
-9) Create JAR + deploy to Render (with hosted Postgres)
-10) Improve frontend and redeploy
+7) Add RentalAgreement to DB
+8) Create simple DB diagram
+9) ~~Add in logging~~
+10) Create JAR + deploy to Render (with hosted Postgres)
+11) Improve frontend and redeploy
 
 #### Stretch Goals:
 1) Add Users

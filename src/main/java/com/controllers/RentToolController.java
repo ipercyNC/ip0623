@@ -48,6 +48,14 @@ public class RentToolController {
                     objectNode.get("days").asText(),
                     objectNode.get("discount").asText());
 
+            // Return error if percent is not in proper range
+            if (charges == "PERCENT_OUT_OF_RANGE") {
+                return new ResponseEntity<String>("Please give percent that is 0-100", HttpStatus.BAD_REQUEST);
+            }
+            // Return error if rental days is not valid
+            if (charges == "RENTAL_DAY_COUNT_OUT_OF_RANGE") {
+                return new ResponseEntity<String>("Please rental day count that is 1 day or more", HttpStatus.BAD_REQUEST);
+            }
             return new ResponseEntity<String>(charges, HttpStatus.OK);
         } catch (Exception e) {
             logger.error("Error in rentTool() " + e);
