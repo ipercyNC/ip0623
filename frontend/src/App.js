@@ -1,5 +1,3 @@
-import logo from './logo.svg';
-import styles from './App.css';
 import axios from 'axios';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -23,6 +21,14 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import Button from '@mui/material/Button';
 import moment from 'moment';
+import dayjs from 'dayjs';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import Typography from '@mui/material/Typography';
+import { Divider } from '@mui/material';
+
 
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -33,8 +39,8 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       toolTypes: [], toolBrands: [], toolChoices: [], toolCharges: [],
-      toolCode: "", checkoutDate: "", rentalDays: 0, percentDiscount: 0,
-      rentalAgreement: ""
+      toolCode: "", checkoutDate: undefined, rentalDays: 0, percentDiscount: 0,
+      rentalAgreement: "", error: false, errorMessage: {}
     };
   }
 
@@ -53,8 +59,16 @@ export default class App extends React.Component {
     });
   }
   handleDateChange = (newValue) => {
-    let formatString = newValue.$y + "-" + String((parseInt(newValue.$M) + 1)).padStart(2, "0") + "-" + String(newValue.$D).padStart(2, "0");
-    this.setState({ checkoutDate: formatString });
+    // Catch if the valid is invalid - otherwise this will generate runtime errors
+    let date = moment(newValue.$d)
+    if (!date.isValid()) {
+      this.setState({ checkoutDate: undefined });
+    }
+    else {
+      this.setState({ checkoutDate: date.format("yyyy-MM-DD") });
+    }
+
+
   }
   handleSubmit = (event) => {
     event.preventDefault();
@@ -62,29 +76,67 @@ export default class App extends React.Component {
     console.log("checkoutDate", this.state.checkoutDate)
     console.log("rentalDays", this.state.rentalDays)
     console.log("discount", this.state.percentDiscount)
-    const json = JSON.stringify({
-      "code": this.state.toolCode,
-      "startDate": this.state.checkoutDate,
-      "days": this.state.rentalDays,
-      "discount": this.state.percentDiscount
-    });
-    console.log(axios.post('/api/rentTool', json, {
-      // Overwrite Axios's automatically set Content-Type
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(response => {
-      console.log(response);
-      this.setState({ rentalAgreement: response.data })
-    })
-    )
+    let isError = false;
+    console.log(this.state.toolCode.length)
+    if (this.state.toolCode.length !== 4) {
+      isError = true;
+      this.setState({
+        error: true,
+        errorMessage: { toolCode: "Enter ToolCode that is 4 letters long" }
+      });
+    }
+
+    if (!isError) {
+      this.setState({
+        error: false,
+        errorMessage: {}
+      })
+      const json = JSON.stringify({
+        "code": this.state.toolCode,
+        "startDate": this.state.checkoutDate,
+        "days": this.state.rentalDays,
+        "discount": this.state.percentDiscount
+      });
+      console.log(axios.post('/api/rentTool', json, {
+        // Overwrite Axios's automatically set Content-Type
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(response => {
+        console.log(response);
+        this.setState({ rentalAgreement: response.data })
+      }).catch(error => {
+        console.log(error);
+      })
+      )
+    }
   }
+
   render() {
     return (
       <>
         <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={4}>
+          <AppBar position="static">
+            <Toolbar>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+              >
+                {/* <MenuIcon /> */}
+              </IconButton>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                Toolywood Rentals
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <Grid container spacing={4} padding={2}>
             <Grid item xs={2}>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                Tool Types
+              </Typography>
               <item>
                 {
                   this.state.toolTypes.length > 0 &&
@@ -108,6 +160,9 @@ export default class App extends React.Component {
               </item>
             </Grid>
             <Grid item xs={2}>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                Tool Brands
+              </Typography>
               <item>
                 {
                   this.state.toolBrands.length > 0 &&
@@ -131,6 +186,9 @@ export default class App extends React.Component {
               </item>
             </Grid>
             <Grid item xs={3}>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                Tool Choices
+              </Typography>
               <item>
                 {
                   this.state.toolChoices.length > 0 &&
@@ -159,6 +217,9 @@ export default class App extends React.Component {
               </item>
             </Grid>
             <Grid item xs={5}>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                Tool Charges
+              </Typography>
               <item>
                 {
                   this.state.toolCharges.length > 0 &&
@@ -171,8 +232,6 @@ export default class App extends React.Component {
                           <TableCell>Weekday Charge</TableCell>
                           <TableCell>Weekend Charge</TableCell>
                           <TableCell>Holiday Charge</TableCell>
-
-
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -191,7 +250,13 @@ export default class App extends React.Component {
                 }
               </item>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12}   >
+              <Divider />
+              <Typography display="flex"
+                justifyContent="center"
+                alignItems="center" variant="h4" component="div" sx={{ flexGrow: 1 }}>
+                Tool Checkout:
+              </Typography>
               <item>
                 <Box
                   component="form"
@@ -200,30 +265,38 @@ export default class App extends React.Component {
                   }}
                   noValidate
                   autoComplete="off"
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
                   onSubmit={this.handleSubmit}
                 >
+
                   <FormControl>
                     <InputLabel htmlFor="component-outlined">Tool Code</InputLabel>
                     <OutlinedInput
+                      error={!!this.state.errorMessage.toolCode}
                       id="component-outlined"
                       defaultValue=""
                       label="Tool Code"
                       value={this.state.toolCode}
                       onChange={e => this.setState({ toolCode: e.target.value })}
+
                     />
+                    <FormHelperText id="tool-code-helper"
+                      error={!!this.state.errorMessage.toolCode}>{this.state.errorMessage.toolCode}
+                    </FormHelperText>
                   </FormControl>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       label="Checkout Date"
-                      defaultValue=""
-                      value={this.state.checkoutDate}
+                      defaultValue={undefined}
+                      value={this.state.checkoutDate || undefined}
                       onChange={this.handleDateChange} />
                   </LocalizationProvider>
                   <FormControl>
                     <InputLabel htmlFor="component-outlined">Rental Days</InputLabel>
                     <OutlinedInput
                       id="component-outlined"
-                      defaultValue=""
                       label="Rental Days"
                       value={this.state.rentalDays}
                       onChange={e => this.setState({ rentalDays: e.target.value })}
@@ -236,6 +309,10 @@ export default class App extends React.Component {
                       label="Percent Discount"
                       value={this.state.percentDiscount}
                       onChange={e => this.setState({ percentDiscount: e.target.value })}
+                      helperText={
+                        this.state.errorMessage.zipCode &&
+                        this.state.errorMessage.zipCode
+                      }
                     />
                   </FormControl>
                   <Button variant="contained" type="submit"
@@ -247,7 +324,7 @@ export default class App extends React.Component {
             <Grid item xs={12}>
               {this.state.rentalAgreement &&
                 <Paper elevation={3}>
-                  <p style={{whiteSpace: "pre-line"}}>
+                  <p style={{ whiteSpace: "pre-line" }}>
                     {this.state.rentalAgreement}
                   </p>
                 </Paper>
