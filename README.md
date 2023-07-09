@@ -18,7 +18,7 @@ Rent a specific tool (by tool code), checkout date, amount of days, and discount
 
 
 #### Next Steps:
-1) Finalize checkout path + add the test cases
+1) ~~Finalize checkout path + add the test cases~~
 2) ~~Create more unit tests~~
 3) ~~Add formatting to rental agreement~~
 4) ~~Create RentalAgreement object~~
