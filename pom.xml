@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com</groupId>
-	<artifactId>toolywood-0.0.1</artifactId>
-	<version>0.0.1-PROD</version>
+	<artifactId>toolywood</artifactId>
+	<version>0.0.1</version>
 	<name>toolywood</name>
 	<description>Toolywood Rentals</description>
 	<properties>
