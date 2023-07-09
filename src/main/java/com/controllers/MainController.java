@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(path = "/")
+@RequestMapping(path = "/hello")
 public class MainController {
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
     /*
      * General catch for the root entry point into the application
      */
-    @GetMapping(path = "/")
+    @GetMapping(path = "")
     public @ResponseBody String getRoot() {
         logger.info("Main entrypoint called");
         return "Application Running";

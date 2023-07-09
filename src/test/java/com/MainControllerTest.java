@@ -28,7 +28,7 @@ public class MainControllerTest {
 
     @Test
     public void smokeTest() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/", 
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/hello", 
             String.class)).contains("Application Running");
     }
 }
