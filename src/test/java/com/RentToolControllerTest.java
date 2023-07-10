@@ -71,7 +71,7 @@ public class RentToolControllerTest {
             jdbcTemplate.update(
                     "INSERT into tool_type(id, name) " +
                             " VALUES(?, ?), (?, ?), (?, ?);",
-                    1, "Chainsaw", 2, "JackHammer", 3, "Ladder");
+                    1, "Chainsaw", 2, "Ladder", 3, "Jackhammer");
 
             jdbcTemplate.update(
                     "INSERT into tool_brand(id, name) " +
@@ -123,13 +123,13 @@ public class RentToolControllerTest {
         assertTrue(result2.contains("Tool Type           : Ladder"));
         assertTrue(result2.contains("Tool Brand          : Werner"));
         assertTrue(result2.contains("Rental Days         : 3"));
-        assertTrue(result2.contains("Check out date      : 07/20/20"));
-        assertTrue(result2.contains("Due date            : 07/23/20"));
+        assertTrue(result2.contains("Checkout Date      : 07/20/20"));
+        assertTrue(result2.contains("Due Date            : 07/23/20"));
         assertTrue(result2.contains("Daily Rental Charge : $1.99"));
         assertTrue(result2.contains("Charge Days         : 3"));
         assertTrue(result2.contains("Pre-discount Charge : $5.97"));
-        assertTrue(result2.contains("Discount Percent    : 10.0%"));
-        assertTrue(result2.contains("Discount Amount     : $0.6"));
+        assertTrue(result2.contains("Discount Percent    : 10%"));
+        assertTrue(result2.contains("Discount Amount     : $0.60"));
         assertTrue(result2.contains("Final Charge        : $5.37"));
     }
 
@@ -144,12 +144,12 @@ public class RentToolControllerTest {
         assertTrue(result3.contains("Tool Type           : Chainsaw"));
         assertTrue(result3.contains("Tool Brand          : Stihl"));
         assertTrue(result3.contains("Rental Days         : 5"));
-        assertTrue(result3.contains("Check out date      : 07/02/15"));
-        assertTrue(result3.contains("Due date            : 07/07/15"));
+        assertTrue(result3.contains("Checkout Date      : 07/02/15"));
+        assertTrue(result3.contains("Due Date            : 07/07/15"));
         assertTrue(result3.contains("Daily Rental Charge : $1.49"));
         assertTrue(result3.contains("Charge Days         : 3"));
         assertTrue(result3.contains("Pre-discount Charge : $4.47"));
-        assertTrue(result3.contains("Discount Percent    : 25.0%"));
+        assertTrue(result3.contains("Discount Percent    : 25%"));
         assertTrue(result3.contains("Discount Amount     : $1.12"));
         assertTrue(result3.contains("Final Charge        : $3.35"));
     }
@@ -165,13 +165,13 @@ public class RentToolControllerTest {
         assertTrue(result4.contains("Tool Type           : Jackhammer"));
         assertTrue(result4.contains("Tool Brand          : DeWalt"));
         assertTrue(result4.contains("Rental Days         : 6"));
-        assertTrue(result4.contains("Check out date      : 09/03/15"));
-        assertTrue(result4.contains("Due date            : 09/09/15"));
+        assertTrue(result4.contains("Checkout Date      : 09/03/15"));
+        assertTrue(result4.contains("Due Date            : 09/09/15"));
         assertTrue(result4.contains("Daily Rental Charge : $2.99"));
         assertTrue(result4.contains("Charge Days         : 3"));
         assertTrue(result4.contains("Pre-discount Charge : $8.97"));
-        assertTrue(result4.contains("Discount Percent    : 0.0%"));
-        assertTrue(result4.contains("Discount Amount     : $0.0"));
+        assertTrue(result4.contains("Discount Percent    : 0%"));
+        assertTrue(result4.contains("Discount Amount     : $0.00"));
         assertTrue(result4.contains("Final Charge        : $8.97"));
     }
 
@@ -186,13 +186,13 @@ public class RentToolControllerTest {
         assertTrue(result5.contains("Tool Type           : Jackhammer"));
         assertTrue(result5.contains("Tool Brand          : Ridgid"));
         assertTrue(result5.contains("Rental Days         : 9"));
-        assertTrue(result5.contains("Check out date      : 07/02/15"));
-        assertTrue(result5.contains("Due date            : 07/11/15"));
+        assertTrue(result5.contains("Checkout Date      : 07/02/15"));
+        assertTrue(result5.contains("Due Date            : 07/11/15"));
         assertTrue(result5.contains("Daily Rental Charge : $2.99"));
         assertTrue(result5.contains("Charge Days         : 5"));
         assertTrue(result5.contains("Pre-discount Charge : $14.95"));
-        assertTrue(result5.contains("Discount Percent    : 0.0%"));
-        assertTrue(result5.contains("Discount Amount     : $0.0"));
+        assertTrue(result5.contains("Discount Percent    : 0%"));
+        assertTrue(result5.contains("Discount Amount     : $0.00"));
         assertTrue(result5.contains("Final Charge        : $14.95"));
     }
 
@@ -201,19 +201,19 @@ public class RentToolControllerTest {
      */
     @Test
     public void test6() {
-        String result6 = rentToolService.rentTool("JAKR", "2015-07-02", "9", "0");
+        String result6 = rentToolService.rentTool("JAKR", "2015-07-02", "4", "50");
         System.out.println(result6);
         assertTrue(result6.contains("Tool Code           : JAKR"));
         assertTrue(result6.contains("Tool Type           : Jackhammer"));
         assertTrue(result6.contains("Tool Brand          : Ridgid"));
         assertTrue(result6.contains("Rental Days         : 4"));
-        assertTrue(result6.contains("Check out date      : 07/02/15"));
-        assertTrue(result6.contains("Due date            : 07/06/15"));
+        assertTrue(result6.contains("Checkout Date      : 07/02/15"));
+        assertTrue(result6.contains("Due Date            : 07/06/15"));
         assertTrue(result6.contains("Daily Rental Charge : $2.99"));
         assertTrue(result6.contains("Charge Days         : 1"));
-        assertTrue(result6.contains("Pre-discount Charge : $11.99"));
-        assertTrue(result6.contains("Discount Percent    : 0.0%"));
-        assertTrue(result6.contains("Discount Amount     : $1.5"));
+        assertTrue(result6.contains("Pre-discount Charge : $2.99"));
+        assertTrue(result6.contains("Discount Percent    : 50%"));
+        assertTrue(result6.contains("Discount Amount     : $1.50"));
         assertTrue(result6.contains("Final Charge        : $1.49"));
     }
 
@@ -225,7 +225,7 @@ public class RentToolControllerTest {
     public void test7() {
         String result7 = rentToolService.rentTool("JAKR", "2015-09-03", "5", "-1");
         System.out.println(result7);
-        assertTrue(result7.contains("PERCENT_OUT_OF_RANGE"));
+        assertTrue(result7.contains("ERROR_PERCENT_OUT_OF_RANGE"));
     }
 
     /*
@@ -236,7 +236,7 @@ public class RentToolControllerTest {
     public void test8() {
         String result7 = rentToolService.rentTool("JAKR", "2015-09-03", "5", "-1");
         System.out.println(result7);
-        assertTrue(result7.contains("ERROR_RENTING_TOOL"));
+        assertTrue(result7.contains("ERROR_PERCENT_OUT_OF_RANGE"));
 
 
     }

@@ -78,8 +78,8 @@ ALTER TABLE IF EXISTS public.tool_type
 					
 INSERT INTO tool_type(id, name)  
 VALUES(1, 'Chainsaw'), 
-(2, 'JackHammer'),
-(3, 'Ladder');
+(2, 'Ladder'),
+(3, 'Jackhammer');
 
 INSERT INTO tool_brand(id, name) 
 VALUES(1, 'Stihl'), 
