@@ -13,13 +13,16 @@ import Button from '@mui/material/Button';
 import moment from 'moment';
 import Typography from '@mui/material/Typography';
 import { Divider } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import dayjs from 'dayjs';
+import RentalAgreement from './RentalAgreement';
 
 export default class RentToolForm extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            toolTypes: [], toolBrands: [], toolChoices: [], toolCharges: [],
-            toolCode: "", checkoutDate: undefined, rentalDays: 0, percentDiscount: 0,
+            toolCode: "", checkoutDate: dayjs(Date.now()), rentalDays: 0, percentDiscount: 0,
             rentalAgreement: "", error: false, errorMessage: {}
         };
     }
@@ -27,30 +30,62 @@ export default class RentToolForm extends React.Component {
         // Catch if the valid is invalid - otherwise this will generate runtime errors
         let date = moment(newValue.$d)
         if (!date.isValid()) {
-            this.setState({ checkoutDate: undefined });
+            let tempErrorMessage = this.state.errorMessage
+            tempErrorMessage.checkoutDate = "Enter Valid Date"
+            this.setState({
+                error: true,
+                errorMessage: tempErrorMessage
+            });
         }
         else {
-            this.setState({ checkoutDate: date.format("yyyy-MM-DD") });
+            let tempErrorMessage = this.state.errorMessage
+            if (tempErrorMessage.hasOwnProperty("checkoutDate")) {
+                delete tempErrorMessage["checkoutDate"]
+            }
+            this.setState({
+                checkoutDate: date.format("yyyy-MM-DD"),
+                errorMessage: tempErrorMessage
+            });
+            console.log(this.state)
         }
 
 
     }
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log("toolCode", this.state.toolCode)
-        console.log("checkoutDate", this.state.checkoutDate)
-        console.log("rentalDays", this.state.rentalDays)
-        console.log("discount", this.state.percentDiscount)
         let isError = false;
-        console.log(this.state.toolCode.length)
         if (this.state.toolCode.length !== 4) {
             isError = true;
+            let tempErrorMessage = this.state.errorMessage
+            tempErrorMessage.toolCode = "Enter 4 Character Code"
             this.setState({
                 error: true,
-                errorMessage: { toolCode: "Enter ToolCode that is 4 letters long" }
+                errorMessage: tempErrorMessage
+            });
+        }
+        let rentalDaysParsed = parseInt(this.state.rentalDays)
+        if (rentalDaysParsed === NaN || rentalDaysParsed < 1) {
+            isError = true;
+            let tempErrorMessage = this.state.errorMessage
+            tempErrorMessage.rentalDays = "Enter 1 Or More Days"
+            this.setState({
+                error: true,
+                errorMessage: tempErrorMessage
             });
         }
 
+        let percentParsed = parseInt(this.state.percentDiscount)
+        console.log("percent", percentParsed)
+        if (percentParsed === NaN || percentParsed < 0 || percentParsed > 100) {
+            isError = true;
+            let tempErrorMessage = this.state.errorMessage
+            tempErrorMessage.percentDiscount = "Enter 0-100 Percent"
+            this.setState({
+                error: true,
+                errorMessage: tempErrorMessage
+            });
+            console.log(this.state)
+        }
         if (!isError) {
             this.setState({
                 error: false,
@@ -110,49 +145,57 @@ export default class RentToolForm extends React.Component {
                                 onChange={e => this.setState({ toolCode: e.target.value })}
 
                             />
-                            <FormHelperText id="tool-code-helper"
+                            <FormHelperText id="tool-code-helper" sx={{
+                                position: 'absolute',
+                                bottom: '-1rem'
+                            }}
                                 error={!!this.state.errorMessage.toolCode}>{this.state.errorMessage.toolCode}
                             </FormHelperText>
                         </FormControl>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker
                                 label="Checkout Date"
-                                defaultValue={undefined}
-                                value={this.state.checkoutDate || undefined}
-                                onChange={this.handleDateChange} />
+                                value={this.state.checkoutDate}
+                            />
                         </LocalizationProvider>
                         <FormControl>
                             <InputLabel htmlFor="component-outlined">Rental Days</InputLabel>
                             <OutlinedInput
+                                error={!!this.state.errorMessage.rentalDays}
                                 id="component-outlined"
                                 label="Rental Days"
                                 value={this.state.rentalDays}
                                 onChange={e => this.setState({ rentalDays: e.target.value })}
                             />
+                            <FormHelperText id="rental-days-helper" sx={{
+                                position: 'absolute',
+                                bottom: '-1rem'
+                            }}
+                                error={!!this.state.errorMessage.rentalDays}>{this.state.errorMessage.rentalDays}
+                            </FormHelperText>
                         </FormControl>
                         <FormControl>
                             <InputLabel htmlFor="component-outlined">Percent Discount</InputLabel>
                             <OutlinedInput
+                                error={!!this.state.errorMessage.percentDiscount}
                                 id="component-outlined"
-                                label="Percent Discount"
+                                label="Percent Discount %"
                                 value={this.state.percentDiscount}
                                 onChange={e => this.setState({ percentDiscount: e.target.value })}
-                                helperText={
-                                    this.state.errorMessage.zipCode &&
-                                    this.state.errorMessage.zipCode
-                                }
                             />
+                            <FormHelperText id="rental-days-helper" sx={{
+                                position: 'absolute',
+                                bottom: '-1rem'
+                            }}
+                                error={!!this.state.errorMessage.percentDiscount}>{this.state.errorMessage.percentDiscount}
+                            </FormHelperText>
                         </FormControl>
                         <Button variant="contained" type="submit"
                             style={{ maxWidth: '120px', maxHeight: '55px', minWidth: '120px', minHeight: '55px' }}
                         >Rent Tool</Button>
                     </Box>
                     {this.state.rentalAgreement &&
-                        <Paper elevation={3}>
-                            <p style={{ whiteSpace: "pre-line" }}>
-                                {this.state.rentalAgreement}
-                            </p>
-                        </Paper>
+                        <RentalAgreement rentalAgreement={this.state.rentalAgreement} />
                     }
                 </item>
             </>
