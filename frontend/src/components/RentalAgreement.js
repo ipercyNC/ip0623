@@ -14,7 +14,6 @@ import Grid from '@mui/material/Grid';
 export default class RentalAgreement extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props.rentalAgreement.split("\n"))
         this.state = {
             rentalAgreement: props.rentalAgreement.split("\n")
         };
@@ -35,11 +34,11 @@ export default class RentalAgreement extends React.Component {
                                 </Typography>
                             </Grid>
 
-                            {this.state.rentalAgreement && this.state.rentalAgreement.map((line) => {
+                            {this.state.rentalAgreement && this.state.rentalAgreement.map((line, i) => {
                                 let lineSplit = line.split(":")
                                 return (
                                     <>
-                                        <Grid item xs={3} sx={{ height: "40px" }}>
+                                        <Grid key={i} xs={3} sx={{ height: "40px" }}>
                                             <Typography display="inline" variant="h6" sx={{
                                                 color: "#4585d9",
                                                 fontWeight: "bold",

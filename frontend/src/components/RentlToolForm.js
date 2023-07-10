@@ -1,6 +1,12 @@
+/*
+ * RentToolForm.js
+ * 7/10/2023
+ * Ian Percy
+ * 
+ * Form for allows users to input tool rental options. Calls backend to rent tool.
+ */
 import React from 'react';
 import axios from 'axios';
-import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
@@ -13,7 +19,6 @@ import Button from '@mui/material/Button';
 import moment from 'moment';
 import Typography from '@mui/material/Typography';
 import { Divider } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import dayjs from 'dayjs';
 import RentalAgreement from './RentalAgreement';
 
@@ -21,100 +26,94 @@ export default class RentToolForm extends React.Component {
 
     constructor(props) {
         super(props);
+        // Set the proper variables needed for the rental api call
         this.state = {
-            toolCode: "", checkoutDate: dayjs(Date.now()), rentalDays: 0, percentDiscount: 0,
+            toolCode: "", checkoutDate: dayjs(Date.now()), rentalDays: 1, percentDiscount: 0,
             rentalAgreement: "", error: false, errorMessage: {}
         };
     }
-    handleDateChange = (newValue) => {
-        // Catch if the valid is invalid - otherwise this will generate runtime errors
-        let date = moment(newValue.$d)
-        if (!date.isValid()) {
-            let tempErrorMessage = this.state.errorMessage
-            tempErrorMessage.checkoutDate = "Enter Valid Date"
-            this.setState({
-                error: true,
-                errorMessage: tempErrorMessage
-            });
-        }
-        else {
-            let tempErrorMessage = this.state.errorMessage
-            if (tempErrorMessage.hasOwnProperty("checkoutDate")) {
-                delete tempErrorMessage["checkoutDate"]
-            }
-            this.setState({
-                checkoutDate: date.format("yyyy-MM-DD"),
-                errorMessage: tempErrorMessage
-            });
-            console.log(this.state)
-        }
 
-
-    }
+    /*
+    * Handle simple form validation and calling backend with the rental details
+    *
+    * @param {event} event
+    */
     handleSubmit = (event) => {
         event.preventDefault();
         let isError = false;
+        // Catch if ToolCode isn't proper format (4 characters)
         if (this.state.toolCode.length !== 4) {
             isError = true;
             let tempErrorMessage = this.state.errorMessage
             tempErrorMessage.toolCode = "Enter 4 Character Code"
+            // Set ToolCode error message
             this.setState({
                 error: true,
                 errorMessage: tempErrorMessage
             });
         }
+
+        //Catch if rental days isn't valid (must be 1 or more days)
         let rentalDaysParsed = parseInt(this.state.rentalDays)
         if (rentalDaysParsed === NaN || rentalDaysParsed < 1) {
             isError = true;
             let tempErrorMessage = this.state.errorMessage
             tempErrorMessage.rentalDays = "Enter 1 Or More Days"
+            // Set RentalDays error message
             this.setState({
                 error: true,
                 errorMessage: tempErrorMessage
             });
         }
 
+        //Catch if percent discount isn't valid (must be 0 - 100 percent)
         let percentParsed = parseInt(this.state.percentDiscount)
-        console.log("percent", percentParsed)
         if (percentParsed === NaN || percentParsed < 0 || percentParsed > 100) {
             isError = true;
             let tempErrorMessage = this.state.errorMessage
             tempErrorMessage.percentDiscount = "Enter 0-100 Percent"
+            // Set PercentDiscount error message
             this.setState({
                 error: true,
                 errorMessage: tempErrorMessage
             });
-            console.log(this.state)
         }
+
+        // If the form validation did not trigger an error, call the backend
         if (!isError) {
             this.setState({
                 error: false,
                 errorMessage: {}
             })
+            // Create JSON object for api
             const json = JSON.stringify({
                 "code": this.state.toolCode,
                 "startDate": this.state.checkoutDate,
                 "days": this.state.rentalDays,
                 "discount": this.state.percentDiscount
             });
-            console.log(axios.post('/api/rentTool', json, {
-                // Overwrite Axios's automatically set Content-Type
+            axios.post('/api/rentTool', json, {
+                // Set content type to JSON
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then(response => {
+                // Save response into RentalAgreement to be displayed
                 console.log(response);
                 this.setState({ rentalAgreement: response.data })
             }).catch(error => {
+                // Catch error and display alert
                 console.log(error);
+                setTimeout(() => alert(error.response.data), 1000);
             })
-            )
+
         }
     }
     render() {
         return (
             <>
                 <Divider />
+                {/* Header for form */}
                 <Typography display="flex"
                     justifyContent="center"
                     alignItems="center" variant="h4" component="div" sx={{ flexGrow: 1 }}>
@@ -133,7 +132,7 @@ export default class RentToolForm extends React.Component {
                         alignItems="center"
                         onSubmit={this.handleSubmit}
                     >
-
+                        {/* Tool Code input */}
                         <FormControl>
                             <InputLabel htmlFor="component-outlined">Tool Code</InputLabel>
                             <OutlinedInput
@@ -152,12 +151,14 @@ export default class RentToolForm extends React.Component {
                                 error={!!this.state.errorMessage.toolCode}>{this.state.errorMessage.toolCode}
                             </FormHelperText>
                         </FormControl>
+                        {/* Checkout Date input */}
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker
                                 label="Checkout Date"
                                 value={this.state.checkoutDate}
                             />
                         </LocalizationProvider>
+                        {/* Rental Days input */}
                         <FormControl>
                             <InputLabel htmlFor="component-outlined">Rental Days</InputLabel>
                             <OutlinedInput
@@ -174,6 +175,7 @@ export default class RentToolForm extends React.Component {
                                 error={!!this.state.errorMessage.rentalDays}>{this.state.errorMessage.rentalDays}
                             </FormHelperText>
                         </FormControl>
+                        {/* PercentDiscount input */}
                         <FormControl>
                             <InputLabel htmlFor="component-outlined">Percent Discount</InputLabel>
                             <OutlinedInput
@@ -190,10 +192,12 @@ export default class RentToolForm extends React.Component {
                                 error={!!this.state.errorMessage.percentDiscount}>{this.state.errorMessage.percentDiscount}
                             </FormHelperText>
                         </FormControl>
+                        {/* Submit button */}
                         <Button variant="contained" type="submit"
                             style={{ maxWidth: '120px', maxHeight: '55px', minWidth: '120px', minHeight: '55px' }}
                         >Rent Tool</Button>
                     </Box>
+                    {/* Display RentalAgreement */}
                     {this.state.rentalAgreement &&
                         <RentalAgreement rentalAgreement={this.state.rentalAgreement} />
                     }

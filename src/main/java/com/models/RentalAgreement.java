@@ -33,7 +33,7 @@ public class RentalAgreement {
     private ToolCharges toolCharges;
     private int chargeDays;
     private double prediscountCharge;
-    private double discountPercent;
+    private int discountPercent;
     private double discountAmount;
     private double finalCharge;
 
@@ -43,7 +43,7 @@ public class RentalAgreement {
 
     public RentalAgreement(ToolChoices toolChoices, int rentalDays, LocalDate checkoutDate,
             LocalDate dueDate, ToolCharges toolCharges, int chargeDays, double prediscountCharge,
-            double discountPercent, double discountAmount, double finalCharge) {
+            int discountPercent, double discountAmount, double finalCharge) {
         this.toolChoices = toolChoices;
         this.rentalDays = rentalDays;
         this.checkoutDate = checkoutDate;
@@ -126,11 +126,11 @@ public class RentalAgreement {
         return prediscountCharge;
     }
 
-    public void setDiscountPercent(double discountPercent) {
+    public void setDiscountPercent(int discountPercent) {
         this.discountPercent = discountPercent;
     }
 
-    public double getDiscountPercent() {
+    public int getDiscountPercent() {
         return discountPercent;
     }
 

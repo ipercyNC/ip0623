@@ -48,14 +48,25 @@ public class RentToolService {
     public String rentTool(String code, String inputDate, String rentalDays, String discountRaw) {
         try {
             // Gather the ToolChoices object and the ToolCharges object
-            ToolChoices toolChoices = toolChoicesService.findToolChoicesByCode(code);
-            ToolCharges toolCharges = toolChargesService.findToolChargesByTypeId(toolChoices.getToolType().getId());
+            ToolChoices toolChoices;
+            ToolCharges toolCharges;
+            code = code.toUpperCase();
+            toolChoices = toolChoicesService.findToolChoicesByCode(code);
+            if (toolChoices == null) {
+                logger.error("Cannot get Tool Choice");
+                return "ERROR_TOOL_CHOICE";
+            }
+            toolCharges = toolChargesService.findToolChargesByTypeId(toolChoices.getToolType().getId());
+            if (toolCharges == null) {
+                logger.error("Cannot get Tool Charge");
+                return "ERROR_TOOL_CHARGE";
+            }
 
             // Validate and calculate the discount percent
             int discountInteger = Integer.parseInt(discountRaw);
             // Check discount percent is 0 - 100
             if (discountInteger < 0 || discountInteger > 100) {
-                return "PERCENT_OUT_OF_RANGE";
+                return "ERROR_PERCENT_OUT_OF_RANGE";
             }
             double discountCalculated = discountInteger / 100.0;
 
@@ -70,7 +81,7 @@ public class RentToolService {
             int maxDaysToCharge = Integer.parseInt(rentalDays);
             // Check to make sure that the rental day is 1 or greater
             if (maxDaysToCharge < 1) {
-                return "RENTAL_DAY_COUNT_OUT_OF_RANGE";
+                return "ERROR_RENTAL_DAY_COUNT_OUT_OF_RANGE";
             }
             // Create the date to be used in the loop below
             LocalDate date = startDate.plusDays(1);
@@ -117,8 +128,7 @@ public class RentToolService {
             double prediscountCharge = new BigDecimal(daysToCharge * toolCharges.getDailyCharge())
                     .setScale(2, RoundingMode.HALF_UP).doubleValue();
             // Discount percent -> from input
-            int discountPercent = new BigDecimal(discountCalculated * 100).setScale(0, RoundingMode.HALF_UP)
-                    .intValue();
+            int discountPercent = (int)Math.round(discountCalculated * 100);
             // Discount Amount -> amount saved from discount - calculated after loop
             double discountAmount = new BigDecimal(prediscountCharge * discountCalculated)
                     .setScale(2, RoundingMode.HALF_UP).doubleValue();
@@ -146,7 +156,7 @@ public class RentToolService {
 
         } catch (Exception e) {
             logger.error("Error in rent tool " + e);
-            return "";
+            return "ERROR_GENERAL";
         }
     }
 
@@ -193,7 +203,7 @@ public class RentToolService {
      * @return string with the formatted rental agreement String
      */
     public String generateAgreement(RentalAgreement rentalAgreement) {
-        // Created extra function call here so if we want to modify the output format or 
+        // Created extra function call here so if we want to modify the output format or
         // add some logic with the output of the agreement
         return rentalAgreement.formatRentalAgreement();
     }
