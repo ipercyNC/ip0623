@@ -1,3 +1,11 @@
+/*
+ * ToolChargesTable.js
+ * 7/10/2023
+ * Ian Percy
+ * 
+ * 
+ * Component for displaying the ToolCharges table
+ */
 import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -30,8 +38,9 @@ export default class ToolChargesTable extends React.Component {
                         </TableRow>
                       </TableHead>
                       <TableBody>
+                        {/* Print out ToolCharges info */}
                         {this.props.toolCharges.map((toolCharge) => (
-                          <TableRow>
+                          <TableRow key={toolCharge.toolType.name}>
                             <TableCell component="th" scope="toolCharge" align="right">{toolCharge.toolType.name}</TableCell>
                             <TableCell align="right">${toolCharge.dailyCharge}</TableCell>
                             <TableCell align="right">{toolCharge.weekdayCharge === 1 ? "Yes" : "No"}</TableCell>

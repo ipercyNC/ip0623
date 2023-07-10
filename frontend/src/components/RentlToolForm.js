@@ -134,11 +134,10 @@ export default class RentToolForm extends React.Component {
                     >
                         {/* Tool Code input */}
                         <FormControl>
-                            <InputLabel htmlFor="component-outlined">Tool Code</InputLabel>
+                            <InputLabel htmlFor="toolcode-component">Tool Code</InputLabel>
                             <OutlinedInput
                                 error={!!this.state.errorMessage.toolCode}
-                                id="component-outlined"
-                                defaultValue=""
+                                id="toolcode-component"
                                 label="Tool Code"
                                 value={this.state.toolCode}
                                 onChange={e => this.setState({ toolCode: e.target.value })}
@@ -160,10 +159,10 @@ export default class RentToolForm extends React.Component {
                         </LocalizationProvider>
                         {/* Rental Days input */}
                         <FormControl>
-                            <InputLabel htmlFor="component-outlined">Rental Days</InputLabel>
+                            <InputLabel htmlFor="rentaldays-component">Rental Days</InputLabel>
                             <OutlinedInput
                                 error={!!this.state.errorMessage.rentalDays}
-                                id="component-outlined"
+                                id="rentaldays-component"
                                 label="Rental Days"
                                 value={this.state.rentalDays}
                                 onChange={e => this.setState({ rentalDays: e.target.value })}
@@ -177,15 +176,15 @@ export default class RentToolForm extends React.Component {
                         </FormControl>
                         {/* PercentDiscount input */}
                         <FormControl>
-                            <InputLabel htmlFor="component-outlined">Percent Discount</InputLabel>
+                            <InputLabel htmlFor="discount-component">Percent Discount</InputLabel>
                             <OutlinedInput
                                 error={!!this.state.errorMessage.percentDiscount}
-                                id="component-outlined"
+                                id="discount-component"
                                 label="Percent Discount %"
                                 value={this.state.percentDiscount}
                                 onChange={e => this.setState({ percentDiscount: e.target.value })}
                             />
-                            <FormHelperText id="rental-days-helper" sx={{
+                            <FormHelperText id="percent-discount-helper" sx={{
                                 position: 'absolute',
                                 bottom: '-1rem'
                             }}

@@ -1,3 +1,11 @@
+/*
+ * ToolTypeTable.js
+ * 7/10/2023
+ * Ian Percy
+ * 
+ * 
+ * Component for displaying the ToolType table
+ */
 import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -26,8 +34,9 @@ export default class ToolTypeTable extends React.Component {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
+                                    {/* Print out ToolType info */}
                                     {this.props.toolTypes.map((toolType) => (
-                                        <TableRow>
+                                        <TableRow key={toolType.name}>
                                             <TableCell component="th" scope="toolType" align="right">{toolType.name}</TableCell>
                                         </TableRow>
                                     ))}

@@ -157,14 +157,14 @@ public class RentalAgreement {
         agreementLines.add("Tool Type           : " + toolChoices.getToolType().getName());
         agreementLines.add("Tool Brand          : " + toolChoices.getToolBrand().getName());
         agreementLines.add("Rental Days         : " + rentalDays);
-        agreementLines.add("Check out date      : " + checkoutDate.format(formatter));
-        agreementLines.add("Due date            : " + dueDate.format(formatter));
+        agreementLines.add("Checkout Date      : " + checkoutDate.format(formatter));
+        agreementLines.add("Due Date            : " + dueDate.format(formatter));
         agreementLines.add("Daily Rental Charge : $" + toolCharges.getDailyCharge());
         agreementLines.add("Charge Days         : " + chargeDays);
-        agreementLines.add("Pre-discount Charge : $" + prediscountCharge);
+        agreementLines.add(String.format("Pre-discount Charge : $%.2f", prediscountCharge));
         agreementLines.add("Discount Percent    : " + discountPercent + "%");
-        agreementLines.add("Discount Amount     : $" + discountAmount);
-        agreementLines.add("Final Charge        : $" + finalCharge);
+        agreementLines.add(String.format("Discount Amount     : $%.2f", discountAmount));
+        agreementLines.add(String.format("Final Charge        : $%.2f", finalCharge));
         return  String.join("\n", agreementLines);
     }
 }

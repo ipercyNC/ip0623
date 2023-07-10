@@ -25,6 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.beans.factory.annotation.Value;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -61,7 +62,7 @@ public class ToolBrandControllerTest {
                 .andExpect(status().isCreated());
         MvcResult result = mvc.perform(get("/api/toolBrand")).andReturn();
         String resultAsString = result.getResponse().getContentAsString();
-        assertThat(resultAsString.contains(newToolBrandName));
+        assertTrue(resultAsString.contains(newToolBrandName));
     }
 
     // Test creating and query by ID
@@ -74,12 +75,12 @@ public class ToolBrandControllerTest {
                 .andExpect(status().isCreated());
         MvcResult result = mvc.perform(get("/api/toolBrand")).andReturn();
         String resultAsString = result.getResponse().getContentAsString();
-        assertThat(resultAsString.contains(newToolBrandName));
+        assertTrue(resultAsString.contains(newToolBrandName));
 
         // Get ID of returned object
         JSONArray toolBrandResultArray = new JSONArray(resultAsString);
         String firstToolBrand = toolBrandResultArray.get(0).toString();
-        assertThat(firstToolBrand.contains(newToolBrandName));
+        assertTrue(firstToolBrand.contains(newToolBrandName));
         // Get id from the return
         JSONObject jsonObject = new JSONObject(firstToolBrand);
         int retrievedToolBrandId = Integer.parseInt(jsonObject.get("id").toString());
@@ -90,7 +91,7 @@ public class ToolBrandControllerTest {
                 .andReturn();
         String toolBrandByIdResultString = toolBrandByIdResult.getResponse().getContentAsString();
         // Check name matches what we put in as the test name
-        assertThat(toolBrandByIdResultString.contains(newToolBrandName));
+        assertTrue(toolBrandByIdResultString.contains(newToolBrandName));
     }
 
     // Test creating and query by ID
@@ -103,12 +104,12 @@ public class ToolBrandControllerTest {
                 .andExpect(status().isCreated());
         MvcResult result = mvc.perform(get("/api/toolBrand")).andReturn();
         String resultAsString = result.getResponse().getContentAsString();
-        assertThat(resultAsString.contains(newToolBrandName));
+        assertTrue(resultAsString.contains(newToolBrandName));
 
         // Get ID of returned object
         JSONArray toolBrandResultArray = new JSONArray(resultAsString);
         String firstToolBrand = toolBrandResultArray.get(0).toString();
-        assertThat(firstToolBrand.contains(newToolBrandName));
+        assertTrue(firstToolBrand.contains(newToolBrandName));
         // Get id from the return
         JSONObject jsonObject = new JSONObject(firstToolBrand);
         String retrievedToolBrandName = jsonObject.get("name").toString();
@@ -138,7 +139,7 @@ public class ToolBrandControllerTest {
         mvc.perform(delete("/api/toolBrand")).andReturn();
         MvcResult toolBrandResult = mvc.perform(get("/api/toolBrand")).andReturn();
         String toolBrandResultAsString = toolBrandResult.getResponse().getContentAsString();
-        assertThat(toolBrandResultAsString.isBlank());
+        assertTrue(toolBrandResultAsString.isBlank());
     }
 
     // Test gathering all ToolBrands when it's empty
@@ -146,7 +147,7 @@ public class ToolBrandControllerTest {
     public void gatherAllToolBrandsEmpty() throws Exception {
         MvcResult result = mvc.perform(get("/api/toolBrand")).andReturn();
         String resultAsString = result.getResponse().getContentAsString();
-        assertThat(resultAsString.isBlank());
+        assertTrue(resultAsString.isBlank());
     }
 
     @AfterAll

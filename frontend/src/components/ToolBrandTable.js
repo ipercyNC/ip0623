@@ -1,3 +1,11 @@
+/*
+ * ToolBrandTable.js
+ * 7/10/2023
+ * Ian Percy
+ * 
+ * 
+ * Component for displaying the ToolBrand table
+ */
 import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -21,13 +29,14 @@ export default class ToolBrandTable extends React.Component {
                         <TableContainer component={Paper}>
                             <Table aria-label="simple table">
                                 <TableHead sx={{ backgroundColor: "lightblue" }}>
-                                    <TableRow >
+                                    <TableRow>
                                         <TableCell>Name</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
+                                    {/* Print out ToolBrand info */}
                                     {this.props.toolBrands.map((toolBrand) => (
-                                        <TableRow>
+                                        <TableRow key={toolBrand.name}>
                                             <TableCell component="th" scope="toolBrand" align="right">{toolBrand.name}</TableCell>
                                         </TableRow>
                                     ))}

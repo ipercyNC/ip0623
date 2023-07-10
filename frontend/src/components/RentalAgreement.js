@@ -1,10 +1,12 @@
+/*
+ * RentalAgreement.js
+ * 7/10/2023
+ * Ian Percy
+ * 
+ * 
+ * Component for displaying the Rental Agreement
+ */
 import React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { Divider } from '@mui/material';
@@ -14,6 +16,7 @@ import Grid from '@mui/material/Grid';
 export default class RentalAgreement extends React.Component {
     constructor(props) {
         super(props);
+        // Set the variable for the rentalAgreement - split into an array
         this.state = {
             rentalAgreement: props.rentalAgreement.split("\n")
         };
@@ -38,6 +41,7 @@ export default class RentalAgreement extends React.Component {
                                 let lineSplit = line.split(":")
                                 return (
                                     <>
+                                        {/* Label for line */}
                                         <Grid key={i} xs={3} sx={{ height: "40px" }}>
                                             <Typography display="inline" variant="h6" sx={{
                                                 color: "#4585d9",
@@ -46,10 +50,9 @@ export default class RentalAgreement extends React.Component {
                                             }}>
                                                 {lineSplit[0]}:
                                             </Typography>
-
                                         </Grid>
+                                        {/* Value for line */}
                                         <Grid item xs={9} sx={{ height: "40px" }}>
-
                                             <Typography display="inline" variant="subtitle1">
                                                 {lineSplit[1]}
                                             </Typography>

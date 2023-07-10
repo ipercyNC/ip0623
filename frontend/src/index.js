@@ -1,3 +1,11 @@
+/*
+ * Index.js
+ * 7/10/2023
+ * Ian Percy
+ * 
+ * 
+ * Render the App.js class
+ */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';

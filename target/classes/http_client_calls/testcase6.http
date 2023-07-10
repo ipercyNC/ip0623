@@ -1,0 +1,9 @@
+POST http://localhost:8080/api/rentTool HTTP/1.1
+content-type: application/json
+
+{
+    "code": "JAKR",
+    "startDate": "2020-07-02",
+    "days":4,
+    "discount": 50
+}

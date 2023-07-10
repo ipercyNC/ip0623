@@ -1,3 +1,11 @@
+/*
+ * ToolChoicesTable.js
+ * 7/10/2023
+ * Ian Percy
+ * 
+ * 
+ * Component for displaying the ToolChoices table
+ */
 import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -28,8 +36,9 @@ export default class ToolChoicesTable extends React.Component {
                         </TableRow>
                       </TableHead>
                       <TableBody>
+                        {/* Print out ToolChoices info */}
                         {this.props.toolChoices.map((toolChoice) => (
-                          <TableRow>
+                          <TableRow key={toolChoice.code}>
                             <TableCell component="th" scope="toolchoice" align="right">{toolChoice.code}</TableCell>
                             <TableCell align="right">{toolChoice.toolBrand.name}</TableCell>
                             <TableCell align="right">{toolChoice.toolType.name}</TableCell>

@@ -1,3 +1,11 @@
+/*
+ * App.js
+ * 7/10/2023
+ * Ian Percy
+ * 
+ * 
+ * Main view for the application. Entry point and renderer 
+ */
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -16,6 +24,7 @@ const React = require('react');
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+    // Save all of the necesssary information for the application
     this.state = {
       toolTypes: [], toolBrands: [], toolChoices: [], toolCharges: [],
       toolCode: "", checkoutDate: undefined, rentalDays: 0, percentDiscount: 0,
@@ -23,19 +32,20 @@ export default class App extends React.Component {
     };
   }
 
+  // Call all of the tables we need from the backend
   componentDidMount() {
     axios.get('/api/toolType').then(response => {
       this.setState({ toolTypes: response.data });
-    });
+    }).catch(error => console.log("Error getting ToolType table", error));
     axios.get('/api/toolBrand').then(response => {
       this.setState({ toolBrands: response.data });
-    });
+    }).catch(error => console.log("Error getting ToolBrand table", error));
     axios.get('/api/toolChoices').then(response => {
       this.setState({ toolChoices: response.data });
-    });
+    }).catch(error => console.log("Error getting ToolChoices table", error));
     axios.get('/api/toolCharges').then(response => {
       this.setState({ toolCharges: response.data });
-    });
+    }).catch(error => console.log("Error getting ToolCharges table", error));
   }
 
   render() {
@@ -59,18 +69,24 @@ export default class App extends React.Component {
             </Toolbar>
           </AppBar>
           <Grid container spacing={4} padding={2}>
+            {/* Print out ToolTypes info */}
             <Grid item xs={2}>
               <ToolTypeTable toolTypes={this.state.toolTypes} />
             </Grid>
+            {/* Print out ToolBrands info */}
             <Grid item xs={2}>
               <ToolBrandTable toolBrands={this.state.toolBrands} />
             </Grid>
+            {/* Display ToolChoices info*/}
             <Grid item xs={3}>
               <ToolChoicesTable toolChoices={this.state.toolChoices} />
             </Grid>
+            {/* Display ToolCharges info */}
             <Grid item xs={5}>
               <ToolChargesTable toolCharges={this.state.toolCharges} />
             </Grid>
+            {/* Display tool rental form */}
+
             <Grid item xs={12}   >
               <RentToolForm />
             </Grid>
