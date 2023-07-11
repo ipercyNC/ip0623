@@ -52,7 +52,7 @@ export default class RentalAgreement extends React.Component {
                                 return (
                                     <>
                                         {/* Label + Value for line */}
-                                        <Grid key={i} xs={12} height="30px">
+                                        <Grid key={i} item xs={12} height="30px">
                                             <Typography display="inline" variant="h6" sx={{
                                                 color: "#1976D2",
                                                 fontWeight: "bold"

@@ -26,7 +26,6 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.beans.factory.annotation.Value;
-import static org.assertj.core.api.Assertions.assertThat;
 import com.services.*;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -114,27 +113,35 @@ public class RentToolControllerTest {
 
     /*
      * 2) Rent - LADW, 7/2/20, 3, 10
+     * 7/3/20 (Friday) - Holiday - No Charge
+     * 7/4/20 (Saturday) - Weekend - Charge
+     * 7/5/20 (Sunday) - Weekend - Charge
      */
     @Test
     public void test2() {
-        String result2 = rentToolService.rentTool("LADW", "2020-07-20", "3", "10");
+        String result2 = rentToolService.rentTool("LADW", "2020-07-02", "3", "10");
         System.out.println(result2);
         assertTrue(result2.contains("Tool Code           : LADW"));
         assertTrue(result2.contains("Tool Type           : Ladder"));
         assertTrue(result2.contains("Tool Brand          : Werner"));
         assertTrue(result2.contains("Rental Days         : 3"));
-        assertTrue(result2.contains("Checkout Date      : 07/20/20"));
-        assertTrue(result2.contains("Due Date            : 07/23/20"));
+        assertTrue(result2.contains("Checkout Date      : 07/02/20"));
+        assertTrue(result2.contains("Due Date            : 07/05/20"));
         assertTrue(result2.contains("Daily Rental Charge : $1.99"));
-        assertTrue(result2.contains("Charge Days         : 3"));
-        assertTrue(result2.contains("Pre-discount Charge : $5.97"));
+        assertTrue(result2.contains("Charge Days         : 2"));
+        assertTrue(result2.contains("Pre-discount Charge : $3.98"));
         assertTrue(result2.contains("Discount Percent    : 10%"));
-        assertTrue(result2.contains("Discount Amount     : $0.60"));
-        assertTrue(result2.contains("Final Charge        : $5.37"));
+        assertTrue(result2.contains("Discount Amount     : $0.40"));
+        assertTrue(result2.contains("Final Charge        : $3.58"));
     }
 
     /*
      * 3) Rent - CHNS, 7/2/15, 5, 25
+     * 7/3/15 (Friday) - Holiday - Charge
+     * 7/4/15 (Saturday) - Weekend - No Charge
+     * 7/5/15 (Sunday) - Weekend - No Charge
+     * 7/6/15 (Monday) - Weekday- Charge
+     * 7/7/15 (Tuesday) - Weekday - Charge
      */
     @Test
     public void test3() {
@@ -156,6 +163,12 @@ public class RentToolControllerTest {
 
     /*
      * 4) Rent - JAKD, 9/3/15, 6, 0
+     * 9/4/15 (Friday) - Weekday - Charge
+     * 9/5/15 (Saturday) - Weekend - No Charge
+     * 9/6/15 (Sunday) - Weekend - No Charge
+     * 9/7/15 (Monday) - Holiday Labor Day - No Charge
+     * 9/8/15 (Tuesday) - Weekday - Charge
+     * 9/9/15 (Wednesday) - Weekday - Charge
      */
     @Test
     public void test4() {
@@ -177,6 +190,15 @@ public class RentToolControllerTest {
 
     /*
      * 5) Rent - JAKR, 7/2/15, 9, 0
+     * 7/3/15 (Friday) - Holiday - No Charge
+     * 7/4/15 (Saturday) - Weekend - No Charge
+     * 7/5/15 (Sunday) - Weekend - No Charge
+     * 7/6/15 (Monday) - Weekday- Charge
+     * 7/7/15 (Tuesday) - Weekday - Charge
+     * 7/8/15 (Wednesday) - Weekday - Charge
+     * 7/9/15 (Thursday) - Weeekday - Charge
+     * 7/10/15 (Friday) - Weekeday - Charge
+     * 7/11/15 (Saturday) - Weekend - No Charge
      */
     @Test
     public void test5() {
@@ -198,17 +220,21 @@ public class RentToolControllerTest {
 
     /*
      * 6) Rent - JAKR, 7/2/20, 4, 50
+     * 7/3/20 (Friday) - Holiday July 4th - No Charge
+     * 7/4/20 (Saturday) - Weekend - No Charge
+     * 7/5/20 (Sunday) - Weekend - No Charge
+     * 7/6/20 (Monday) - Weekday - Charge
      */
     @Test
     public void test6() {
-        String result6 = rentToolService.rentTool("JAKR", "2015-07-02", "4", "50");
+        String result6 = rentToolService.rentTool("JAKR", "2020-07-02", "4", "50");
         System.out.println(result6);
         assertTrue(result6.contains("Tool Code           : JAKR"));
         assertTrue(result6.contains("Tool Type           : Jackhammer"));
         assertTrue(result6.contains("Tool Brand          : Ridgid"));
         assertTrue(result6.contains("Rental Days         : 4"));
-        assertTrue(result6.contains("Checkout Date      : 07/02/15"));
-        assertTrue(result6.contains("Due Date            : 07/06/15"));
+        assertTrue(result6.contains("Checkout Date      : 07/02/20"));
+        assertTrue(result6.contains("Due Date            : 07/06/20"));
         assertTrue(result6.contains("Daily Rental Charge : $2.99"));
         assertTrue(result6.contains("Charge Days         : 1"));
         assertTrue(result6.contains("Pre-discount Charge : $2.99"));
@@ -252,6 +278,30 @@ public class RentToolControllerTest {
         assertTrue(result7.contains("RENTAL_DAY_COUNT_OUT_OF_RANGE"));
     }
 
+    /*
+     * 10) Rent - JAKR, 7/2/21, 4, 0  (Test a July 4th on a Sunday)
+     * 7/3/21 (Saturday) - Weekend - No Charge
+     * 7/4/21 (Sunday) - Weekend - No Charge
+     * 7/5/21 (Monday) - Holiday July 4th - No Charge
+     * 7/6/21 (Tuesday) - Weekday - Charge
+     */
+    @Test
+    public void test10() {
+        String result6 = rentToolService.rentTool("JAKR", "2021-07-02", "4", "0");
+        System.out.println(result6);
+        assertTrue(result6.contains("Tool Code           : JAKR"));
+        assertTrue(result6.contains("Tool Type           : Jackhammer"));
+        assertTrue(result6.contains("Tool Brand          : Ridgid"));
+        assertTrue(result6.contains("Rental Days         : 4"));
+        assertTrue(result6.contains("Checkout Date      : 07/02/21"));
+        assertTrue(result6.contains("Due Date            : 07/06/21"));
+        assertTrue(result6.contains("Daily Rental Charge : $2.99"));
+        assertTrue(result6.contains("Charge Days         : 1"));
+        assertTrue(result6.contains("Pre-discount Charge : $2.99"));
+        assertTrue(result6.contains("Discount Percent    : 0%"));
+        assertTrue(result6.contains("Discount Amount     : $0.00"));
+        assertTrue(result6.contains("Final Charge        : $2.99"));
+    }
     @AfterAll
     public void clearAfter() {
         toolChoicesService.deleteAllToolChoices();

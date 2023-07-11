@@ -28,7 +28,7 @@ export default class RentToolForm extends React.Component {
         super(props);
         // Set the proper variables needed for the rental api call
         this.state = {
-            toolCode: "", checkoutDate: dayjs(Date.now()), rentalDays: 1, percentDiscount: 0,
+            toolCode: "", checkoutDate: undefined, rentalDays: 1, percentDiscount: 0,
             rentalAgreement: "", error: false, errorMessage: {}
         };
     }
@@ -78,6 +78,7 @@ export default class RentToolForm extends React.Component {
                 errorMessage: tempErrorMessage
             });
         } 
+        
 
         // If the form validation did not trigger an error, call the backend
         if (!isError) {
@@ -86,10 +87,11 @@ export default class RentToolForm extends React.Component {
                 errorMessage: {}, 
                 rentalAgreement: ""
             })
+            console.log(this.state.checkoutDate)
             // Create JSON object for api
             const json = JSON.stringify({
                 "code": this.state.toolCode,
-                "startDate": this.state.checkoutDate,
+                "startDate": moment(this.state.checkoutDate.$d).format("YYYY-MM-DD"),
                 "days": this.state.rentalDays,
                 "discount": this.state.percentDiscount
             });
@@ -155,7 +157,9 @@ export default class RentToolForm extends React.Component {
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker
                                 label="Checkout Date"
+                                adapterLocale="en-us"
                                 value={this.state.checkoutDate}
+                                onChange={e => this.setState({checkoutDate: e})}
                             />
                         </LocalizationProvider>
                         {/* Rental Days input */}
