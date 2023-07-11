@@ -24,7 +24,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.beans.factory.annotation.Value;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -120,7 +119,7 @@ public class ToolBrandControllerTest {
                 .andReturn();
         String toolBrandByNameResultString = toolBrandByNameResult.getResponse().getContentAsString();
         // Check name matches what we put in as the test name
-        assertThat(toolBrandByNameResultString.contains(newToolBrandName));
+        assertTrue(toolBrandByNameResultString.contains(newToolBrandName));
     }
 
     // Test creating and deleting
@@ -133,7 +132,7 @@ public class ToolBrandControllerTest {
                 .andExpect(status().isCreated());
         MvcResult result = mvc.perform(get("/api/toolBrand")).andReturn();
         String resultAsString = result.getResponse().getContentAsString();
-        assertThat(resultAsString.contains(newToolBrandName));
+        assertTrue(resultAsString.contains(newToolBrandName));
 
         // Delete and check result is empty
         mvc.perform(delete("/api/toolBrand")).andReturn();

@@ -23,7 +23,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.beans.factory.annotation.Value;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import com.services.ToolChargesService;
@@ -65,7 +65,7 @@ public class ToolChargesControllerTest {
         mvc.perform(post("/api/toolType").contentType(MediaType.APPLICATION_JSON).content(toolTypeJson.toString())).andExpect(status().isCreated());
         MvcResult toolTypeResult = mvc.perform(get("/api/toolType")).andReturn();
         String toolTypeResultAsString = toolTypeResult.getResponse().getContentAsString();
-        assertThat(toolTypeResultAsString.contains(newToolTypeName));
+        assertTrue(toolTypeResultAsString.contains(newToolTypeName));
         MvcResult toolTypeIdResult = mvc.perform(get("/api/toolType/name/" + newToolTypeName)).andExpect(status().isOk()).andReturn();
         String toolTypeIdResultString = toolTypeIdResult.getResponse().getContentAsString();
         JSONObject jsonObject = new JSONObject(toolTypeIdResultString);
@@ -76,7 +76,7 @@ public class ToolChargesControllerTest {
         mvc.perform(post("/api/toolCharges").contentType(MediaType.APPLICATION_JSON).content(json.toString())).andExpect(status().isCreated());
         MvcResult result = mvc.perform(get("/api/toolCharges")).andReturn();
         String resultAsString = result.getResponse().getContentAsString();
-        assertThat(resultAsString.contains(String.valueOf(newToolChargesId)));
+        assertTrue(resultAsString.contains(String.valueOf(newToolChargesId)));
     }
 
     
@@ -92,7 +92,7 @@ public class ToolChargesControllerTest {
         mvc.perform(post("/api/toolType").contentType(MediaType.APPLICATION_JSON).content(toolTypeJson.toString())).andExpect(status().isCreated());
         MvcResult toolTypeResult = mvc.perform(get("/api/toolType")).andReturn();
         String toolTypeResultAsString = toolTypeResult.getResponse().getContentAsString();
-        assertThat(toolTypeResultAsString.contains(newToolTypeName));
+        assertTrue(toolTypeResultAsString.contains(newToolTypeName));
         MvcResult toolTypeIdResult = mvc.perform(get("/api/toolType/name/" + newToolTypeName)).andExpect(status().isOk()).andReturn();
         String toolTypeIdResultString = toolTypeIdResult.getResponse().getContentAsString();
         JSONObject jsonObject = new JSONObject(toolTypeIdResultString);
@@ -104,7 +104,7 @@ public class ToolChargesControllerTest {
         mvc.perform(post("/api/toolCharges").contentType(MediaType.APPLICATION_JSON).content(json.toString())).andExpect(status().isCreated());
         MvcResult result = mvc.perform(get("/api/toolCharges")).andReturn();
         String resultAsString = result.getResponse().getContentAsString();
-        assertThat(resultAsString.contains(String.valueOf(newToolChargesId)));
+        assertTrue(resultAsString.contains(String.valueOf(newToolChargesId)));
 
         // Get the object from the get all query
         JSONArray toolChargesResultArray = new JSONArray(resultAsString);
@@ -115,7 +115,7 @@ public class ToolChargesControllerTest {
         //Query for id
         MvcResult toolChargesFindById = mvc.perform(get("/api/toolCharges/id/" + retrievedToolChargesId)).andExpect(status().isOk()).andReturn();
         String toolChargesByIdString = toolChargesFindById.getResponse().getContentAsString();
-        assertThat(toolChargesByIdString.contains(Integer.toString(newToolChargesId)));
+        assertTrue(toolChargesByIdString.contains(Integer.toString(newToolChargesId)));
     }
 
 
@@ -124,7 +124,7 @@ public class ToolChargesControllerTest {
     public void gatherAllToolChargesEmpty() throws Exception {
         MvcResult result = mvc.perform(get("/api/toolCharges")).andReturn();
         String resultAsString = result.getResponse().getContentAsString();
-        assertThat(resultAsString.isBlank());
+        assertTrue(resultAsString.isBlank());
     }
 
     @AfterAll

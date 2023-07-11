@@ -23,7 +23,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.beans.factory.annotation.Value;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import com.services.ToolChoicesService;
@@ -69,7 +69,7 @@ public class ToolChoicesControllerTest {
         mvc.perform(post("/api/toolType").contentType(MediaType.APPLICATION_JSON).content(toolTypeJson.toString())).andExpect(status().isCreated());
         MvcResult toolTypeResult = mvc.perform(get("/api/toolType")).andReturn();
         String toolTypeResultAsString = toolTypeResult.getResponse().getContentAsString();
-        assertThat(toolTypeResultAsString.contains(newToolTypeName));
+        assertTrue(toolTypeResultAsString.contains(newToolTypeName));
         MvcResult toolTypeIdResult = mvc.perform(get("/api/toolType/name/" + newToolTypeName)).andExpect(status().isOk()).andReturn();
         String toolTypeIdResultString = toolTypeIdResult.getResponse().getContentAsString();
         JSONObject jsonObject = new JSONObject(toolTypeIdResultString);
@@ -82,7 +82,7 @@ public class ToolChoicesControllerTest {
         mvc.perform(post("/api/toolBrand").contentType(MediaType.APPLICATION_JSON).content(toolBrandJson.toString())).andExpect(status().isCreated());
         MvcResult toolBrandResult = mvc.perform(get("/api/toolBrand")).andReturn();
         String toolBrandResultAsString = toolBrandResult.getResponse().getContentAsString();
-        assertThat(toolBrandResultAsString.contains(newToolBrandName));
+        assertTrue(toolBrandResultAsString.contains(newToolBrandName));
         MvcResult toolBrandIdResult = mvc.perform(get("/api/toolBrand/name/" + newToolBrandName)).andExpect(status().isOk()).andReturn();
         String toolBrandIdResultString = toolBrandIdResult.getResponse().getContentAsString();
         JSONObject toolBrandJsonObject = new JSONObject(toolBrandIdResultString);
@@ -97,7 +97,7 @@ public class ToolChoicesControllerTest {
         mvc.perform(post("/api/toolChoices").contentType(MediaType.APPLICATION_JSON).content(toolChoiceJson.toString())).andExpect(status().isCreated());
         MvcResult toolChoicesResult = mvc.perform(get("/api/toolChoices")).andReturn();
         String toolChoicesResultAsString = toolChoicesResult.getResponse().getContentAsString();
-        assertThat(toolChoicesResultAsString.contains(newToolCode));
+        assertTrue(toolChoicesResultAsString.contains(newToolCode));
     }
 
     //Test creating and getting by id
@@ -110,7 +110,7 @@ public class ToolChoicesControllerTest {
         mvc.perform(post("/api/toolType").contentType(MediaType.APPLICATION_JSON).content(toolTypeJson.toString())).andExpect(status().isCreated());
         MvcResult toolTypeResult = mvc.perform(get("/api/toolType")).andReturn();
         String toolTypeResultAsString = toolTypeResult.getResponse().getContentAsString();
-        assertThat(toolTypeResultAsString.contains(newToolTypeName));
+        assertTrue(toolTypeResultAsString.contains(newToolTypeName));
         MvcResult toolTypeIdResult = mvc.perform(get("/api/toolType/name/" + newToolTypeName)).andExpect(status().isOk()).andReturn();
         String toolTypeIdResultString = toolTypeIdResult.getResponse().getContentAsString();
         JSONObject jsonObject = new JSONObject(toolTypeIdResultString);
@@ -123,7 +123,7 @@ public class ToolChoicesControllerTest {
         mvc.perform(post("/api/toolBrand").contentType(MediaType.APPLICATION_JSON).content(toolBrandJson.toString())).andExpect(status().isCreated());
         MvcResult toolBrandResult = mvc.perform(get("/api/toolBrand")).andReturn();
         String toolBrandResultAsString = toolBrandResult.getResponse().getContentAsString();
-        assertThat(toolBrandResultAsString.contains(newToolBrandName));
+        assertTrue(toolBrandResultAsString.contains(newToolBrandName));
         MvcResult toolBrandIdResult = mvc.perform(get("/api/toolBrand/name/" + newToolBrandName)).andExpect(status().isOk()).andReturn();
         String toolBrandIdResultString = toolBrandIdResult.getResponse().getContentAsString();
         JSONObject toolBrandJsonObject = new JSONObject(toolBrandIdResultString);
@@ -138,7 +138,7 @@ public class ToolChoicesControllerTest {
         mvc.perform(post("/api/toolChoices").contentType(MediaType.APPLICATION_JSON).content(toolChoiceJson.toString())).andExpect(status().isCreated());
         MvcResult toolChoicesResult = mvc.perform(get("/api/toolChoices")).andReturn();
         String toolChoicesResultAsString = toolChoicesResult.getResponse().getContentAsString();
-        assertThat(toolChoicesResultAsString.contains(newToolCode));
+        assertTrue(toolChoicesResultAsString.contains(newToolCode));
         JSONArray toolChoicesResultArray = new JSONArray(toolChoicesResultAsString);
         String firstToolChoices = toolChoicesResultArray.get(0).toString();
         JSONObject firstToolChoicesObject = new JSONObject(firstToolChoices);
@@ -147,7 +147,7 @@ public class ToolChoicesControllerTest {
         //Query for id
         MvcResult toolChoicesFindById = mvc.perform(get("/api/toolChoices/id/" + retrievedToolChoicesId)).andExpect(status().isOk()).andReturn();
         String toolChoicesByIdString = toolChoicesFindById.getResponse().getContentAsString();
-        assertThat(toolChoicesByIdString.contains(newToolCode));
+        assertTrue(toolChoicesByIdString.contains(newToolCode));
     }
 
     //Test creating and getting by code
@@ -160,7 +160,7 @@ public class ToolChoicesControllerTest {
         mvc.perform(post("/api/toolType").contentType(MediaType.APPLICATION_JSON).content(toolTypeJson.toString())).andExpect(status().isCreated());
         MvcResult toolTypeResult = mvc.perform(get("/api/toolType")).andReturn();
         String toolTypeResultAsString = toolTypeResult.getResponse().getContentAsString();
-        assertThat(toolTypeResultAsString.contains(newToolTypeName));
+        assertTrue(toolTypeResultAsString.contains(newToolTypeName));
         MvcResult toolTypeIdResult = mvc.perform(get("/api/toolType/name/" + newToolTypeName)).andExpect(status().isOk()).andReturn();
         String toolTypeIdResultString = toolTypeIdResult.getResponse().getContentAsString();
         JSONObject jsonObject = new JSONObject(toolTypeIdResultString);
@@ -173,7 +173,7 @@ public class ToolChoicesControllerTest {
         mvc.perform(post("/api/toolBrand").contentType(MediaType.APPLICATION_JSON).content(toolBrandJson.toString())).andExpect(status().isCreated());
         MvcResult toolBrandResult = mvc.perform(get("/api/toolBrand")).andReturn();
         String toolBrandResultAsString = toolBrandResult.getResponse().getContentAsString();
-        assertThat(toolBrandResultAsString.contains(newToolBrandName));
+        assertTrue(toolBrandResultAsString.contains(newToolBrandName));
         MvcResult toolBrandIdResult = mvc.perform(get("/api/toolBrand/name/" + newToolBrandName)).andExpect(status().isOk()).andReturn();
         String toolBrandIdResultString = toolBrandIdResult.getResponse().getContentAsString();
         JSONObject toolBrandJsonObject = new JSONObject(toolBrandIdResultString);
@@ -188,7 +188,7 @@ public class ToolChoicesControllerTest {
         mvc.perform(post("/api/toolChoices").contentType(MediaType.APPLICATION_JSON).content(toolChoiceJson.toString())).andExpect(status().isCreated());
         MvcResult toolChoicesResult = mvc.perform(get("/api/toolChoices")).andReturn();
         String toolChoicesResultAsString = toolChoicesResult.getResponse().getContentAsString();
-        assertThat(toolChoicesResultAsString.contains(newToolCode));
+        assertTrue(toolChoicesResultAsString.contains(newToolCode));
         JSONArray toolChoicesResultArray = new JSONArray(toolChoicesResultAsString);
         String firstToolChoices = toolChoicesResultArray.get(0).toString();
         JSONObject firstToolChoicesObject = new JSONObject(firstToolChoices);
@@ -197,7 +197,7 @@ public class ToolChoicesControllerTest {
         //Query for id
         MvcResult toolChoicesFindByCode = mvc.perform(get("/api/toolChoices/code/" + retrievedToolChoicesCode)).andExpect(status().isOk()).andReturn();
         String toolChoicesByIdString = toolChoicesFindByCode.getResponse().getContentAsString();
-        assertThat(toolChoicesByIdString.contains(newToolCode));
+        assertTrue(toolChoicesByIdString.contains(newToolCode));
     }
 
     //Test creating and deletingAll
@@ -210,7 +210,7 @@ public class ToolChoicesControllerTest {
         mvc.perform(post("/api/toolType").contentType(MediaType.APPLICATION_JSON).content(toolTypeJson.toString())).andExpect(status().isCreated());
         MvcResult toolTypeResult = mvc.perform(get("/api/toolType")).andReturn();
         String toolTypeResultAsString = toolTypeResult.getResponse().getContentAsString();
-        assertThat(toolTypeResultAsString.contains(newToolTypeName));
+        assertTrue(toolTypeResultAsString.contains(newToolTypeName));
         MvcResult toolTypeIdResult = mvc.perform(get("/api/toolType/name/" + newToolTypeName)).andExpect(status().isOk()).andReturn();
         String toolTypeIdResultString = toolTypeIdResult.getResponse().getContentAsString();
         JSONObject jsonObject = new JSONObject(toolTypeIdResultString);
@@ -223,7 +223,7 @@ public class ToolChoicesControllerTest {
         mvc.perform(post("/api/toolBrand").contentType(MediaType.APPLICATION_JSON).content(toolBrandJson.toString())).andExpect(status().isCreated());
         MvcResult toolBrandResult = mvc.perform(get("/api/toolBrand")).andReturn();
         String toolBrandResultAsString = toolBrandResult.getResponse().getContentAsString();
-        assertThat(toolBrandResultAsString.contains(newToolBrandName));
+        assertTrue(toolBrandResultAsString.contains(newToolBrandName));
         MvcResult toolBrandIdResult = mvc.perform(get("/api/toolBrand/name/" + newToolBrandName)).andExpect(status().isOk()).andReturn();
         String toolBrandIdResultString = toolBrandIdResult.getResponse().getContentAsString();
         JSONObject toolBrandJsonObject = new JSONObject(toolBrandIdResultString);
@@ -238,20 +238,20 @@ public class ToolChoicesControllerTest {
         mvc.perform(post("/api/toolChoices").contentType(MediaType.APPLICATION_JSON).content(toolChoiceJson.toString())).andExpect(status().isCreated());
         MvcResult toolChoicesResult = mvc.perform(get("/api/toolChoices")).andReturn();
         String toolChoicesResultAsString = toolChoicesResult.getResponse().getContentAsString();
-        assertThat(toolChoicesResultAsString.contains(newToolCode));
+        assertTrue(toolChoicesResultAsString.contains(newToolCode));
 
         //Delete All
         mvc.perform(delete("/api/toolChoices")).andReturn();
         MvcResult toolChoicesDeleteResult= mvc.perform(get("/api/toolChoices")).andReturn();
         String toolChoicesDeleteResultAsString = toolChoicesDeleteResult.getResponse().getContentAsString();
-        assertThat(toolChoicesDeleteResultAsString.isBlank());
+        assertTrue(toolChoicesDeleteResultAsString.isBlank());
     }
     // Get all ToolChoices empty
     @Test
     public void gatherAllToolChoicesEmpty() throws Exception {
         MvcResult result = mvc.perform(get("/api/toolChoices")).andReturn();
         String resultAsString = result.getResponse().getContentAsString();
-        assertThat(resultAsString.isBlank());
+        assertTrue(resultAsString.isBlank());
     }
 
     @AfterAll
