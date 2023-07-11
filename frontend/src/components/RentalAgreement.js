@@ -26,11 +26,12 @@ export default class RentalAgreement extends React.Component {
             <>
                 <Paper elevation={3} sx={{
                     padding: 1, width: "30vw",
-                    transform: "translate(100%, 0)"
+                    transform: "translate(100%, 2%)",
+                    height: "40vh"
                 }}>
-                    <Box>
+                    <Box >
                         <Grid container spacing={2} sx={{
-                            padding: 5, display: "flex",
+                            padding: 2, display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
                         }}>
@@ -40,7 +41,7 @@ export default class RentalAgreement extends React.Component {
                                     fontWeight: "bold",
                                     display: "flex",
                                     justifyContent: "center",
-                                    alignItems: "center"
+                                    alignItems: "center", height: "25px"
                                 }}>
                                     Rental Agreement
                                 </Typography>
@@ -52,7 +53,7 @@ export default class RentalAgreement extends React.Component {
                                 return (
                                     <>
                                         {/* Label + Value for line */}
-                                        <Grid key={i} item xs={12} height="30px">
+                                        <Grid key={i} item xs={12} height="26px">
                                             <Typography display="inline" variant="h6" sx={{
                                                 color: "#1976D2",
                                                 fontWeight: "bold"
