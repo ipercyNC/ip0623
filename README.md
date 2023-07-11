@@ -21,6 +21,22 @@ Rent a specific tool (by tool code), checkout date, amount of rental days, and d
 ### Run Tests
 1) Run tests with `mvn test`
 
+### Tests Information
+There are tests for all of the controllers. I would like to add more but these test majority of the endpoints.
+The tests for the actual tool renting are in src\test\java\com\RentToolControllerTest.java.
+The main tool rental tests are:
+Tool Code, Checkout Date, Rental Days, Discount Percent
+1) Rent - JAKR, 9/3/15, 5, 101
+2) Rent - LADW, 7/2/20, 3, 10
+3) Rent - CHNS, 7/2/15, 5, 25
+4) Rent - JAKD, 9/3/15, 6, 0
+5) Rent - JAKR, 7/2/15, 9, 0
+6) Rent - JAKR, 7/2/20, 4, 50
+7) Rent - JAKR, 7/2/20, 4, -1 -> Invalid percent (not 0-100)
+8) Rent - YYYY, 7/2/20, 4, 0 -> Rent tool that doesn't exist
+9) Rent - JAKR, 7/2/20, 0, 50 -> invalid rental days
+10) Rent - JAKR, 7/2/21, 4, 0 -> Test July 4th on a Sunday
+
 ### General Notes and Development Progress:
 The application uses a React UI + SpringBoot + PostgreSQL backend. When starting out I was using a default JPA 
 repository classes from Springboot, but changed to using JDBC queries that allowed me to be explicit with SQL.
@@ -32,6 +48,13 @@ Initially I was going to use Heroku for the deploy, but they no longer offer a f
 provider, Render.com, which has a free tier and a hosted PostgreSQL DB. Both the production and the test
 DB (schema only) exist on this web hosted DB server. The application was containerized with mvn package and then deployed
 via a docker + static React files from the npm build. 
+
+The main Java objects:
+1) ToolType - Contains tool types
+2) ToolBrand - Contains tool brands
+3) ToolChoices - Contains available tools (type + brand + tool code)
+4) ToolCharges - Contains charges for a particular tool type
+5) RentalAgreement - Contains the rental agreement object (not currently in a DB table)
 
 #### Next Steps:
 1) ~~Finalize checkout path + add the test cases~~
