@@ -10,7 +10,7 @@ Current functionality:
 Rent a specific tool (by tool code), checkout date, amount of rental days, and discount (if applicable)
 This will generate a rental agreement with information about the rental. 
 Tool Code, Tool Type, Tool Brand, Number of Rental Days, Checkout Date,
-Due Date, Daily Rental Charge,Charge Days (Number of Days The Rental Will Charge For),
+Due Date, Daily Rental Charge, Charge Days (Number of Days The Rental Will Charge For),
 Pre-discount Charge, Discount Percent, Discount Amount, Final Charge
 
 The rental will start the day after the checkout up until the number of 
@@ -35,6 +35,7 @@ and rental length. The rental days must be 1 or greater and the percent discount
 There are tests for all of the controllers. I would like to add more but these test majority of the endpoints.
 The tests for the actual tool renting are in src\test\java\com\RentToolControllerTest.java.
 The main tool rental tests are:
+
 Tool Code, Checkout Date, Rental Days, Discount Percent
 1) Rent - JAKR, 9/3/15, 5, 101
 2) Rent - LADW, 7/2/20, 3, 10
