@@ -56,8 +56,7 @@ public class ToolTypeControllerTest {
         String newToolTypeName = "testToolType";
         JSONObject json = new JSONObject();
         json.put("name", newToolTypeName);
-        MvcResult createResult = mvc
-                .perform(post("/api/toolType").contentType(MediaType.APPLICATION_JSON).content(json.toString()))
+        mvc.perform(post("/api/toolType").contentType(MediaType.APPLICATION_JSON).content(json.toString()))
                 .andExpect(status().isCreated()).andReturn();
 
         // Get all ToolTypes and check that the new ToolType name is in the response
@@ -139,8 +138,7 @@ public class ToolTypeControllerTest {
         String newToolTypeName = "testToolType";
         JSONObject json = new JSONObject();
         json.put("name", newToolTypeName);
-        MvcResult result = mvc
-                .perform(post("/api/toolType").contentType(MediaType.APPLICATION_JSON).content(json.toString()))
+        mvc.perform(post("/api/toolType").contentType(MediaType.APPLICATION_JSON).content(json.toString()))
                 .andExpect(status().isCreated()).andReturn();
 
         // Delete and check result is empty
