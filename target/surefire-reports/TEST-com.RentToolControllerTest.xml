@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.RentToolControllerTest" time="4.426" tests="10" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.RentToolControllerTest" time="4.682" tests="10" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17\bin"/>
-    <property name="sun.java.command" value="C:\Users\ianpe\AppData\Local\Temp\surefire8547050443733548243\surefirebooter-20230711000331802_3.jar C:\Users\ianpe\AppData\Local\Temp\surefire8547050443733548243 2023-07-11T00-03-31_615-jvmRun1 surefire-20230711000331802_1tmp surefire_0-20230711000331802_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\ianpe\AppData\Local\Temp\surefire6976231152276030741\surefirebooter-20230711004850690_3.jar C:\Users\ianpe\AppData\Local\Temp\surefire6976231152276030741 2023-07-11T00-48-50_504-jvmRun1 surefire-20230711004850690_1tmp surefire_0-20230711004850690_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\ianpe\vscodeprojects\ip0623\target\test-classes;C:\Users\ianpe\vscodeprojects\ip0623\target\classes;C:\Users\ianpe\.m2\repository\org\springframework\boot\spring-boot-starter-data-jdbc\3.1.1\spring-boot-starter-data-jdbc-3.1.1.jar;C:\Users\ianpe\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.1.1\spring-boot-starter-jdbc-3.1.1.jar;C:\Users\ianpe\.m2\repository\com\zaxxer\HikariCP\5.0.1\HikariCP-5.0.1.jar;C:\Users\ianpe\.m2\repository\org\springframework\spring-jdbc\6.0.10\spring-jdbc-6.0.10.jar;C:\Users\ianpe\.m2\repository\org\springframework\data\spring-data-jdbc\3.1.1\spring-data-jdbc-3.1.1.jar;C:\Users\ianpe\.m2\repository\org\springframework\data\spring-data-relational\3.1.1\spring-data-relational-3.1.1.jar;C:\Users\ianpe\.m2\repository\org\springframework\data\spring-data-commons\3.1.1\spring-data-commons-3.1.1.jar;C:\Users\ianpe\.m2\repository\org\springframework\spring-tx\6.0.10\spring-tx-6.0.10.jar;C:\Users\ianpe\.m2\repository\org\springframework\spring-context\6.0.10\spring-context-6.0.10.jar;C:\Users\ianpe\.m2\repository\org\springframework\spring-beans\6.0.10\spring-beans-6.0.10.jar;C:\Users\ianpe\.m2\repository\org\slf4j\slf4j-api\2.0.7\slf4j-api-2.0.7.jar;C:\Users\ianpe\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.1.1\spring-boot-starter-web-3.1.1.jar;C:\Users\ianpe\.m2\repository\org\springframework\boot\spring-boot-starter\3.1.1\spring-boot-starter-3.1.1.jar;C:\Users\ianpe\.m2\repository\org\springframework\boot\spring-boot\3.1.1\spring-boot-3.1.1.jar;C:\Users\ianpe\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.1.1\spring-boot-autoconfigure-3.1.1.jar;C:\Users\ianpe\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.1.1\spring-boot-starter-logging-3.1.1.jar;C:\Users\ianpe\.m2\repository\ch\qos\logback\logback-classic\1.4.8\logback-classic-1.4.8.jar;C:\Users\ianpe\.m2\repository\ch\qos\logback\logback-core\1.4.8\logback-core-1.4.8.jar;C:\Users\ianpe\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.20.0\log4j-to-slf4j-2.20.0.jar;C:\Users\ianpe\.m2\repository\org\apache\logging\log4j\log4j-api\2.20.0\log4j-api-2.20.0.jar;C:\Users\ianpe\.m2\repository\org\slf4j\jul-to-slf4j\2.0.7\jul-to-slf4j-2.0.7.jar;C:\Users\ianpe\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\ianpe\.m2\repository\org\yaml\snakeyaml\1.33\snakeyaml-1.33.jar;C:\Users\ianpe\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.1.1\spring-boot-starter-json-3.1.1.jar;C:\Users\ianpe\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.2\jackson-databind-2.15.2.jar;C:\Users\ianpe\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.2\jackson-annotations-2.15.2.jar;C:\Users\ianpe\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.2\jackson-core-2.15.2.jar;C:\Users\ianpe\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.15.2\jackson-datatype-jdk8-2.15.2.jar;C:\Users\ianpe\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.15.2\jackson-datatype-jsr310-2.15.2.jar;C:\Users\ianpe\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.15.2\jackson-module-parameter-names-2.15.2.jar;C:\Users\ianpe\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.1.1\spring-boot-starter-tomcat-3.1.1.jar;C:\Users\ianpe\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.10\tomcat-embed-core-10.1.10.jar;C:\Users\ianpe\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.10\tomcat-embed-el-10.1.10.jar;C:\Users\ianpe\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.10\tomcat-embed-websocket-10.1.10.jar;C:\Users\ianpe\.m2\repository\org\springframework\spring-web\6.0.10\spring-web-6.0.10.jar;C:\Users\ianpe\.m2\repository\io\micrometer\micrometer-observation\1.11.1\micrometer-observation-1.11.1.jar;C:\Users\ianpe\.m2\repository\io\micrometer\micrometer-commons\1.11.1\micrometer-commons-1.11.1.jar;C:\Users\ianpe\.m2\repository\org\springframework\spring-webmvc\6.0.10\spring-webmvc-6.0.10.jar;C:\Users\ianpe\.m2\repository\org\springframework\spring-aop\6.0.10\spring-aop-6.0.10.jar;C:\Users\ianpe\.m2\repository\org\springframework\spring-expression\6.0.10\spring-expression-6.0.10.jar;C:\Users\ianpe\.m2\repository\mysql\mysql-connector-java\8.0.28\mysql-connector-java-8.0.28.jar;C:\Users\ianpe\.m2\repository\com\google\protobuf\protobuf-java\3.11.4\protobuf-java-3.11.4.jar;C:\Users\ianpe\.m2\repository\org\postgresql\postgresql\42.6.0\postgresql-42.6.0.jar;C:\Users\ianpe\.m2\repository\org\checkerframework\checker-qual\3.31.0\checker-qual-3.31.0.jar;C:\Users\ianpe\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.1.0\spring-boot-starter-test-3.1.0.jar;C:\Users\ianpe\.m2\repository\org\springframework\boot\spring-boot-test\3.1.1\spring-boot-test-3.1.1.jar;C:\Users\ianpe\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.1.1\spring-boot-test-autoconfigure-3.1.1.jar;C:\Users\ianpe\.m2\repository\com\jayway\jsonpath\json-path\2.8.0\json-path-2.8.0.jar;C:\Users\ianpe\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.0\jakarta.xml.bind-api-4.0.0.jar;C:\Users\ianpe\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.2\jakarta.activation-api-2.1.2.jar;C:\Users\ianpe\.m2\repository\net\minidev\json-smart\2.4.11\json-smart-2.4.11.jar;C:\Users\ianpe\.m2\repository\net\minidev\accessors-smart\2.4.11\accessors-smart-2.4.11.jar;C:\Users\ianpe\.m2\repository\org\ow2\asm\asm\9.3\asm-9.3.jar;C:\Users\ianpe\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\ianpe\.m2\repository\net\bytebuddy\byte-buddy\1.14.5\byte-buddy-1.14.5.jar;C:\Users\ianpe\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\ianpe\.m2\repository\org\junit\jupiter\junit-jupiter\5.9.3\junit-jupiter-5.9.3.jar;C:\Users\ianpe\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.3\junit-jupiter-api-5.9.3.jar;C:\Users\ianpe\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\ianpe\.m2\repository\org\junit\platform\junit-platform-commons\1.9.3\junit-platform-commons-1.9.3.jar;C:\Users\ianpe\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\ianpe\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.3\junit-jupiter-params-5.9.3.jar;C:\Users\ianpe\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.3\junit-jupiter-engine-5.9.3.jar;C:\Users\ianpe\.m2\repository\org\junit\platform\junit-platform-engine\1.9.3\junit-platform-engine-1.9.3.jar;C:\Users\ianpe\.m2\repository\org\mockito\mockito-core\5.3.1\mockito-core-5.3.1.jar;C:\Users\ianpe\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.5\byte-buddy-agent-1.14.5.jar;C:\Users\ianpe\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\ianpe\.m2\repository\org\mockito\mockito-junit-jupiter\5.3.1\mockito-junit-jupiter-5.3.1.jar;C:\Users\ianpe\.m2\repository\org\skyscreamer\jsonassert\1.5.1\jsonassert-1.5.1.jar;C:\Users\ianpe\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\ianpe\.m2\repository\org\springframework\spring-core\6.0.10\spring-core-6.0.10.jar;C:\Users\ianpe\.m2\repository\org\springframework\spring-jcl\6.0.10\spring-jcl-6.0.10.jar;C:\Users\ianpe\.m2\repository\org\springframework\spring-test\6.0.10\spring-test-6.0.10.jar;C:\Users\ianpe\.m2\repository\org\xmlunit\xmlunit-core\2.9.1\xmlunit-core-2.9.1.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -33,7 +33,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="FILE_LOG_CHARSET" value="windows-1252"/>
     <property name="java.awt.headless" value="true"/>
-    <property name="surefire.real.class.path" value="C:\Users\ianpe\AppData\Local\Temp\surefire8547050443733548243\surefirebooter-20230711000331802_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\ianpe\AppData\Local\Temp\surefire6976231152276030741\surefirebooter-20230711004850690_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.7+8-LTS-224"/>
@@ -46,16 +46,16 @@
     <property name="localRepository" value="C:\Users\ianpe\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\ianpe\AppData\Local\Temp\"/>
-    <property name="catalina.home" value="C:\Users\ianpe\AppData\Local\Temp\tomcat.0.9106779119552461032"/>
+    <property name="catalina.home" value="C:\Users\ianpe\AppData\Local\Temp\tomcat.0.1462568078198277157"/>
     <property name="com.zaxxer.hikari.pool_number" value="2"/>
     <property name="java.version" value="17.0.7"/>
     <property name="user.dir" value="C:\Users\ianpe\vscodeprojects\ip0623"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="2780"/>
+    <property name="PID" value="13912"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="CONSOLE_LOG_CHARSET" value="windows-1252"/>
-    <property name="catalina.base" value="C:\Users\ianpe\AppData\Local\Temp\tomcat.0.10884342530348502166"/>
+    <property name="catalina.base" value="C:\Users\ianpe\AppData\Local\Temp\tomcat.0.12665535297949355397"/>
     <property name="native.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk-17\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Python39\Scripts\;C:\Python39\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;c:\users\ianpe\appdata\local\programs\python\python37\Scripts;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Go\bin;C:\Program Files\CMake\bin;C:\Maven\apache-maven-3.9.3-bin\apache-maven-3.9.3\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Python\Python37\Scripts\;C:\Python\Python37\;C:\Users\ianpe\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\PyCharm Community Edition 2020.3.3\bin;c:\users\ianpe\appdata\local\programs\python\python37\Scripts;c:\users\ianpe\appdata\local\programs\python\python37;C:\Program Files (x86)\PostgreSQL\10\bin;C:\Users\ianpe\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\ianpe\AppData\Roaming\npm;C:\Users\ianpe\AppData\Local\Programs\Fiddler;C:\Program Files\OpenSSL-Win64\bin;C:\Users\ianpe\go\bin;C:\Program Files\heroku\bin;C:\Maven\apache-maven-3.9.3-bin\apache-maven-3.9.3\bin;C:\Program Files\PostgreSQL\14\bin;C:\Program Files\PostgreSQL\14\lib;;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
@@ -64,9 +64,9 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="test10" classname="com.RentToolControllerTest" time="0.241">
-    <system-out><![CDATA[2023-07-11T00:03:39.670-04:00  INFO 2780 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.RentToolControllerTest]: RentToolControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2023-07-11T00:03:39.682-04:00  INFO 2780 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.Application for test class com.RentToolControllerTest
+  <testcase name="test10" classname="com.RentToolControllerTest" time="0.233">
+    <system-out><![CDATA[2023-07-11T00:48:58.567-04:00  INFO 13912 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.RentToolControllerTest]: RentToolControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-07-11T00:48:58.581-04:00  INFO 13912 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.Application for test class com.RentToolControllerTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -76,27 +76,27 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.1.1)
 
-2023-07-11T00:03:39.781-04:00  INFO 2780 --- [           main] com.RentToolControllerTest               : Starting RentToolControllerTest using Java 17.0.7 with PID 2780 (started by ianpe in C:\Users\ianpe\vscodeprojects\ip0623)
-2023-07-11T00:03:39.781-04:00  INFO 2780 --- [           main] com.RentToolControllerTest               : No active profile set, falling back to 1 default profile: "default"
-2023-07-11T00:03:40.853-04:00  INFO 2780 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2023-07-11T00:03:40.985-04:00  INFO 2780 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 131 ms. Found 0 JDBC repository interfaces.
-2023-07-11T00:03:41.051-04:00  INFO 2780 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 0 (http)
-2023-07-11T00:03:41.052-04:00  INFO 2780 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-07-11T00:03:41.052-04:00  INFO 2780 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.10]
-2023-07-11T00:03:41.073-04:00  INFO 2780 --- [           main] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
-2023-07-11T00:03:41.074-04:00  INFO 2780 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1290 ms
-2023-07-11T00:03:41.217-04:00  INFO 2780 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2023-07-11T00:03:41.280-04:00  INFO 2780 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-2023-07-11T00:03:41.739-04:00  INFO 2780 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@6378d7a1
-2023-07-11T00:03:41.748-04:00  INFO 2780 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-2023-07-11T00:03:41.776-04:00  INFO 2780 --- [           main] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring TestDispatcherServlet ''
-2023-07-11T00:03:41.777-04:00  INFO 2780 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2023-07-11T00:03:41.778-04:00  INFO 2780 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2023-07-11T00:03:41.791-04:00  INFO 2780 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 52018 (http) with context path ''
-2023-07-11T00:03:41.795-04:00  INFO 2780 --- [           main] com.RentToolControllerTest               : Started RentToolControllerTest in 2.105 seconds (process running for 9.874)
-2023-07-11T00:03:42.304-04:00  INFO 2780 --- [           main] com.services.RentToolService             : Observed July 4th on Monday 2021-07-05
-2023-07-11T00:03:42.305-04:00  INFO 2780 --- [           main] com.services.RentToolService             : Charge Dates [2021-07-06]
-2023-07-11T00:03:42.305-04:00  INFO 2780 --- [           main] com.services.RentToolService             : No Charge Dates [2021-07-03, 2021-07-04, 2021-07-05]
+2023-07-11T00:48:58.630-04:00  INFO 13912 --- [           main] com.RentToolControllerTest               : Starting RentToolControllerTest using Java 17.0.7 with PID 13912 (started by ianpe in C:\Users\ianpe\vscodeprojects\ip0623)
+2023-07-11T00:48:58.631-04:00  INFO 13912 --- [           main] com.RentToolControllerTest               : No active profile set, falling back to 1 default profile: "default"
+2023-07-11T00:48:59.756-04:00  INFO 13912 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-11T00:48:59.885-04:00  INFO 13912 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 129 ms. Found 0 JDBC repository interfaces.
+2023-07-11T00:48:59.958-04:00  INFO 13912 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 0 (http)
+2023-07-11T00:48:59.959-04:00  INFO 13912 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-11T00:48:59.959-04:00  INFO 13912 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-07-11T00:48:59.992-04:00  INFO 13912 --- [           main] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2023-07-11T00:48:59.992-04:00  INFO 13912 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1359 ms
+2023-07-11T00:49:00.135-04:00  INFO 13912 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-11T00:49:00.194-04:00  INFO 13912 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2023-07-11T00:49:00.693-04:00  INFO 13912 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@3a235f21
+2023-07-11T00:49:00.699-04:00  INFO 13912 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2023-07-11T00:49:00.739-04:00  INFO 13912 --- [           main] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring TestDispatcherServlet ''
+2023-07-11T00:49:00.739-04:00  INFO 13912 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-07-11T00:49:00.740-04:00  INFO 13912 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2023-07-11T00:49:00.754-04:00  INFO 13912 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 52552 (http) with context path ''
+2023-07-11T00:49:00.759-04:00  INFO 13912 --- [           main] com.RentToolControllerTest               : Started RentToolControllerTest in 2.172 seconds (process running for 9.905)
+2023-07-11T00:49:01.307-04:00  INFO 13912 --- [           main] com.services.RentToolService             : Observed July 4th on Monday 2021-07-05
+2023-07-11T00:49:01.308-04:00  INFO 13912 --- [           main] com.services.RentToolService             : Charge Dates [2021-07-06]
+2023-07-11T00:49:01.309-04:00  INFO 13912 --- [           main] com.services.RentToolService             : No Charge Dates [2021-07-03, 2021-07-04, 2021-07-05]
 Tool Code           : JAKR
 Tool Type           : Jackhammer
 Tool Brand          : Ridgid
@@ -111,11 +111,11 @@ Discount Amount     : $0.00
 Final Charge        : $2.99
 ]]></system-out>
   </testcase>
-  <testcase name="test1" classname="com.RentToolControllerTest" time="0.168"/>
-  <testcase name="test2" classname="com.RentToolControllerTest" time="0.167">
-    <system-out><![CDATA[2023-07-11T00:03:42.650-04:00  INFO 2780 --- [           main] com.services.RentToolService             : Observed July 4th on Friday 2020-07-03
-2023-07-11T00:03:42.650-04:00  INFO 2780 --- [           main] com.services.RentToolService             : Charge Dates [2020-07-04, 2020-07-05]
-2023-07-11T00:03:42.650-04:00  INFO 2780 --- [           main] com.services.RentToolService             : No Charge Dates [2020-07-03]
+  <testcase name="test1" classname="com.RentToolControllerTest" time="0.197"/>
+  <testcase name="test2" classname="com.RentToolControllerTest" time="0.198">
+    <system-out><![CDATA[2023-07-11T00:49:01.723-04:00  INFO 13912 --- [           main] com.services.RentToolService             : Observed July 4th on Friday 2020-07-03
+2023-07-11T00:49:01.723-04:00  INFO 13912 --- [           main] com.services.RentToolService             : Charge Dates [2020-07-04, 2020-07-05]
+2023-07-11T00:49:01.723-04:00  INFO 13912 --- [           main] com.services.RentToolService             : No Charge Dates [2020-07-03]
 Tool Code           : LADW
 Tool Type           : Ladder
 Tool Brand          : Werner
@@ -130,10 +130,10 @@ Discount Amount     : $0.40
 Final Charge        : $3.58
 ]]></system-out>
   </testcase>
-  <testcase name="test3" classname="com.RentToolControllerTest" time="0.175">
-    <system-out><![CDATA[2023-07-11T00:03:42.824-04:00  INFO 2780 --- [           main] com.services.RentToolService             : Observed July 4th on Friday 2015-07-03
-2023-07-11T00:03:42.825-04:00  INFO 2780 --- [           main] com.services.RentToolService             : Charge Dates [2015-07-03, 2015-07-06, 2015-07-07]
-2023-07-11T00:03:42.825-04:00  INFO 2780 --- [           main] com.services.RentToolService             : No Charge Dates [2015-07-04, 2015-07-05]
+  <testcase name="test3" classname="com.RentToolControllerTest" time="0.187">
+    <system-out><![CDATA[2023-07-11T00:49:01.909-04:00  INFO 13912 --- [           main] com.services.RentToolService             : Observed July 4th on Friday 2015-07-03
+2023-07-11T00:49:01.909-04:00  INFO 13912 --- [           main] com.services.RentToolService             : Charge Dates [2015-07-03, 2015-07-06, 2015-07-07]
+2023-07-11T00:49:01.909-04:00  INFO 13912 --- [           main] com.services.RentToolService             : No Charge Dates [2015-07-04, 2015-07-05]
 Tool Code           : CHNS
 Tool Type           : Chainsaw
 Tool Brand          : Stihl
@@ -148,10 +148,10 @@ Discount Amount     : $1.12
 Final Charge        : $3.35
 ]]></system-out>
   </testcase>
-  <testcase name="test4" classname="com.RentToolControllerTest" time="0.17">
-    <system-out><![CDATA[2023-07-11T00:03:42.992-04:00  INFO 2780 --- [           main] com.services.RentToolService             : Labor Day 2015-09-07
-2023-07-11T00:03:42.992-04:00  INFO 2780 --- [           main] com.services.RentToolService             : Charge Dates [2015-09-04, 2015-09-08, 2015-09-09]
-2023-07-11T00:03:42.992-04:00  INFO 2780 --- [           main] com.services.RentToolService             : No Charge Dates [2015-09-05, 2015-09-06, 2015-09-07]
+  <testcase name="test4" classname="com.RentToolControllerTest" time="0.191">
+    <system-out><![CDATA[2023-07-11T00:49:02.104-04:00  INFO 13912 --- [           main] com.services.RentToolService             : Labor Day 2015-09-07
+2023-07-11T00:49:02.104-04:00  INFO 13912 --- [           main] com.services.RentToolService             : Charge Dates [2015-09-04, 2015-09-08, 2015-09-09]
+2023-07-11T00:49:02.104-04:00  INFO 13912 --- [           main] com.services.RentToolService             : No Charge Dates [2015-09-05, 2015-09-06, 2015-09-07]
 Tool Code           : JAKD
 Tool Type           : Jackhammer
 Tool Brand          : DeWalt
@@ -166,10 +166,10 @@ Discount Amount     : $0.00
 Final Charge        : $8.97
 ]]></system-out>
   </testcase>
-  <testcase name="test5" classname="com.RentToolControllerTest" time="0.158">
-    <system-out><![CDATA[2023-07-11T00:03:43.155-04:00  INFO 2780 --- [           main] com.services.RentToolService             : Observed July 4th on Friday 2015-07-03
-2023-07-11T00:03:43.155-04:00  INFO 2780 --- [           main] com.services.RentToolService             : Charge Dates [2015-07-06, 2015-07-07, 2015-07-08, 2015-07-09, 2015-07-10]
-2023-07-11T00:03:43.155-04:00  INFO 2780 --- [           main] com.services.RentToolService             : No Charge Dates [2015-07-03, 2015-07-04, 2015-07-05, 2015-07-11]
+  <testcase name="test5" classname="com.RentToolControllerTest" time="0.199">
+    <system-out><![CDATA[2023-07-11T00:49:02.305-04:00  INFO 13912 --- [           main] com.services.RentToolService             : Observed July 4th on Friday 2015-07-03
+2023-07-11T00:49:02.305-04:00  INFO 13912 --- [           main] com.services.RentToolService             : Charge Dates [2015-07-06, 2015-07-07, 2015-07-08, 2015-07-09, 2015-07-10]
+2023-07-11T00:49:02.305-04:00  INFO 13912 --- [           main] com.services.RentToolService             : No Charge Dates [2015-07-03, 2015-07-04, 2015-07-05, 2015-07-11]
 Tool Code           : JAKR
 Tool Type           : Jackhammer
 Tool Brand          : Ridgid
@@ -184,10 +184,10 @@ Discount Amount     : $0.00
 Final Charge        : $14.95
 ]]></system-out>
   </testcase>
-  <testcase name="test6" classname="com.RentToolControllerTest" time="0.187">
-    <system-out><![CDATA[2023-07-11T00:03:43.341-04:00  INFO 2780 --- [           main] com.services.RentToolService             : Observed July 4th on Friday 2020-07-03
-2023-07-11T00:03:43.342-04:00  INFO 2780 --- [           main] com.services.RentToolService             : Charge Dates [2020-07-06]
-2023-07-11T00:03:43.343-04:00  INFO 2780 --- [           main] com.services.RentToolService             : No Charge Dates [2020-07-03, 2020-07-04, 2020-07-05]
+  <testcase name="test6" classname="com.RentToolControllerTest" time="0.189">
+    <system-out><![CDATA[2023-07-11T00:49:02.493-04:00  INFO 13912 --- [           main] com.services.RentToolService             : Observed July 4th on Friday 2020-07-03
+2023-07-11T00:49:02.493-04:00  INFO 13912 --- [           main] com.services.RentToolService             : Charge Dates [2020-07-06]
+2023-07-11T00:49:02.493-04:00  INFO 13912 --- [           main] com.services.RentToolService             : No Charge Dates [2020-07-03, 2020-07-04, 2020-07-05]
 Tool Code           : JAKR
 Tool Type           : Jackhammer
 Tool Brand          : Ridgid
@@ -202,15 +202,15 @@ Discount Amount     : $1.50
 Final Charge        : $1.49
 ]]></system-out>
   </testcase>
-  <testcase name="test7" classname="com.RentToolControllerTest" time="0.173">
+  <testcase name="test7" classname="com.RentToolControllerTest" time="0.193">
     <system-out><![CDATA[ERROR_PERCENT_OUT_OF_RANGE
 ]]></system-out>
   </testcase>
-  <testcase name="test8" classname="com.RentToolControllerTest" time="0.214">
+  <testcase name="test8" classname="com.RentToolControllerTest" time="0.194">
     <system-out><![CDATA[ERROR_PERCENT_OUT_OF_RANGE
 ]]></system-out>
   </testcase>
-  <testcase name="test9" classname="com.RentToolControllerTest" time="0.204">
+  <testcase name="test9" classname="com.RentToolControllerTest" time="0.192">
     <system-out><![CDATA[ERROR_RENTAL_DAY_COUNT_OUT_OF_RANGE
 ]]></system-out>
   </testcase>
