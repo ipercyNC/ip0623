@@ -298,6 +298,18 @@ public class RentToolControllerTest {
         assertTrue(result6.contains("Discount Amount     : $0.00"));
         assertTrue(result6.contains("Final Charge        : $2.99"));
     }
+
+    /*
+     * 11) Rent - JAKR, aaaaaaa, 1, 50
+     * Invalid Date Format
+     */
+    @Test
+    public void test11() {
+        String result7 = rentToolService.rentTool("JAKR", "aaaaaaa", "1", "50");
+        System.out.println(result7);
+        assertTrue(result7.contains("ERROR_CHECKOUT_DATE"));
+    }
+
     @AfterAll
     public void clearAfter() {
         toolChoicesService.deleteAllToolChoices();

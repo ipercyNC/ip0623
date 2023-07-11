@@ -7,6 +7,7 @@
  */
 package com.services;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -48,6 +49,7 @@ public class RentToolService {
     public String rentTool(String code, String inputDate, String rentalDays, String discountRaw) {
         try {
             // Gather the ToolChoices object and the ToolCharges object
+
             ToolChoices toolChoices;
             ToolCharges toolCharges;
             code = code.toUpperCase();
@@ -56,16 +58,24 @@ public class RentToolService {
                 logger.error("Cannot get Tool Choice");
                 return "ERROR_TOOL_CHOICE";
             }
+
+            // Print out Tool Choices
+            logger.info("Tool Choices " + toolChoices.toString());
+
             toolCharges = toolChargesService.findToolChargesByTypeId(toolChoices.getToolType().getId());
             if (toolCharges == null) {
                 logger.error("Cannot get Tool Charge");
                 return "ERROR_TOOL_CHARGE";
             }
+            // Print out Tool Charges
+            logger.info("Tool Charges " + toolCharges.toString());
+
 
             // Validate and calculate the discount percent
             int discountInteger;
             try {
                 discountInteger = Integer.parseInt(discountRaw);
+                logger.info("Discount " + discountInteger);
             } catch (NumberFormatException discounte) {
                 logger.error("Percent discount must be integer");
                 return "ERROR_PERCENT_FORMAT";
@@ -76,9 +86,17 @@ public class RentToolService {
             }
             double discountCalculated = discountInteger / 100.0;
 
-            // Format the start date
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            LocalDate startDate = formatter.parse(inputDate).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            // Format the start date and catch invalid date exceptions
+            LocalDate startDate;
+            try {
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                startDate = formatter.parse(inputDate).toInstant().atZone(ZoneId.systemDefault())
+                        .toLocalDate();
+                logger.info("Checkout Date " + startDate.toString());
+            } catch (ParseException dateex) {
+                logger.error("Invalid date format");
+                return "ERROR_CHECKOUT_DATE";
+            }
 
             // TODO: add in ability for counter for holiday + weekend + weekday if those are
             // different charges
@@ -87,6 +105,7 @@ public class RentToolService {
             int maxDaysToCharge;
             try {
                 maxDaysToCharge = Integer.parseInt(rentalDays);
+                logger.info("Rental days " + maxDaysToCharge);
             } catch (NumberFormatException rentale) {
                 logger.error("Rental days must be integer");
                 return "ERROR_RENTAL_DAYS_FORMAT";

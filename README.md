@@ -45,8 +45,9 @@ Tool Code, Checkout Date, Rental Days, Discount Percent
 6) Rent - JAKR, 7/2/20, 4, 50
 7) Rent - JAKR, 7/2/20, 4, -1 -> Invalid percent (not 0-100)
 8) Rent - YYYY, 7/2/20, 4, 0 -> Rent tool that doesn't exist
-9) Rent - JAKR, 7/2/20, 0, 50 -> invalid rental days
+9) Rent - JAKR, 7/2/20, 0, 50 -> Invalid rental days
 10) Rent - JAKR, 7/2/21, 4, 0 -> Test July 4th on a Sunday
+11) Rent - JAKR, aaaaaaa, 1, 50 -> Invalid date format
 
 ### General Notes and Development Progress:
 The application uses a React UI + SpringBoot + PostgreSQL backend. When starting out I was using a default JPA 

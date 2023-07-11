@@ -41,6 +41,7 @@ public class RentToolController {
         this.errorResponseMap.put("ERROR_TOOL_CHARGE", "Cannot Find Tool Charges For The Chosen Tool");
         this.errorResponseMap.put("ERROR_PERCENT_FORMAT", "Please Give Whole Number For Discount (0-100)");
         this.errorResponseMap.put("ERROR_RENTAL_DAYS_FORMAT", "Please Give Whole Number For Rental Days");
+        this.errorResponseMap.put("ERROR_CHECKOUT_DATE", "Invalid Checkout Date");
         this.errorResponseMap.put("ERROR_GENERAL", "Tool Rental Failed, Please Try Again");
     }
     /*
