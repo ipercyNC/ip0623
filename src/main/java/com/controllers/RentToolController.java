@@ -9,6 +9,9 @@
  */
 package com.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,10 +28,21 @@ import com.services.RentToolService;
 @RequestMapping("/api/rentTool")
 public class RentToolController {
     private static final Logger logger = LoggerFactory.getLogger(RentToolController.class);
-
+    private Map<String, String> errorResponseMap;
     @Autowired
     RentToolService rentToolService;
 
+    public RentToolController() {
+        // Initalize mapping that will contain all error mappings with response messages
+        this.errorResponseMap = new HashMap<String, String>();
+        this.errorResponseMap.put("ERROR_PERCENT_OUT_OF_RANGE", "Please Give Percent That Is 0-100");
+        this.errorResponseMap.put("ERROR_RENTAL_DAY_COUNT_OUT_OF_RANGE", "Please Rental Day Count That Is 1 Day Or More");
+        this.errorResponseMap.put("ERROR_TOOL_CHOICE", "Cannot Find Tool Choice, Please Try a Valid Tool Choice");
+        this.errorResponseMap.put("ERROR_TOOL_CHARGE", "Cannot Find Tool Charges For The Chosen Tool");
+        this.errorResponseMap.put("ERROR_PERCENT_FORMAT", "Please Give Whole Number For Discount (0-100)");
+        this.errorResponseMap.put("ERROR_RENTAL_DAYS_FORMAT", "Please Give Whole Number For Rental Days");
+        this.errorResponseMap.put("ERROR_GENERAL", "Tool Rental Failed, Please Try Again");
+    }
     /*
      * Returns a List of Strings representing the rental agreement
      * Accepts an object with the details of the tool rental and then generates the
@@ -47,29 +61,9 @@ public class RentToolController {
                     objectNode.get("days").asText(),
                     objectNode.get("discount").asText());
 
-            // Return error if percent is not in proper range
-            if (charges == "ERROR_PERCENT_OUT_OF_RANGE") {
-                return new ResponseEntity<String>("Please Give Percent That Is 0-100", HttpStatus.BAD_REQUEST);
-            }
-
-            // Return error if rental days is not valid
-            if (charges == "ERROR_RENTAL_DAY_COUNT_OUT_OF_RANGE") {
-                return new ResponseEntity<String>("Please Rental Day Count That Is 1 Day Or More", HttpStatus.BAD_REQUEST);
-            }
-
-            // Return error if ToolChoice not found
-            if (charges == "ERROR_TOOL_CHOICE") {
-                return new ResponseEntity<String>("Cannot Find Tool Choice, Please Try a Valid Tool Choice", HttpStatus.BAD_REQUEST);
-            }
-
-            // Return error if ToolCharge not found
-            if (charges == "ERROR_TOOL_CHARGE") {
-                return new ResponseEntity<String>("Cannot Find Tool Charges For The Chosen Tool", HttpStatus.BAD_REQUEST);
-            }
-
-            // Error in service call 
-            if (charges == "ERROR_GENERAL") {
-                return new ResponseEntity<String>("Tool Rental Failed, Please Try Again", HttpStatus.BAD_REQUEST);
+            // Return error string if match
+            if (this.errorResponseMap.containsKey(charges)){
+                return new ResponseEntity<String>(this.errorResponseMap.get(charges), HttpStatus.BAD_REQUEST);
             }
             
             return new ResponseEntity<String>(charges, HttpStatus.OK);

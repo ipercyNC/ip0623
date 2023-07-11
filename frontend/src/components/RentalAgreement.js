@@ -24,41 +24,45 @@ export default class RentalAgreement extends React.Component {
     render() {
         return (
             <>
-                <Paper elevation={3} sx={{ padding: 1 }}>
+                <Paper elevation={3} sx={{
+                    padding: 1, width: "30vw",
+                    transform: "translate(100%, 0)"
+                }}>
                     <Box>
-                        <Grid container spacing={2}>
+                        <Grid container spacing={2} sx={{
+                            padding: 5, display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}>
                             <Grid item xs={12}>
-                                <Typography display="inline" variant="h5" sx={{
-                                    color: "#4585d9",
-                                    fontWeight: "bold"
+                                <Typography variant="h5" sx={{
+                                    color: "#1976D2",
+                                    fontWeight: "bold",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center"
                                 }}>
                                     Rental Agreement
-                                    <Divider />
                                 </Typography>
+                                <Divider />
                             </Grid>
 
                             {this.state.rentalAgreement && this.state.rentalAgreement.map((line, i) => {
                                 let lineSplit = line.split(":")
                                 return (
                                     <>
-                                        {/* Label for line */}
-                                        <Grid key={i} xs={3} sx={{ height: "40px" }}>
+                                        {/* Label + Value for line */}
+                                        <Grid key={i} xs={12} height="30px">
                                             <Typography display="inline" variant="h6" sx={{
-                                                color: "#4585d9",
-                                                fontWeight: "bold",
-                                                width: "130px"
+                                                color: "#1976D2",
+                                                fontWeight: "bold"
                                             }}>
                                                 {lineSplit[0]}:
                                             </Typography>
-                                        </Grid>
-                                        {/* Value for line */}
-                                        <Grid item xs={9} sx={{ height: "40px" }}>
                                             <Typography display="inline" variant="subtitle1">
                                                 {lineSplit[1]}
                                             </Typography>
-                                            <br />
                                         </Grid>
-
                                     </>)
                             })}
                         </Grid>

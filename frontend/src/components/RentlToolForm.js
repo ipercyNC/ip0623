@@ -77,13 +77,14 @@ export default class RentToolForm extends React.Component {
                 error: true,
                 errorMessage: tempErrorMessage
             });
-        }
+        } 
 
         // If the form validation did not trigger an error, call the backend
         if (!isError) {
             this.setState({
                 error: false,
-                errorMessage: {}
+                errorMessage: {}, 
+                rentalAgreement: ""
             })
             // Create JSON object for api
             const json = JSON.stringify({

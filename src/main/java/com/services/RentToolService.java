@@ -7,6 +7,7 @@
  */
 package com.services;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -63,7 +64,13 @@ public class RentToolService {
             }
 
             // Validate and calculate the discount percent
-            int discountInteger = Integer.parseInt(discountRaw);
+            int discountInteger;
+            try {
+                discountInteger = Integer.parseInt(discountRaw);
+            } catch (NumberFormatException discounte) {
+                logger.error("Percent discount must be integer");
+                return "ERROR_PERCENT_FORMAT";
+            }
             // Check discount percent is 0 - 100
             if (discountInteger < 0 || discountInteger > 100) {
                 return "ERROR_PERCENT_OUT_OF_RANGE";
@@ -78,7 +85,13 @@ public class RentToolService {
             // different charges
             // Grab the rental days as the end counter for the loop
             int daysToCharge = 0;
-            int maxDaysToCharge = Integer.parseInt(rentalDays);
+            int maxDaysToCharge;
+            try {
+                maxDaysToCharge = Integer.parseInt(rentalDays);
+            } catch (NumberFormatException rentale) {
+                logger.error("Rental days must be integer");
+                return "ERROR_RENTAL_DAYS_FORMAT";
+            }
             // Check to make sure that the rental day is 1 or greater
             if (maxDaysToCharge < 1) {
                 return "ERROR_RENTAL_DAY_COUNT_OUT_OF_RANGE";
@@ -128,7 +141,7 @@ public class RentToolService {
             double prediscountCharge = new BigDecimal(daysToCharge * toolCharges.getDailyCharge())
                     .setScale(2, RoundingMode.HALF_UP).doubleValue();
             // Discount percent -> from input
-            int discountPercent = (int)Math.round(discountCalculated * 100);
+            int discountPercent = (int) Math.round(discountCalculated * 100);
             // Discount Amount -> amount saved from discount - calculated after loop
             double discountAmount = new BigDecimal(prediscountCharge * discountCalculated)
                     .setScale(2, RoundingMode.HALF_UP).doubleValue();
