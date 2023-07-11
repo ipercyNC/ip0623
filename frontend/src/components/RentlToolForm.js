@@ -87,7 +87,6 @@ export default class RentToolForm extends React.Component {
                 errorMessage: {}, 
                 rentalAgreement: ""
             })
-            console.log(this.state.checkoutDate)
             // Create JSON object for api
             const json = JSON.stringify({
                 "code": this.state.toolCode,
