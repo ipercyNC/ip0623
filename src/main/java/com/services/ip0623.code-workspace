@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "ip0623",
+			"path": "../../../../.."
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "disabled"
+	}
+}
