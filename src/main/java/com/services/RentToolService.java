@@ -96,6 +96,7 @@ public class RentToolService {
                 return "ERROR_RENTAL_DAY_COUNT_OUT_OF_RANGE";
             }
             // Create the date to be used in the loop below
+            // The start date for the rental is the day after the checkout day
             LocalDate date = startDate.plusDays(1);
             // Lists for saving the charge and no charge dates
             List<LocalDate> chargeDates = new ArrayList<LocalDate>();
@@ -156,7 +157,7 @@ public class RentToolService {
             RentalAgreement rentalAgreement = new RentalAgreement(toolChoices,
                     Integer.parseInt(rentalDays),
                     startDate,
-                    date.minusDays(1),
+                    date.minusDays(1), // Subtract a day because was incremented in the loop
                     toolCharges,
                     daysToCharge,
                     prediscountCharge,

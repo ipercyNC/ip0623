@@ -8,7 +8,17 @@ Current functionality:
 
 ## Checkout
 Rent a specific tool (by tool code), checkout date, amount of rental days, and discount (if applicable)
+This will generate a rental agreement with information about the rental. 
+Tool Code, Tool Type, Tool Brand, Number of Rental Days, Checkout Date,
+Due Date, Daily Rental Charge,Charge Days (Number of Days The Rental Will Charge For),
+Pre-discount Charge, Discount Percent, Discount Amount, Final Charge
 
+The rental will start the day after the checkout up until the number of 
+rental days has been reached. 
+
+Choose a tool from the selection and it will generate a rental agreement with the chosen tool 
+and rental length. The rental days must be 1 or greater and the percent discount must be 
+0-100. 
 
 
 ## How to Run
